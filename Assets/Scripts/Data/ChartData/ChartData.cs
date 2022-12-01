@@ -100,7 +100,6 @@ namespace Blophy.Chart
         public Event[] moveY;
         public Event[] rotate;
         public Event[] alpha;
-        public Event[] scale;
         public Event[] scaleX;
         public Event[] scaleY;
         public Event[] centerX;
