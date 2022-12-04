@@ -17,7 +17,7 @@ public class ProgressManager : MonoBehaviourSingleton<ProgressManager>
     /// 开始播放
     /// </summary>
     /// <param name="offset">偏移</param>
-    public void StartPlay(double offset)
+    public void StartPlay(double offset = 0)
     {
         this.offset = offset;//偏移
         dsp_StartPlayMusic = AudioSettings.dspTime + this.offset;//获取到开始播放的时间

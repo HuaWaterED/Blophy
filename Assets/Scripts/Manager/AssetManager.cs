@@ -12,10 +12,9 @@ public class AssetManager : MonoBehaviourSingleton<AssetManager>
 
     [Header("方框以及他们的爹爹~")]
     public Transform box;
-    public SquareBoxController squareBox;
-    public FreeBoxController freeBox;
+    public BoxController boxController;
 
-    //[Header("音符萌~")]
-    //public 
+    [Header("音符萌~")]
+    public NoteController[] noteControllers;
 
 }

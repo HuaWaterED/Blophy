@@ -198,7 +198,7 @@ Transform:
   m_GameObject: {fileID: 3454888801272454994}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.1, y: 0.1, z: 1}
+  m_LocalScale: {x: 2.05, y: 0.05, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8202403564857911928}
@@ -282,7 +282,7 @@ Transform:
   m_GameObject: {fileID: 3840377292165482478}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.9, y: 0.1, z: 1}
+  m_LocalScale: {x: 1.95, y: 0.05, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 668601366295249207}
@@ -411,7 +411,7 @@ Transform:
   m_GameObject: {fileID: 5002396007187557347}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.1, y: 0.1, z: 1}
+  m_LocalScale: {x: 2.05, y: 0.05, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3202097674868574558}
@@ -623,7 +623,7 @@ Transform:
   m_GameObject: {fileID: 7602156726718949089}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.9, y: 0.1, z: 1}
+  m_LocalScale: {x: 1.95, y: 0.05, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 540981992243716408}
@@ -692,7 +692,7 @@ GameObject:
   - component: {fileID: 6519659997534465197}
   - component: {fileID: 2812981860159532905}
   m_Layer: 0
-  m_Name: SquareBox-CenterPoint
+  m_Name: CenterPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -723,10 +723,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 8050038196457433697}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64e8cafd5bda04641b3830007cee2406, type: 3}
+  m_Script: {fileID: 11500000, guid: aa6a99f96b9495048947dce0229feaad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  centerPoint: {fileID: 450407355890572104}
+  squarePosition: {fileID: 450407355890572104}
   decideLineControllers:
   - {fileID: 2188726653390802360}
   - {fileID: 8467052956719726910}
@@ -752,6 +752,7 @@ MonoBehaviour:
       centerY: []
       lineAlpha: []
     lines: []
+  boxFineness: 0.05
 --- !u!1 &8653660713236379741
 GameObject:
   m_ObjectHideFlags: 0
@@ -778,7 +779,7 @@ Transform:
   m_GameObject: {fileID: 8653660713236379741}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.9, y: 0.1, z: 1}
+  m_LocalScale: {x: 1.95, y: 0.05, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1147479564153363209}

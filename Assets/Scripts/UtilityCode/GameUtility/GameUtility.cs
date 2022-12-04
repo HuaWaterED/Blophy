@@ -18,6 +18,7 @@ public class GameUtility
     private static float CalculatedPercentage(Event @event, float time)
     {
         float eventTimeDelta = @event.endTime - @event.startTime;//计算时间结束时间和开始时间的时间差
+        if (eventTimeDelta <= 0) return 1;
         float currentTime = time - @event.startTime;//计算自从事件开始以来经历了多长时间
         float percentage = @event.curve.Evaluate(currentTime / eventTimeDelta);//用当前所经过的时间/时间差，子啊通过eva函数得到百分比
         return percentage;

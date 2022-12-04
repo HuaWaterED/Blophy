@@ -2130,7 +2130,35 @@ MonoBehaviour:
         - startTime: -0.1
           endTime: 0
           startValue: 0
-          endValue: 0.5
+          endValue: 0
+          curve:
+            serializedVersion: 2
+            m_Curve:
+            - serializedVersion: 3
+              time: 0
+              value: 0
+              inSlope: 1
+              outSlope: 1
+              tangentMode: 34
+              weightedMode: 0
+              inWeight: 0
+              outWeight: 0
+            - serializedVersion: 3
+              time: 1
+              value: 1
+              inSlope: 1
+              outSlope: 1
+              tangentMode: 34
+              weightedMode: 0
+              inWeight: 0
+              outWeight: 0
+            m_PreInfinity: 2
+            m_PostInfinity: 2
+            m_RotationOrder: 0
+        - startTime: 0
+          endTime: 10
+          startValue: 0
+          endValue: 5
           curve:
             serializedVersion: 2
             m_Curve:
@@ -2159,7 +2187,35 @@ MonoBehaviour:
         - startTime: -0.1
           endTime: 0
           startValue: 0
-          endValue: 0.5
+          endValue: 0
+          curve:
+            serializedVersion: 2
+            m_Curve:
+            - serializedVersion: 3
+              time: 0
+              value: 0
+              inSlope: 1
+              outSlope: 1
+              tangentMode: 34
+              weightedMode: 0
+              inWeight: 0
+              outWeight: 0
+            - serializedVersion: 3
+              time: 1
+              value: 1
+              inSlope: 1
+              outSlope: 1
+              tangentMode: 34
+              weightedMode: 0
+              inWeight: 0
+              outWeight: 0
+            m_PreInfinity: 2
+            m_PostInfinity: 2
+            m_RotationOrder: 0
+        - startTime: 0
+          endTime: 10
+          startValue: 0
+          endValue: 5
           curve:
             serializedVersion: 2
             m_Curve:
@@ -2213,11 +2269,67 @@ MonoBehaviour:
             m_PreInfinity: 2
             m_PostInfinity: 2
             m_RotationOrder: 0
+        - startTime: 0
+          endTime: 10
+          startValue: 10
+          endValue: 45
+          curve:
+            serializedVersion: 2
+            m_Curve:
+            - serializedVersion: 3
+              time: 0
+              value: 0
+              inSlope: 1
+              outSlope: 1
+              tangentMode: 34
+              weightedMode: 0
+              inWeight: 0
+              outWeight: 0
+            - serializedVersion: 3
+              time: 1
+              value: 1
+              inSlope: 1
+              outSlope: 1
+              tangentMode: 34
+              weightedMode: 0
+              inWeight: 0
+              outWeight: 0
+            m_PreInfinity: 2
+            m_PostInfinity: 2
+            m_RotationOrder: 0
         alpha:
         - startTime: -0.1
           endTime: 0
           startValue: 0
           endValue: 1
+          curve:
+            serializedVersion: 2
+            m_Curve:
+            - serializedVersion: 3
+              time: 0
+              value: 0
+              inSlope: 1
+              outSlope: 1
+              tangentMode: 34
+              weightedMode: 0
+              inWeight: 0
+              outWeight: 0
+            - serializedVersion: 3
+              time: 1
+              value: 1
+              inSlope: 1
+              outSlope: 1
+              tangentMode: 34
+              weightedMode: 0
+              inWeight: 0
+              outWeight: 0
+            m_PreInfinity: 2
+            m_PostInfinity: 2
+            m_RotationOrder: 0
+        - startTime: 0
+          endTime: 10
+          startValue: 1
+          endValue: 0.2
           curve:
             serializedVersion: 2
             m_Curve:
@@ -2271,10 +2383,66 @@ MonoBehaviour:
             m_PreInfinity: 2
             m_PostInfinity: 2
             m_RotationOrder: 0
+        - startTime: 0
+          endTime: 10
+          startValue: 1
+          endValue: 2
+          curve:
+            serializedVersion: 2
+            m_Curve:
+            - serializedVersion: 3
+              time: 0
+              value: 0
+              inSlope: 1
+              outSlope: 1
+              tangentMode: 34
+              weightedMode: 0
+              inWeight: 0
+              outWeight: 0
+            - serializedVersion: 3
+              time: 1
+              value: 1
+              inSlope: 1
+              outSlope: 1
+              tangentMode: 34
+              weightedMode: 0
+              inWeight: 0
+              outWeight: 0
+            m_PreInfinity: 2
+            m_PostInfinity: 2
+            m_RotationOrder: 0
         scaleY:
         - startTime: -0.1
           endTime: 0
           startValue: 0
+          endValue: 1
+          curve:
+            serializedVersion: 2
+            m_Curve:
+            - serializedVersion: 3
+              time: 0
+              value: 0
+              inSlope: 1
+              outSlope: 1
+              tangentMode: 34
+              weightedMode: 0
+              inWeight: 0
+              outWeight: 0
+            - serializedVersion: 3
+              time: 1
+              value: 1
+              inSlope: 1
+              outSlope: 1
+              tangentMode: 34
+              weightedMode: 0
+              inWeight: 0
+              outWeight: 0
+            m_PreInfinity: 2
+            m_PostInfinity: 2
+            m_RotationOrder: 0
+        - startTime: 0
+          endTime: 10
+          startValue: 2
           endValue: 1
           curve:
             serializedVersion: 2
@@ -2329,10 +2497,66 @@ MonoBehaviour:
             m_PreInfinity: 2
             m_PostInfinity: 2
             m_RotationOrder: 0
+        - startTime: 0
+          endTime: 10
+          startValue: 0.5
+          endValue: 0.8
+          curve:
+            serializedVersion: 2
+            m_Curve:
+            - serializedVersion: 3
+              time: 0
+              value: 0
+              inSlope: 1
+              outSlope: 1
+              tangentMode: 34
+              weightedMode: 0
+              inWeight: 0
+              outWeight: 0
+            - serializedVersion: 3
+              time: 1
+              value: 1
+              inSlope: 1
+              outSlope: 1
+              tangentMode: 34
+              weightedMode: 0
+              inWeight: 0
+              outWeight: 0
+            m_PreInfinity: 2
+            m_PostInfinity: 2
+            m_RotationOrder: 0
         centerY:
-        - startTime: -0.1
-          endTime: 0
+        - startTime: 0
+          endTime: 10
           startValue: 0
+          endValue: 0.5
+          curve:
+            serializedVersion: 2
+            m_Curve:
+            - serializedVersion: 3
+              time: 0
+              value: 0
+              inSlope: 1
+              outSlope: 1
+              tangentMode: 34
+              weightedMode: 0
+              inWeight: 0
+              outWeight: 0
+            - serializedVersion: 3
+              time: 1
+              value: 1
+              inSlope: 1
+              outSlope: 1
+              tangentMode: 34
+              weightedMode: 0
+              inWeight: 0
+              outWeight: 0
+            m_PreInfinity: 2
+            m_PostInfinity: 2
+            m_RotationOrder: 0
+        - startTime: 0
+          endTime: 10
+          startValue: 0.8
           endValue: 0.5
           curve:
             serializedVersion: 2
@@ -2362,6 +2586,34 @@ MonoBehaviour:
         - startTime: -0.1
           endTime: 0
           startValue: 0
+          endValue: 1
+          curve:
+            serializedVersion: 2
+            m_Curve:
+            - serializedVersion: 3
+              time: 0
+              value: 0
+              inSlope: 1
+              outSlope: 1
+              tangentMode: 34
+              weightedMode: 0
+              inWeight: 0
+              outWeight: 0
+            - serializedVersion: 3
+              time: 1
+              value: 1
+              inSlope: 1
+              outSlope: 1
+              tangentMode: 34
+              weightedMode: 0
+              inWeight: 0
+              outWeight: 0
+            m_PreInfinity: 2
+            m_PostInfinity: 2
+            m_RotationOrder: 0
+        - startTime: 0
+          endTime: 10
+          startValue: 1
           endValue: 0
           curve:
             serializedVersion: 2
@@ -2453,8 +2705,8 @@ MonoBehaviour:
       musicLength: 0
   musicPlayer: {fileID: 248289080}
   box: {fileID: 703527228}
-  squareBox: {fileID: 2812981860159532905, guid: e9d296562d21b0449b65c03a0ab28115, type: 3}
-  freeBox: {fileID: 4328238766048793538, guid: 7b0d1e2e2e6c3d548bed777e685ec4b0, type: 3}
+  boxController: {fileID: 2812981860159532905, guid: 42da3d73476190044add28e5c04e1ace, type: 3}
+  noteControllers: []
 --- !u!1 &1266613607
 GameObject:
   m_ObjectHideFlags: 0

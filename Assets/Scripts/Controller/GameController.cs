@@ -8,18 +8,7 @@ public class GameController : MonoBehaviourSingleton<GameController>
     {
         for (int i = 0; i < AssetManager.Instance.chartData.boxes.Count; i++)
         {
-            switch (AssetManager.Instance.chartData.boxes[i].type)
-            {
-                case Blophy.Chart.BoxType.free:
-                    Instantiate(AssetManager.Instance.freeBox, AssetManager.Instance.box).box = AssetManager.Instance.chartData.boxes[i];
-                    break;
-                case Blophy.Chart.BoxType.square:
-                    Instantiate(AssetManager.Instance.squareBox, AssetManager.Instance.box).box = AssetManager.Instance.chartData.boxes[i];
-                    break;
-                default:
-                    Debug.Log("读取到未知方框类型，生成此方框失败");
-                    break;
-            }
+            Instantiate(AssetManager.Instance.boxController, AssetManager.Instance.box).box = AssetManager.Instance.chartData.boxes[i];
         }
 
         yield return new WaitForSeconds(1);

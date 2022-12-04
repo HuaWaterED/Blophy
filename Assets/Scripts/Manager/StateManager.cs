@@ -14,6 +14,7 @@ public class StateManager : MonoBehaviourSingleton<StateManager>
         {
             _isStart = value;
             AssetManager.Instance.musicPlayer.PlayScheduled(AssetManager.Instance.chartData.globalData.offset);
+            ProgressManager.Instance.StartPlay(default);
             AssetManager.Instance.box.gameObject.SetActive(true);//激活所有方框
 
         }
