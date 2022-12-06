@@ -34,7 +34,7 @@ namespace Blophy.Chart
     [Serializable]
     public struct GlobalData
     {
-        public List<BPM> BPM;
+        public List<Event> speed;
         public float offset;
         public float musicLength;
     }
@@ -44,12 +44,6 @@ namespace Blophy.Chart
         //未来要补文字演示的json
     }
     #region 下面都是依赖
-    [Serializable]
-    public struct BPM
-    {
-        public float time;
-        public float bpm;
-    }
 
     [Serializable]
     public enum BoxType
@@ -74,6 +68,7 @@ namespace Blophy.Chart
         public BoxEffect boxEffect;
         public float positionX;
         public Event[] speed;
+        public bool isClockwise;//是逆时针
     }
     [Serializable]
     public enum NoteType
@@ -91,7 +86,8 @@ namespace Blophy.Chart
     {
         None = 0,
         Ripple = 1,
-        FullLine = 2
+        FullLine = 2,
+        FullBox = 4
     }
     [Serializable]
     public struct BoxEvents

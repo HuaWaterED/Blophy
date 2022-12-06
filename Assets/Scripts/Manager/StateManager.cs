@@ -49,6 +49,7 @@ public class StateManager : MonoBehaviourSingleton<StateManager>
     /// <param name="focus"></param>
     private void OnApplicationFocus(bool focus)
     {
+        if (Application.platform == RuntimePlatform.WindowsEditor) return;
         switch (focus)
         {
             case true:

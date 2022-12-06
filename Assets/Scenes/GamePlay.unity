@@ -2124,7 +2124,7 @@ MonoBehaviour:
       chartLevel: 
       description: 
     boxes:
-    - type: 1
+    - type: 0
       boxEvents:
         moveX:
         - startTime: -0.1
@@ -2639,9 +2639,152 @@ MonoBehaviour:
             m_PreInfinity: 2
             m_PostInfinity: 2
             m_RotationOrder: 0
-      lines: []
+      lines:
+      - onlineNotes:
+        - noteType: 0
+          hitTime: 0
+          holdTime: 0
+          boxEffect: 0
+          positionX: 0
+          speed: []
+          isClockwise: 0
+        offlineNotes: []
+        speed: []
+      - onlineNotes:
+        - noteType: 5
+          hitTime: 0
+          holdTime: 0
+          boxEffect: 0
+          positionX: 0
+          speed: []
+          isClockwise: 0
+        offlineNotes: []
+        speed: []
+      - onlineNotes:
+        - noteType: 5
+          hitTime: 0
+          holdTime: 0
+          boxEffect: 0
+          positionX: 0
+          speed: []
+          isClockwise: 0
+        offlineNotes: []
+        speed: []
+      - onlineNotes:
+        - noteType: 5
+          hitTime: 0
+          holdTime: 0
+          boxEffect: 0
+          positionX: 0
+          speed: []
+          isClockwise: 0
+        offlineNotes: []
+        speed: []
+      - onlineNotes:
+        - noteType: 5
+          hitTime: 0
+          holdTime: 0
+          boxEffect: 0
+          positionX: 0
+          speed: []
+          isClockwise: 0
+        offlineNotes: []
+        speed: []
     globalData:
-      BPM: []
+      speed:
+      - startTime: 0
+        endTime: 10
+        startValue: 0
+        endValue: 10
+        curve:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0
+            inSlope: 1
+            outSlope: 1
+            tangentMode: 1
+            weightedMode: 3
+            inWeight: 0
+            outWeight: 0.33333334
+          - serializedVersion: 3
+            time: 1
+            value: 1
+            inSlope: 1
+            outSlope: 1
+            tangentMode: 1
+            weightedMode: 3
+            inWeight: 0.33333334
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 0
+      - startTime: 10
+        endTime: 20
+        startValue: 10
+        endValue: 20
+        curve:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0
+            inSlope: 0
+            outSlope: 0.051282052
+            tangentMode: 1
+            weightedMode: 3
+            inWeight: 0
+            outWeight: 0.4875
+          - serializedVersion: 3
+            time: 1
+            value: 1
+            inSlope: 1.7844826
+            outSlope: 2
+            tangentMode: 1
+            weightedMode: 3
+            inWeight: 0.24166667
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 0
+      - startTime: 20
+        endTime: 30
+        startValue: 0
+        endValue: 20
+        curve:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0
+            inSlope: 0
+            outSlope: -0.6652618
+            tangentMode: 1
+            weightedMode: 3
+            inWeight: 0
+            outWeight: 0.5884359
+          - serializedVersion: 3
+            time: 0.48692605
+            value: 0.48586914
+            inSlope: 3.5117784
+            outSlope: 3.5117784
+            tangentMode: 1
+            weightedMode: 3
+            inWeight: 0.20091267
+            outWeight: 0.20310354
+          - serializedVersion: 3
+            time: 1
+            value: 1
+            inSlope: -0.74130213
+            outSlope: 2
+            tangentMode: 1
+            weightedMode: 3
+            inWeight: 0.60427976
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 0
       offset: 0
       musicLength: 0
   clip: {fileID: 8300000, guid: 9cf0d6759534aa34db10cb2a7b95bc1c, type: 3}
@@ -2700,13 +2843,20 @@ MonoBehaviour:
       description: 
     boxes: []
     globalData:
-      BPM: []
+      speed: []
       offset: 0
       musicLength: 0
   musicPlayer: {fileID: 248289080}
   box: {fileID: 703527228}
   boxController: {fileID: 2812981860159532905, guid: 42da3d73476190044add28e5c04e1ace, type: 3}
-  noteControllers: []
+  noteControllers:
+  - {fileID: 618014297205522441, guid: 0e754dbd38f14664aa0cef22f54e8ce2, type: 3}
+  - {fileID: 7249850021719846552, guid: e552ab7477e91e74eb39d61165a94173, type: 3}
+  - {fileID: 642696795478812152, guid: 18474e78e025fbb40a263ae4d712865b, type: 3}
+  - {fileID: 5914662720148280741, guid: 3c43060a1c87428449f904ae2c4926ea, type: 3}
+  - {fileID: 2395726933947035738, guid: 635c1f359cfa62b4da1a8ac624b24e21, type: 3}
+  - {fileID: 852783850352410451, guid: b165f8e0b53cc3345a7fd872c2fee4fb, type: 3}
+  - {fileID: 221127150915810207, guid: bb0bc53564cefb543b992b2e4e8abcda, type: 3}
 --- !u!1 &1266613607
 GameObject:
   m_ObjectHideFlags: 0
@@ -2816,6 +2966,10 @@ PrefabInstance:
     - target: {fileID: 132536, guid: 67117722a812a2e46ab8cb8eafbf5f5e, type: 3}
       propertyPath: m_Name
       value: IngameDebugConsole
+      objectReference: {fileID: 0}
+    - target: {fileID: 22400762, guid: 67117722a812a2e46ab8cb8eafbf5f5e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.000061035156
       objectReference: {fileID: 0}
     - target: {fileID: 22426080, guid: 67117722a812a2e46ab8cb8eafbf5f5e, type: 3}
       propertyPath: m_AnchorMax.x

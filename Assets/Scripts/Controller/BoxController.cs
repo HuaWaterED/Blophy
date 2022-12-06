@@ -13,15 +13,16 @@ public class BoxController : MonoBehaviour
 
     public float boxFineness;//方框线的精细度
 
-    public float currentPositionX;
-    public float currentPositionY;
-    public float currentAngle;
-    public float currentAlpha;
-    public float currentLineAlpha;
-    public float currentCenterX;
-    public float currentCenterY;
     public float currentScaleX;
     public float currentScaleY;
+
+    private void Start()
+    {
+        for (int i = 0; i < decideLineControllers.Length; i++)
+        {
+            decideLineControllers[i].thisLine = box.lines[i];
+        }
+    }
 
     private void Update()
     {
@@ -33,10 +34,10 @@ public class BoxController : MonoBehaviour
     void UpdateCurrentEvents()
     {
         //更新所有事件，拿到当前这一刻的数据
-        CalculateAllEventCurrentValue(out currentPositionX,
-            out currentPositionY, out currentAngle,
-            out currentAlpha, out currentLineAlpha,
-            out currentCenterX, out currentCenterY,
+        CalculateAllEventCurrentValue(out float currentPositionX,
+            out float currentPositionY, out float currentAngle,
+            out float currentAlpha, out float currentLineAlpha,
+            out float currentCenterX, out float currentCenterY,
             out currentScaleX, out currentScaleY,
             (float)ProgressManager.Instance.CurrentTime);
         //将当前这一刻的数据全部赋值给方框
@@ -115,7 +116,7 @@ public class BoxController : MonoBehaviour
         spriteRenderers[2].transform.localScale =//第34都是垂直的
             spriteRenderers[3].transform.localScale =
             new Vector2(2 + (boxFineness / currentScaleY), boxFineness / currentScaleX);
-
+        //这里的2是初始大小*2得到的结果，初始大小就是Prefabs里的
         //结束设置scale
     }
     /// <summary>
