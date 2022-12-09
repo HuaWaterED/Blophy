@@ -64,7 +64,7 @@ public class DecideLineController : MonoBehaviour
         Keyframe keyframe = speeds[i].curve.keys[index];
         keyframe.weightedMode = WeightedMode.Both;
         keyframe.time = (speeds[i].endTime - speeds[i].startTime) * keyframe.time + keySeed.x;
-        keyframe.value = (speeds[i].endValue - speeds[i].startValue) * keyframe.value + keySeed.y;
+        keyframe.value = (speeds[i].endValue - speeds[i].startValue) * keyframe.value + speeds[i].startValue;
 
         keyframe.outTangent *= tant;
         keyframe.inTangent *= tant;
@@ -74,7 +74,7 @@ public class DecideLineController : MonoBehaviour
     void AddKey2KeyList(List<Keyframe> keys, Keyframe keyframe)
     {
         int index = Algorithm.BinaryStrictSearch(keys.ToArray(), keyframe.time);
-        if (index >= 0) keys.RemoveAt(index);
+        //if (index >= 0) keys.RemoveAt(index);
         keys.Add(keyframe);
     }
 

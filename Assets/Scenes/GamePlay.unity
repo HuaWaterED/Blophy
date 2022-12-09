@@ -2698,7 +2698,7 @@ MonoBehaviour:
         speed:
         - startTime: 0
           endTime: 10
-          startValue: 0
+          startValue: 50
           endValue: 50
           curve:
             serializedVersion: 2
