@@ -243,7 +243,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbe2bea46345eb34a9e97fe9a09bb4d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  easeAcceleratedCalculatedFineness: 10000
   boxFineness: 0.05
 --- !u!1 &130468146
 GameObject:
@@ -396,7 +395,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
