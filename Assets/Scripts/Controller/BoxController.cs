@@ -11,8 +11,6 @@ public class BoxController : MonoBehaviour
 
     public Blophy.Chart.Box box;//谱面，单独这个box的谱面
 
-    public float boxFineness;//方框线的精细度
-
     public float currentScaleX;
     public float currentScaleY;
 
@@ -111,11 +109,11 @@ public class BoxController : MonoBehaviour
         spriteRenderers[0].transform.localScale =//第125根线都是水平的
             spriteRenderers[1].transform.localScale =
             spriteRenderers[4].transform.localScale =
-            new Vector2(2 - (boxFineness / currentScaleX), boxFineness / currentScaleY);
+            new Vector2(2 - (ValueManager.Instance.boxFineness / currentScaleX), ValueManager.Instance.boxFineness / currentScaleY);
 
         spriteRenderers[2].transform.localScale =//第34都是垂直的
             spriteRenderers[3].transform.localScale =
-            new Vector2(2 + (boxFineness / currentScaleY), boxFineness / currentScaleX);
+            new Vector2(2 + (ValueManager.Instance.boxFineness / currentScaleY), ValueManager.Instance.boxFineness / currentScaleX);
         //这里的2是初始大小*2得到的结果，初始大小就是Prefabs里的
         //结束设置scale
     }
