@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ValueManager : MonoBehaviourSingleton<ValueManager>//这里存放一些数值相关的东西
 {
+    [Tooltip("计算面积的精细度")] public float calculatedAreaRange;
+    [Tooltip("保留多少位，和上边的有强关联，如0.1就保留1位，0.2就2位，以此类推")] public int reservedBits;
 
     [Tooltip("方框的精细程度")] public float boxFineness;//方框线的精细度
 }

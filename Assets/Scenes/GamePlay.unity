@@ -243,6 +243,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbe2bea46345eb34a9e97fe9a09bb4d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  calculatedAreaRange: 0.0001
+  reservedBits: 4
   boxFineness: 0.05
 --- !u!1 &130468146
 GameObject:
@@ -2775,6 +2777,90 @@ MonoBehaviour:
               tangentMode: 1
               weightedMode: 3
               inWeight: 1
+              outWeight: 0
+            m_PreInfinity: 2
+            m_PostInfinity: 2
+            m_RotationOrder: 0
+        - startTime: 80
+          endTime: 100
+          startValue: 50
+          endValue: 100
+          curve:
+            serializedVersion: 2
+            m_Curve:
+            - serializedVersion: 3
+              time: 0
+              value: 0
+              inSlope: 1
+              outSlope: 1
+              tangentMode: 1
+              weightedMode: 3
+              inWeight: 0
+              outWeight: 0.4875
+            - serializedVersion: 3
+              time: 1
+              value: 1
+              inSlope: 1
+              outSlope: 1
+              tangentMode: 1
+              weightedMode: 3
+              inWeight: 0.50625
+              outWeight: 0
+            m_PreInfinity: 2
+            m_PostInfinity: 2
+            m_RotationOrder: 0
+        - startTime: 100
+          endTime: 120
+          startValue: 50
+          endValue: -50
+          curve:
+            serializedVersion: 2
+            m_Curve:
+            - serializedVersion: 3
+              time: 0
+              value: 0
+              inSlope: 1
+              outSlope: 1
+              tangentMode: 1
+              weightedMode: 3
+              inWeight: 0
+              outWeight: 0.4875
+            - serializedVersion: 3
+              time: 1
+              value: 1
+              inSlope: 1
+              outSlope: 1
+              tangentMode: 1
+              weightedMode: 3
+              inWeight: 0.50625
+              outWeight: 0
+            m_PreInfinity: 2
+            m_PostInfinity: 2
+            m_RotationOrder: 0
+        - startTime: 120
+          endTime: 140
+          startValue: 0
+          endValue: 0
+          curve:
+            serializedVersion: 2
+            m_Curve:
+            - serializedVersion: 3
+              time: 0
+              value: 0
+              inSlope: 1
+              outSlope: 1
+              tangentMode: 1
+              weightedMode: 3
+              inWeight: 0
+              outWeight: 0.33333334
+            - serializedVersion: 3
+              time: 1
+              value: 1
+              inSlope: 1
+              outSlope: 1
+              tangentMode: 1
+              weightedMode: 3
+              inWeight: 0.33333334
               outWeight: 0
             m_PreInfinity: 2
             m_PostInfinity: 2
