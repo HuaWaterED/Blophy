@@ -14,14 +14,14 @@ public class BoxController : MonoBehaviour
     public float currentScaleX;
     public float currentScaleY;
 
-    private void Start()
+    public BoxController Init(Box thisBox)
     {
-        for (int i = 0; i < decideLineControllers.Length; i++)
+        this.box = thisBox; for (int i = 0; i < decideLineControllers.Length; i++)
         {
-            decideLineControllers[i].thisLine = box.lines[i];
+            decideLineControllers[i].ThisLine = box.lines[i];
         }
+        return this;
     }
-
     private void Update()
     {
         UpdateCurrentEvents();//更新所有事件

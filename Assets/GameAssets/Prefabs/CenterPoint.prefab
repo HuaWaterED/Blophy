@@ -78,6 +78,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1147479564153363209}
   - component: {fileID: 8574961970696007938}
+  - component: {fileID: 5122208234408603399}
   m_Layer: 0
   m_Name: Middle
   m_TagString: Untagged
@@ -115,14 +116,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebc41cdd0f9957842aaf6a0db4597172, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lineNoteController: {fileID: 5122208234408603399}
+  canvasLocalOffset:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  canvasSpeed:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &5122208234408603399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1359241548062079021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc34c809a0f626f4cb7ebf64f886ae83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   freeBox_NoteParsent: {fileID: 6519659997534465197}
+  decideLineController: {fileID: 8574961970696007938}
   onlineNote: {fileID: 9204814098932795526}
   offlineNote: {fileID: 8414123189369247029}
   lineDistance: 1
-  thisLine:
-    onlineNotes: []
-    offlineNotes: []
-    speed: []
 --- !u!1 &1615419593171414015
 GameObject:
   m_ObjectHideFlags: 0
@@ -133,6 +156,7 @@ GameObject:
   m_Component:
   - component: {fileID: 668601366295249207}
   - component: {fileID: 8467052956719726910}
+  - component: {fileID: 323890600802986010}
   m_Layer: 0
   m_Name: Down
   m_TagString: Untagged
@@ -170,14 +194,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebc41cdd0f9957842aaf6a0db4597172, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lineNoteController: {fileID: 323890600802986010}
+  canvasLocalOffset:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  canvasSpeed:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &323890600802986010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1615419593171414015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc34c809a0f626f4cb7ebf64f886ae83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   freeBox_NoteParsent: {fileID: 6519659997534465197}
+  decideLineController: {fileID: 8467052956719726910}
   onlineNote: {fileID: 4538639845524256100}
   offlineNote: {fileID: 6617246351048337357}
   lineDistance: 2
-  thisLine:
-    onlineNotes: []
-    offlineNotes: []
-    speed: []
 --- !u!1 &1644652616945846825
 GameObject:
   m_ObjectHideFlags: 0
@@ -188,6 +234,7 @@ GameObject:
   m_Component:
   - component: {fileID: 540981992243716408}
   - component: {fileID: 2188726653390802360}
+  - component: {fileID: 555974982157619623}
   m_Layer: 0
   m_Name: Top
   m_TagString: Untagged
@@ -225,14 +272,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebc41cdd0f9957842aaf6a0db4597172, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lineNoteController: {fileID: 555974982157619623}
+  canvasLocalOffset:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  canvasSpeed:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &555974982157619623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1644652616945846825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc34c809a0f626f4cb7ebf64f886ae83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   freeBox_NoteParsent: {fileID: 6519659997534465197}
+  decideLineController: {fileID: 2188726653390802360}
   onlineNote: {fileID: 3710686024088124923}
   offlineNote: {fileID: 1862021682680572520}
   lineDistance: 2
-  thisLine:
-    onlineNotes: []
-    offlineNotes: []
-    speed: []
 --- !u!1 &3195383938167310062
 GameObject:
   m_ObjectHideFlags: 0
@@ -473,6 +542,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3202097674868574558}
   - component: {fileID: 2713727041374984722}
+  - component: {fileID: 3474532405289055257}
   m_Layer: 0
   m_Name: Left
   m_TagString: Untagged
@@ -510,14 +580,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebc41cdd0f9957842aaf6a0db4597172, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lineNoteController: {fileID: 3474532405289055257}
+  canvasLocalOffset:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  canvasSpeed:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &3474532405289055257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4073364112389686312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc34c809a0f626f4cb7ebf64f886ae83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   freeBox_NoteParsent: {fileID: 6519659997534465197}
+  decideLineController: {fileID: 2713727041374984722}
   onlineNote: {fileID: 9094191168402356496}
   offlineNote: {fileID: 8456826913762907855}
   lineDistance: 2
-  thisLine:
-    onlineNotes: []
-    offlineNotes: []
-    speed: []
 --- !u!1 &4428127162280632377
 GameObject:
   m_ObjectHideFlags: 0
@@ -819,6 +911,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8202403564857911928}
   - component: {fileID: 4892590778536622743}
+  - component: {fileID: 2332721750854021627}
   m_Layer: 0
   m_Name: Right
   m_TagString: Untagged
@@ -856,14 +949,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebc41cdd0f9957842aaf6a0db4597172, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lineNoteController: {fileID: 2332721750854021627}
+  canvasLocalOffset:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  canvasSpeed:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &2332721750854021627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7433081245412314594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc34c809a0f626f4cb7ebf64f886ae83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   freeBox_NoteParsent: {fileID: 6519659997534465197}
+  decideLineController: {fileID: 4892590778536622743}
   onlineNote: {fileID: 7023855818779590189}
   offlineNote: {fileID: 4649643865117320511}
   lineDistance: 2
-  thisLine:
-    onlineNotes: []
-    offlineNotes: []
-    speed: []
 --- !u!1 &7468549500462524076
 GameObject:
   m_ObjectHideFlags: 0
@@ -1050,7 +1165,6 @@ MonoBehaviour:
       centerY: []
       lineAlpha: []
     lines: []
-  boxFineness: 0.05
   currentScaleX: 0
   currentScaleY: 0
 --- !u!1 &8592862652095322561

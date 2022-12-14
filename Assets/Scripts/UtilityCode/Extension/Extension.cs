@@ -1,8 +1,6 @@
-using Newtonsoft.Json;
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
-namespace mewmesh.Extension
+namespace Blophy.Extension
 {
     public static class AnimationCurveExtension
     {
@@ -42,6 +40,15 @@ namespace mewmesh.Extension
             {
                 ints[i] = i;
             }
+        }
+    }
+    public static class Mathm
+    {
+        public static int Sign(float number)
+        {
+            int result = Math.Sign(number);
+            result = result switch { 0 => 1, _ => result };
+            return result;
         }
     }
 }

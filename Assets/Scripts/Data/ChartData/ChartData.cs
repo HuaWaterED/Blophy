@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -69,6 +70,17 @@ namespace Blophy.Chart
         public float positionX;
         public Event[] speed;
         public bool isClockwise;//是逆时针
+        [JsonIgnore] public float floorPosition;
+        [JsonIgnore] public float ariseTime;
+        [JsonIgnore] public bool isArise;
+        /// <summary>
+        /// 位移图
+        /// </summary>
+        [JsonIgnore] public AnimationCurve localDisplacement;//这个用来表示的是某个时间，画布的Y轴应该是多少
+        /// <summary>
+        /// 速度图
+        /// </summary>
+        [JsonIgnore] public AnimationCurve localVelocity;//这个用来表示这根线的所有速度总览
     }
     [Serializable]
     public enum NoteType
