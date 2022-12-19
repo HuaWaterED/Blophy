@@ -68,18 +68,7 @@ public class GameUtility
         for (int i = 1; i < keyframes.Count; i++)
         {
             float result = 0;//计算这个点和上一个点的面积
-            for (float j = keyframes[i - 1].time;//j等于上一个点的Time
-                j < keyframes[i].time;//让j小于这个点的Time，就是让j处于这个点和上一点之间
-                j += ValueManager.Instance.calculatedAreaRange)//每次处理步长
-            {
-                float currentValue = canvasSpeed.Evaluate(i - 1 + j);//用i-1定位上一个点的索引，用j定位当前的处于那个区间
-                float lastTimeValue = canvasSpeed.Evaluate(i - 1 + j - ValueManager.Instance.calculatedAreaRange);//用i-1定位上一个点的索引，用j定位当前处于那个区间，再减去面积计算步长，配合上一行代码得到梯形的上底加下底
-
-
-                result += (currentValue + lastTimeValue) * ValueManager.Instance.calculatedAreaRange / 2;//面积累加，加的内容是：（上底加下底）乘高除2
-                result = (float)Math.Round(result, 3);//为了较小误差，保留小数点后三位数，四舍五入
-                j = (float)Math.Round(j, ValueManager.Instance.reservedBits);//为了较小误差，保留小数点后三位数，四舍五入
-            }
+            result = CalculateArea(canvasSpeed, keyframes, i, result);
 
             Keyframe keyframe = new()//声明一个key
             {
@@ -87,24 +76,50 @@ public class GameUtility
                 value = result + resultKeyframes[^1].value,//Key的Value直接等于面积结果加上次计算点的value
                 time = keyframes[i].time,//时间数据直接赋值
             };
-            int index_firstKeyframe = keyframes.FindIndex(m => m.time == keyframe.time);//同一时间下列表中第一个Keyframe的索引
-            int index_lastKeyframe = keyframes.FindLastIndex(m => m.time == keyframe.time);//同一时间下列表中最后一个Keyframe的索引
-            Keyframe firstKeyframe = keyframes[index_firstKeyframe];//获取到同一个时间下第一个Keyframe
-            Keyframe lastKeyframe = keyframes[index_lastKeyframe];//获取到同一个时间下最后一个Keyframe
-
-            int sign_inTangent_firstKeyframe = Mathm.Sign(firstKeyframe.inTangent);//获取到入点斜率的正负性，>=0返回1，<0返回-1
-            int sign_outTangent_lastKeyframe = Mathm.Sign(lastKeyframe.outTangent);//获取到出点斜率的正负性，>=0返回1，<0返回-1
-
-            VerifyWhetherOrNotNegation(keyframes, index_firstKeyframe, index_lastKeyframe, ref firstKeyframe, ref lastKeyframe, ref sign_inTangent_firstKeyframe, ref sign_outTangent_lastKeyframe);
-
-            keyframe.inTangent = firstKeyframe.value * sign_inTangent_firstKeyframe;//key的入点斜率等于在这一时刻下所有点中第一个点的速度（value）值
-            keyframe.inWeight = firstKeyframe.inWeight;//key的入点百分比等于在这一时刻下所有点中第一个点的百分比
-            keyframe.outTangent = lastKeyframe.value * sign_outTangent_lastKeyframe;//key的出点斜率等于在这一时刻下所有点中最后一个点的速度（value）值
-            keyframe.outWeight = lastKeyframe.outWeight;//key的出点百分比等于在这一时刻下所有点中最后一个点的百分比
+            keyframe = CalculateKeyframeProperty(keyframes, keyframe);
             AddKey2KeyList(resultKeyframes, keyframe, true);//使用严格搜索，如果这个时间有key就踢掉之前的key重加一次
         }
         return new() { keys = resultKeyframes.ToArray(), preWrapMode = WrapMode.ClampForever, postWrapMode = WrapMode.ClampForever };//把处理好的Key放到AnimationCurve里返回出去
     }
+
+    private static Keyframe CalculateKeyframeProperty(List<Keyframe> keyframes, Keyframe keyframe)
+    {
+        int index_firstKeyframe = keyframes.FindIndex(m => m.time == keyframe.time);//同一时间下列表中第一个Keyframe的索引
+        int index_lastKeyframe = keyframes.FindLastIndex(m => m.time == keyframe.time);//同一时间下列表中最后一个Keyframe的索引
+        Keyframe firstKeyframe = keyframes[index_firstKeyframe];//获取到同一个时间下第一个Keyframe
+        Keyframe lastKeyframe = keyframes[index_lastKeyframe];//获取到同一个时间下最后一个Keyframe
+
+        int sign_inTangent_firstKeyframe = Mathm.Sign(firstKeyframe.inTangent);//获取到入点斜率的正负性，>=0返回1，<0返回-1
+        int sign_outTangent_lastKeyframe = Mathm.Sign(lastKeyframe.outTangent);//获取到出点斜率的正负性，>=0返回1，<0返回-1
+
+        VerifyWhetherOrNotNegation(keyframes, index_firstKeyframe, index_lastKeyframe, ref firstKeyframe, ref lastKeyframe, ref sign_inTangent_firstKeyframe, ref sign_outTangent_lastKeyframe);
+
+        keyframe.inTangent = firstKeyframe.value * sign_inTangent_firstKeyframe;//key的入点斜率等于在这一时刻下所有点中第一个点的速度（value）值
+        keyframe.inWeight = firstKeyframe.inWeight;//key的入点百分比等于在这一时刻下所有点中第一个点的百分比
+        keyframe.outTangent = lastKeyframe.value * sign_outTangent_lastKeyframe;//key的出点斜率等于在这一时刻下所有点中最后一个点的速度（value）值
+        keyframe.outWeight = lastKeyframe.outWeight;//key的出点百分比等于在这一时刻下所有点中最后一个点的百分比
+        return keyframe;
+    }
+
+    private static float CalculateArea(AnimationCurve canvasSpeed, List<Keyframe> keyframes, int i, float result)
+    {
+        for (float j = keyframes[i - 1].time;//j等于上一个点的Time
+            j < keyframes[i].time;//让j小于这个点的Time，就是让j处于这个点和上一点之间
+            j += ValueManager.Instance.calculatedAreaRange)//每次处理步长
+        {
+            float currentDeltaTime = i - 1 + j;
+            float currentValue = canvasSpeed.Evaluate(currentDeltaTime);//用i-1定位上一个点的索引，用j定位当前的处于那个区间
+            float lastDeltaTime = i - 1 + j - ValueManager.Instance.calculatedAreaRange;
+            float lastTimeValue = canvasSpeed.Evaluate(lastDeltaTime);//用i-1定位上一个点的索引，用j定位当前处于那个区间，再减去面积计算步长，配合上一行代码得到梯形的上底加下底
+
+            result += (currentValue + lastTimeValue) * ValueManager.Instance.calculatedAreaRange / 2;//面积累加，加的内容是：（上底加下底）乘高除2
+            result = (float)Math.Round(result, ValueManager.Instance.reservedBits);//为了较小误差，保留小数点后ValueManager.Instance.reservedBits位数，四舍五入
+            j = (float)Math.Round(j, ValueManager.Instance.reservedBits);//为了较小误差，保留小数点后三位数，四舍五入
+        }
+
+        return result;
+    }
+
     /// <summary>
     /// 验证两个正负性是否需要再次取反
     /// </summary>

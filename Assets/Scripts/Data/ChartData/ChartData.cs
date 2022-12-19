@@ -35,7 +35,6 @@ namespace Blophy.Chart
     [Serializable]
     public struct GlobalData
     {
-        public List<Event> speed;
         public float offset;
         public float musicLength;
     }
@@ -64,33 +63,35 @@ namespace Blophy.Chart
     public struct Note
     {
         public NoteType noteType;
-        public float hitTime;
+        public float hitTime;//打击时间
         public float holdTime;
         public BoxEffect boxEffect;
         public float positionX;
         public Event[] speed;
         public bool isClockwise;//是逆时针
-        [JsonIgnore] public float floorPosition;
-        [JsonIgnore] public float ariseTime;
+        [JsonIgnore] public float hitFloorPosition;//打击地板上距离
+        [JsonIgnore] public float ariseFloorPosition;//从什么地方出现
+        [JsonIgnore] public float ariseTime;//出现时间
         [JsonIgnore] public bool isArise;
         /// <summary>
         /// 位移图
         /// </summary>
-        [JsonIgnore] public AnimationCurve localDisplacement;//这个用来表示的是某个时间，画布的Y轴应该是多少
+        [JsonIgnore] public AnimationCurve localDisplacement;//这个用来表示的是某个时间，Note应该在画布的Y轴应该是多少
         /// <summary>
         /// 速度图
         /// </summary>
-        [JsonIgnore] public AnimationCurve localVelocity;//这个用来表示这根线的所有速度总览
+        [JsonIgnore] public AnimationCurve localVelocity;//这个用来表示这个Note的所有速度总览
     }
     [Serializable]
     public enum NoteType
     {
-        tap = 0,
-        hold = 1,
-        drag = 2,
-        flick = 3,
-        fullFlick = 4,
-        point = 5
+        Tap = 0,
+        Hold = 1,
+        Drag = 2,
+        Flick = 3,
+        Point = 4,
+        FullFlickPink = 5,
+        FullFlickBlue = 6
     }
     [Flags]
     [Serializable]
