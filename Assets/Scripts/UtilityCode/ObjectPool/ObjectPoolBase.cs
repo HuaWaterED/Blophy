@@ -9,15 +9,15 @@ public abstract class ObjectPoolBase<T> where T : MonoBehaviour
 {
     protected T PoolObject;
     protected Transform parent;
-
-    protected ObjectPoolBase(T @object, int poolLength, Transform parent = null)
+    protected Quaternion rotation;
+    protected ObjectPoolBase(T @object, int poolLength, Quaternion quaternion, Transform parent = null)
     {
         this.parent = parent;
         PoolObject = @object;
     }
     protected T CreateObject()
     {
-        T obj = Object.Instantiate(PoolObject, Vector3.zero, Quaternion.identity, parent == null ? PoolObject.transform : parent);
+        T obj = Object.Instantiate(PoolObject, Vector3.zero, rotation, parent == null ? PoolObject.transform : parent);
         obj.gameObject.SetActive(false);
         return obj;
     }

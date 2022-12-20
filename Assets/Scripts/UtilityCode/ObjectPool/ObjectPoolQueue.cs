@@ -9,7 +9,7 @@ public class ObjectPoolQueue<T> : ObjectPoolBase<T> where T : MonoBehaviour
 {
     private readonly Queue<T> _pool;
 
-    public ObjectPoolQueue(T @object, int poolLength, Transform parent = null) : base(@object, poolLength, parent)
+    public ObjectPoolQueue(T @object, int poolLength, Quaternion quaternion, Transform parent = null) : base(@object, poolLength, quaternion, parent)
     {
         _pool = new Queue<T>();
         for (int i = 0; i < poolLength; i++)

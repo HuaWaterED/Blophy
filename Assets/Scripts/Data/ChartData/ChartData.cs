@@ -67,19 +67,13 @@ namespace Blophy.Chart
         public float holdTime;
         public BoxEffect boxEffect;
         public float positionX;
-        public Event[] speed;
         public bool isClockwise;//是逆时针
+        [JsonIgnore] public Event[] speed;
         [JsonIgnore] public float hitFloorPosition;//打击地板上距离
         [JsonIgnore] public float ariseFloorPosition;//从什么地方出现
         [JsonIgnore] public float ariseTime;//出现时间
         [JsonIgnore] public bool isArise;
-        /// <summary>
-        /// 位移图
-        /// </summary>
         [JsonIgnore] public AnimationCurve localDisplacement;//这个用来表示的是某个时间，Note应该在画布的Y轴应该是多少
-        /// <summary>
-        /// 速度图
-        /// </summary>
         [JsonIgnore] public AnimationCurve localVelocity;//这个用来表示这个Note的所有速度总览
     }
     [Serializable]

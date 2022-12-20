@@ -6,10 +6,5 @@ using UnityEngine;
 
 public class NoteController : MonoBehaviour
 {
-    public Note note;
-    public NoteController Init(Note note)
-    {
-        this.note = note;
-        return this;
-    }
+    public Note thisNote;//负责储存这个音符的一些数据
 }

@@ -2,6 +2,7 @@ using Blophy.Chart;
 using Blophy.Extension;
 using System;
 using System.Collections.Generic;
+using System.Xml.Serialization;
 using UnityEngine;
 using Event = Blophy.Chart.Event;
 public class GameUtility
@@ -37,6 +38,13 @@ public class GameUtility
     {
         List<Keyframe> keys = new();//声明一个Keys列表
         Vector2 keySeed_Speed = Vector2.zero;//Key种子，用来记录上一次循环结束时的Time和Value信息
+        foreach (var item in speeds)
+        {
+            if (item.startValue == item.endValue)//如果开始值和结束值相等
+            {
+                item.curve.ClearMiddle();//清除中间的所有点
+            }
+        }
         for (int i = 0; i < speeds.Length; i++)//循环遍历所有事件
         {
             float tant = (speeds[i].endValue - speeds[i].startValue)

@@ -5,6 +5,14 @@ namespace Blophy.Extension
 {
     public static class AnimationCurveExtension
     {
+        public static void ClearMiddle(this AnimationCurve curve)
+        {
+            int length = curve.length;
+            for (int i = 1; i < length - 1; i++)
+            {
+                curve.RemoveKey(1);
+            }
+        }
         public static void ClearAll(this AnimationCurve curve)
         {
             for (int i = 0; i < curve.keys.Length; i++)

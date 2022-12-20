@@ -13,6 +13,7 @@ using System.Runtime.InteropServices;
 using Blophy.Extension;
 using UnityEngine.Pool;
 using System.Drawing.Printing;
+using Quaternion = UnityEngine.Quaternion;
 /*
 * 声明：
 * StartTime简称ST
@@ -30,24 +31,24 @@ public class DecideLineController : MonoBehaviour
 {
     public float lineDistance;//线的距离，根据每帧计算，生成这个范围内的所有Note
 
-    public AnimationCurve canvasLocalOffset;//这个用来表示的是某个时间，画布的Y轴应该是多少
     public AnimationCurve canvasSpeed;//这个用来表示这根线的所有速度总览
+    public AnimationCurve canvasLocalOffset;//这个用来表示的是某个时间，画布的Y轴应该是多少
     public Transform onlineNote;//判定线上边的音符
     public Transform offlineNote;//判定线下边的音符
 
-    public LineNoteController lineNoteController;
+    public List<ObjectPoolQueue<NoteController>> onlineNotes;//判定线上方的音符对象池
+    public List<ObjectPoolQueue<NoteController>> offlineNotes;//判定线下方的音符对象池
 
-    public List<ObjectPoolQueue<NoteController>> onlineNotes;
-    public List<ObjectPoolQueue<NoteController>> offlineNotes;
+    public LineNoteController lineNoteController;//判定线音符管理脚本
 
-    public Line thisLine;
+    public Line thisLine;//这根线的源数据
     public Line ThisLine
     {
         get => thisLine;
         set
         {
-            thisLine = value;
-            Init();
+            thisLine = value;//获取到源数据
+            Init();//初始化
         }
     }//这跟线的谱面元数据
 
@@ -56,84 +57,94 @@ public class DecideLineController : MonoBehaviour
     /// </summary>
     void Init()
     {
-        InitNotesObjectPool();
+        InitNotesObjectPool();//初始化对象池
         Debug.LogWarning("请注意我的袁术局的隐私性");
         List<Keyframe> keyframes = GameUtility.CalculatedSpeedCurve(ThisLine.speed);//将获得到的Key列表全部赋值
         canvasSpeed = new() { keys = keyframes.ToArray(), preWrapMode = WrapMode.ClampForever, postWrapMode = WrapMode.ClampForever };//把上边获得到的点转换为速度图
         canvasLocalOffset = GameUtility.CalculatedOffsetCurve(canvasSpeed, keyframes);//吧速度图转换为位移图
-        CalculatedNoteFloorPosition(ThisLine.onlineNotes);
-        CalculatedNoteFloorPosition(ThisLine.offlineNotes);
+        CalculatedNoteFloorPosition(ThisLine.onlineNotes);//计算判定线上方的所有音符的FloorPosition
+        CalculatedNoteFloorPosition(ThisLine.offlineNotes);//计算判定线下方的所有音符的FloorPosition
     }
-
+    /// <summary>
+    /// 初始化对象池
+    /// </summary>
     private void InitNotesObjectPool()
     {
         onlineNotes = new()
         {
-            new ObjectPoolQueue<NoteController>(AssetManager.Instance.noteControllers[(int)NoteType.Tap],5,onlineNote),
-            new ObjectPoolQueue<NoteController>(AssetManager.Instance.noteControllers[(int)NoteType.Hold],2,onlineNote),
-            new ObjectPoolQueue<NoteController>(AssetManager.Instance.noteControllers[(int)NoteType.Drag],5,onlineNote),
-            new ObjectPoolQueue<NoteController>(AssetManager.Instance.noteControllers[(int)NoteType.Flick],0, onlineNote),
-            new ObjectPoolQueue<NoteController>(AssetManager.Instance.noteControllers[(int)NoteType.Point],2, onlineNote),
-            new ObjectPoolQueue<NoteController>(AssetManager.Instance.noteControllers[(int)NoteType.FullFlickPink],2, onlineNote),
-            new ObjectPoolQueue<NoteController>(AssetManager.Instance.noteControllers[(int)NoteType.FullFlickBlue],2, onlineNote)
+            new ObjectPoolQueue<NoteController>(AssetManager.Instance.noteControllers[(int)NoteType.Tap],5,Quaternion.Euler(Vector3.zero),onlineNote),
+            new ObjectPoolQueue<NoteController>(AssetManager.Instance.noteControllers[(int)NoteType.Hold],2,Quaternion.Euler(Vector3.zero),onlineNote),
+            new ObjectPoolQueue<NoteController>(AssetManager.Instance.noteControllers[(int)NoteType.Drag],5,Quaternion.Euler(Vector3.zero),onlineNote),
+            new ObjectPoolQueue<NoteController>(AssetManager.Instance.noteControllers[(int)NoteType.Flick],0,Quaternion.Euler(Vector3.zero), onlineNote),
+            new ObjectPoolQueue<NoteController>(AssetManager.Instance.noteControllers[(int)NoteType.Point],2,Quaternion.Euler(Vector3.zero), onlineNote),
+            new ObjectPoolQueue<NoteController>(AssetManager.Instance.noteControllers[(int)NoteType.FullFlickPink],2,Quaternion.Euler(Vector3.zero), onlineNote),
+            new ObjectPoolQueue<NoteController>(AssetManager.Instance.noteControllers[(int)NoteType.FullFlickBlue],2,Quaternion.Euler(Vector3.zero), onlineNote)
         };
         offlineNotes = new()
         {
-            new ObjectPoolQueue<NoteController>(AssetManager.Instance.noteControllers[(int)NoteType.Tap],5,offlineNote),
-            new ObjectPoolQueue<NoteController>(AssetManager.Instance.noteControllers[(int)NoteType.Hold],2,offlineNote),
-            new ObjectPoolQueue<NoteController>(AssetManager.Instance.noteControllers[(int)NoteType.Drag],5,offlineNote),
-            new ObjectPoolQueue<NoteController>(AssetManager.Instance.noteControllers[(int)NoteType.Flick],0, offlineNote),
-            new ObjectPoolQueue<NoteController>(AssetManager.Instance.noteControllers[(int)NoteType.Point],2, offlineNote),
-            new ObjectPoolQueue<NoteController>(AssetManager.Instance.noteControllers[(int)NoteType.FullFlickPink],2, offlineNote),
-            new ObjectPoolQueue<NoteController>(AssetManager.Instance.noteControllers[(int)NoteType.FullFlickBlue],2, offlineNote)
+            new ObjectPoolQueue<NoteController>(AssetManager.Instance.noteControllers[(int)NoteType.Tap],5,Quaternion.Euler(Vector3.forward*180),offlineNote),
+            new ObjectPoolQueue<NoteController>(AssetManager.Instance.noteControllers[(int)NoteType.Hold],2,Quaternion.Euler(Vector3.forward*180),offlineNote),
+            new ObjectPoolQueue<NoteController>(AssetManager.Instance.noteControllers[(int)NoteType.Drag],5,Quaternion.Euler(Vector3.forward*180),offlineNote),
+            new ObjectPoolQueue<NoteController>(AssetManager.Instance.noteControllers[(int)NoteType.Flick],0,Quaternion.Euler(Vector3.forward*180), offlineNote),
+            new ObjectPoolQueue<NoteController>(AssetManager.Instance.noteControllers[(int)NoteType.Point],2,Quaternion.Euler(Vector3.forward*180), offlineNote),
+            new ObjectPoolQueue<NoteController>(AssetManager.Instance.noteControllers[(int)NoteType.FullFlickPink],2,Quaternion.Euler(Vector3.forward*180), offlineNote),
+            new ObjectPoolQueue<NoteController>(AssetManager.Instance.noteControllers[(int)NoteType.FullFlickBlue],2,Quaternion.Euler(Vector3.forward*180), offlineNote)
         };
     }
+    /// <summary>
+    /// 获取音符
+    /// </summary>
+    /// <param name="noteType">音符类型</param>
+    /// <param name="isOnlineNote">在判定线上方还是下方</param>
+    /// <returns>获取到的音符</returns>
     public NoteController GetNote(NoteType noteType, bool isOnlineNote)
     {
         return isOnlineNote switch
         {
-            true => onlineNotes[(int)noteType].PrepareObject(),
-            false => offlineNotes[(int)noteType].PrepareObject(),
+            true => onlineNotes[(int)noteType].PrepareObject(),//如果是判定线上方，就返回判定线上方的音符
+            false => offlineNotes[(int)noteType].PrepareObject(),//如果是判定线下方，就返回判定线下方的音符
         };
     }
+    /// <summary>
+    /// 返回音符
+    /// </summary>
+    /// <param name="note">需要返回的音符</param>
+    /// <param name="noteType">音符类型</param>
+    /// <param name="isOnlineNote">判定线上方还是下方</param>
     public void ReturnNote(NoteController note, NoteType noteType, bool isOnlineNote)
     {
         switch (isOnlineNote)
         {
-            case true:
+            case true://上方就回上方去
                 onlineNotes[(int)noteType].ReturnObject(note);
                 break;
-            case false:
+            case false://下方就回下方去
                 offlineNotes[(int)noteType].ReturnObject(note);
                 break;
         }
     }
-
+    /// <summary>
+    /// 计算音符的FloorPosition
+    /// </summary>
+    /// <param name="notes"></param>
     void CalculatedNoteFloorPosition(Note[] notes)
     {
-        for (int i = 0; i < notes.Length; i++)
+        for (int i = 0; i < notes.Length; i++)//遍历所有音符
         {
-            notes[i].hitFloorPosition = (float)Math.Round(canvasLocalOffset.Evaluate(ThisLine.onlineNotes[i].hitTime), 3);//根据打击时间获取到打击距离
-
-            List<Keyframe> speedKeyframes = GameUtility.CalculatedSpeedCurve(notes[i].speed);//获得到速度图的Key列表
-            notes[i].localVelocity = new() { keys = speedKeyframes.ToArray(), preWrapMode = WrapMode.ClampForever, postWrapMode = WrapMode.ClampForever };//生成速度图
-
-            notes[i].localDisplacement = GameUtility.CalculatedOffsetCurve(notes[i].localVelocity, speedKeyframes);//根据速度图生成位移图
-
-            notes[i].ariseFloorPosition = (float)Math.Round(notes[i].hitFloorPosition + notes[i].localDisplacement.keys[^1].value, 3);//计算出现距离
-
-            notes[i].ariseTime = notes[i].hitTime + notes[i].localDisplacement.keys[^1].time;//计算出现时间
+            notes[i].hitFloorPosition = (float)Math.Round(canvasLocalOffset.Evaluate(notes[i].hitTime), 3);//根据打击时间获取到打击距离
         }
     }
     private void Update()
     {
-        UpdateCanvas();
+        UpdateCanvas();//更新画布
     }
-
+    /// <summary>
+    /// 更新画布
+    /// </summary>
     private void UpdateCanvas()
     {
-        float currentValue = canvasLocalOffset.Evaluate((float)ProgressManager.Instance.CurrentTime);
-        onlineNote.localPosition = Vector3.down * currentValue;
-        offlineNote.localPosition = Vector3.up * currentValue;
+        float currentValue = canvasLocalOffset.Evaluate((float)ProgressManager.Instance.CurrentTime);//获取到当前的画布距离
+        onlineNote.localPosition = Vector3.down * currentValue;//赋值
+        offlineNote.localPosition = Vector3.up * currentValue;//赋值
     }
 }
