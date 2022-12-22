@@ -20,7 +20,6 @@ public class LineNoteController : MonoBehaviour
     public int lastOfflineIndex = 0;//上次召唤到Note[]列表的什么位置了，从上次的位置继续
     private void Update()
     {
-        if (gameObject.name != "Top") return;
         FindAndGetNote(decideLineController.ThisLine.onlineNotes, ref lastOnlineIndex, ariseOnlineNotes, true);//寻找这一时刻，在判定线上方需要生成的音符
         FindAndGetNote(decideLineController.ThisLine.offlineNotes, ref lastOfflineIndex, ariseOfflineNotes, false);//寻找这一时刻，在判定线下方需要生成的音符
         FindAndReturnNote(ariseOnlineNotes, true);//寻找这一时刻，在判定线上方需要回收的Miss掉的音符
@@ -35,19 +34,38 @@ public class LineNoteController : MonoBehaviour
     /// <param name="isOnlineNote">当前处理的是不是判定线上方的音符，true代表是判定线上方的音符，false代表不是判定线上方的音符</param>
     private void FindAndGetNote(Note[] notes, ref int lastIndex, List<NoteController> arisedNote, bool isOnlineNote)
     {
-        int direction = isOnlineNote switch//确定方向，如果是判定线上方，就是正值，如果是判定线下方，就是负值
+        Vector3 direction = isOnlineNote switch//确定方向，如果是判定线上方，就是正值，如果是判定线下方，就是负值
         {
-            true => 1,
-            false => -1
+            true => Vector3.forward,
+            false => Vector3.back
         };
         int index = Algorithm.BinarySearch(notes, m => (float)ProgressManager.Instance.CurrentTime > m.hitTime - CurrentAriseTime, false);//寻找这个时刻需要出现的音符，出现要提前两个单位长度的时间出现
         for (int i = lastIndex; i < index; i++)//i从上次的地方继续，结束索引是寻找到的索引位置
         {//遍历所有符合要求的音符
             Note note = notes[i];//拿出当前遍历到的音符
             NoteController noteController = decideLineController.GetNote(note.noteType, isOnlineNote);//从对象池拿出来
-            //noteController.transform.localPosition = note.hitFloorPosition * direction;
-            noteController.transform.localPosition = new Vector2(note.positionX, note.hitFloorPosition * direction);//复制localPosition
             noteController.thisNote = note;//将这个音符的源数据赋值过去
+            switch (noteController.thisNote.noteType)
+            {
+                case NoteType.Tap:
+                case NoteType.Drag:
+                case NoteType.Flick:
+                case NoteType.FullFlickPink:
+                case NoteType.FullFlickBlue:
+                    noteController.transform.localPosition = new Vector2(note.positionX, note.hitFloorPosition * direction.z);//复制localPosition
+                    noteController.transform.localRotation = Quaternion.Euler(isOnlineNote ? Vector3.zero : Vector3.forward * 180);
+                    break;
+                case NoteType.Hold:
+                    noteController.transform.localPosition = new Vector2(note.positionX, note.hitFloorPosition * direction.z);//复制localPosition
+                    noteController.transform.localRotation = Quaternion.Euler(isOnlineNote ? Vector3.zero : Vector3.forward * 180);
+
+                    break;
+                case NoteType.Point:
+                    break;
+                default:
+                    Debug.LogError("Invalid note!");
+                    break;
+            }
             arisedNote.Add(noteController);//添加到音符存放点
         }
         lastIndex = index;//更新暂停位置

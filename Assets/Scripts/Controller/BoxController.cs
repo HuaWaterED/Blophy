@@ -9,11 +9,24 @@ public class BoxController : MonoBehaviour
     public DecideLineController[] decideLineControllers;//所有的判定线控制器
     public SpriteRenderer[] spriteRenderers;//所有的渲染组件
 
-    public Blophy.Chart.Box box;//谱面，单独这个box的谱面
+    public Box box;//谱面，单独这个box的谱面
+
+    public int sortSeed = 0;
+    public SpriteMask spriteMask;
 
     public float currentScaleX;
     public float currentScaleY;
-
+    public BoxController SetSortSeed(int sortSeed)
+    {
+        this.sortSeed = sortSeed;
+        spriteMask.frontSortingOrder = sortSeed + 2;
+        spriteMask.backSortingOrder = sortSeed - 1;
+        foreach (var item in spriteRenderers)
+        {
+            item.sortingOrder = sortSeed;
+        }
+        return this;
+    }
     public BoxController Init(Box thisBox)
     {
         this.box = thisBox; for (int i = 0; i < decideLineControllers.Length; i++)

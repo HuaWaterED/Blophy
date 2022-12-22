@@ -31,6 +31,68 @@ Transform:
   m_Father: {fileID: 668601366295249207}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &530718690992984934
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5768717951579708780}
+  m_Layer: 0
+  m_Name: Right
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5768717951579708780
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 530718690992984934}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6519659997534465197}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1064819197233864499
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8525992282209744557}
+  m_Layer: 0
+  m_Name: Down
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8525992282209744557
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1064819197233864499}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6519659997534465197}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1100469717538509265
 GameObject:
   m_ObjectHideFlags: 0
@@ -117,13 +179,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lineDistance: 0
-  canvasLocalOffset:
+  canvasSpeed:
     serializedVersion: 2
     m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  canvasSpeed:
+  canvasLocalOffset:
     serializedVersion: 2
     m_Curve: []
     m_PreInfinity: 2
@@ -131,7 +193,14 @@ MonoBehaviour:
     m_RotationOrder: 4
   onlineNote: {fileID: 9204814098932795526}
   offlineNote: {fileID: 8414123189369247029}
+  onlineNotes: []
+  offlineNotes: []
+  box: {fileID: 2812981860159532905}
   lineNoteController: {fileID: 5122208234408603399}
+  thisLine:
+    onlineNotes: []
+    offlineNotes: []
+    speed: []
 --- !u!114 &5122208234408603399
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -146,6 +215,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   freeBox_NoteParsent: {fileID: 6519659997534465197}
   decideLineController: {fileID: 8574961970696007938}
+  ariseOnlineNotes: []
+  ariseOfflineNotes: []
+  lastOnlineIndex: 0
+  lastOfflineIndex: 0
 --- !u!1 &1615419593171414015
 GameObject:
   m_ObjectHideFlags: 0
@@ -195,13 +268,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lineDistance: 0
-  canvasLocalOffset:
+  canvasSpeed:
     serializedVersion: 2
     m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  canvasSpeed:
+  canvasLocalOffset:
     serializedVersion: 2
     m_Curve: []
     m_PreInfinity: 2
@@ -209,7 +282,14 @@ MonoBehaviour:
     m_RotationOrder: 4
   onlineNote: {fileID: 4538639845524256100}
   offlineNote: {fileID: 6617246351048337357}
+  onlineNotes: []
+  offlineNotes: []
+  box: {fileID: 2812981860159532905}
   lineNoteController: {fileID: 323890600802986010}
+  thisLine:
+    onlineNotes: []
+    offlineNotes: []
+    speed: []
 --- !u!114 &323890600802986010
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -224,6 +304,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   freeBox_NoteParsent: {fileID: 6519659997534465197}
   decideLineController: {fileID: 8467052956719726910}
+  ariseOnlineNotes: []
+  ariseOfflineNotes: []
+  lastOnlineIndex: 0
+  lastOfflineIndex: 0
 --- !u!1 &1644652616945846825
 GameObject:
   m_ObjectHideFlags: 0
@@ -273,13 +357,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lineDistance: 0
-  canvasLocalOffset:
+  canvasSpeed:
     serializedVersion: 2
     m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  canvasSpeed:
+  canvasLocalOffset:
     serializedVersion: 2
     m_Curve: []
     m_PreInfinity: 2
@@ -287,7 +371,14 @@ MonoBehaviour:
     m_RotationOrder: 4
   onlineNote: {fileID: 3710686024088124923}
   offlineNote: {fileID: 1862021682680572520}
+  onlineNotes: []
+  offlineNotes: []
+  box: {fileID: 2812981860159532905}
   lineNoteController: {fileID: 555974982157619623}
+  thisLine:
+    onlineNotes: []
+    offlineNotes: []
+    speed: []
 --- !u!114 &555974982157619623
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -302,6 +393,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   freeBox_NoteParsent: {fileID: 6519659997534465197}
   decideLineController: {fileID: 2188726653390802360}
+  ariseOnlineNotes: []
+  ariseOfflineNotes: []
+  lastOnlineIndex: 0
+  lastOfflineIndex: 0
 --- !u!1 &3195383938167310062
 GameObject:
   m_ObjectHideFlags: 0
@@ -581,13 +676,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lineDistance: 0
-  canvasLocalOffset:
+  canvasSpeed:
     serializedVersion: 2
     m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  canvasSpeed:
+  canvasLocalOffset:
     serializedVersion: 2
     m_Curve: []
     m_PreInfinity: 2
@@ -595,7 +690,14 @@ MonoBehaviour:
     m_RotationOrder: 4
   onlineNote: {fileID: 9094191168402356496}
   offlineNote: {fileID: 8456826913762907855}
+  onlineNotes: []
+  offlineNotes: []
+  box: {fileID: 2812981860159532905}
   lineNoteController: {fileID: 3474532405289055257}
+  thisLine:
+    onlineNotes: []
+    offlineNotes: []
+    speed: []
 --- !u!114 &3474532405289055257
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -610,6 +712,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   freeBox_NoteParsent: {fileID: 6519659997534465197}
   decideLineController: {fileID: 2713727041374984722}
+  ariseOnlineNotes: []
+  ariseOfflineNotes: []
+  lastOnlineIndex: 0
+  lastOfflineIndex: 0
 --- !u!1 &4428127162280632377
 GameObject:
   m_ObjectHideFlags: 0
@@ -640,6 +746,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1147479564153363209}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4996579730083674135
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6463159578342775187}
+  m_Layer: 0
+  m_Name: Middle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6463159578342775187
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4996579730083674135}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6519659997534465197}
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5002396007187557347
 GameObject:
@@ -868,8 +1005,39 @@ SpriteMask:
   m_BackSortingLayer: 0
   m_FrontSortingOrder: 0
   m_BackSortingOrder: 0
-  m_IsCustomRangeActive: 0
+  m_IsCustomRangeActive: 1
   m_SpriteSortPoint: 0
+--- !u!1 &5692348162373850937
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4835178383661871812}
+  m_Layer: 0
+  m_Name: Left
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4835178383661871812
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5692348162373850937}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6519659997534465197}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6750196196168377247
 GameObject:
   m_ObjectHideFlags: 0
@@ -950,13 +1118,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lineDistance: 0
-  canvasLocalOffset:
+  canvasSpeed:
     serializedVersion: 2
     m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  canvasSpeed:
+  canvasLocalOffset:
     serializedVersion: 2
     m_Curve: []
     m_PreInfinity: 2
@@ -964,7 +1132,14 @@ MonoBehaviour:
     m_RotationOrder: 4
   onlineNote: {fileID: 7023855818779590189}
   offlineNote: {fileID: 4649643865117320511}
+  onlineNotes: []
+  offlineNotes: []
+  box: {fileID: 2812981860159532905}
   lineNoteController: {fileID: 2332721750854021627}
+  thisLine:
+    onlineNotes: []
+    offlineNotes: []
+    speed: []
 --- !u!114 &2332721750854021627
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -979,6 +1154,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   freeBox_NoteParsent: {fileID: 6519659997534465197}
   decideLineController: {fileID: 4892590778536622743}
+  ariseOnlineNotes: []
+  ariseOfflineNotes: []
+  lastOnlineIndex: 0
+  lastOfflineIndex: 0
 --- !u!1 &7468549500462524076
 GameObject:
   m_ObjectHideFlags: 0
@@ -1124,6 +1303,11 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 450407355890572104}
+  - {fileID: 1146245458509093465}
+  - {fileID: 8525992282209744557}
+  - {fileID: 4835178383661871812}
+  - {fileID: 5768717951579708780}
+  - {fileID: 6463159578342775187}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1165,8 +1349,41 @@ MonoBehaviour:
       centerY: []
       lineAlpha: []
     lines: []
+  sortSeed: 0
+  spriteMask: {fileID: 3551648482430810191}
   currentScaleX: 0
   currentScaleY: 0
+--- !u!1 &8223208737381543598
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1146245458509093465}
+  m_Layer: 0
+  m_Name: Top
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1146245458509093465
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8223208737381543598}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6519659997534465197}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8592862652095322561
 GameObject:
   m_ObjectHideFlags: 0

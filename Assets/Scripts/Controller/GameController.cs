@@ -8,7 +8,9 @@ public class GameController : MonoBehaviourSingleton<GameController>
     {
         for (int i = 0; i < AssetManager.Instance.chartData.boxes.Count; i++)
         {
-            Instantiate(AssetManager.Instance.boxController, AssetManager.Instance.box).Init(AssetManager.Instance.chartData.boxes[i]);
+            Instantiate(AssetManager.Instance.boxController, AssetManager.Instance.box)
+                .SetSortSeed(i)
+                .Init(AssetManager.Instance.chartData.boxes[i]);
         }
 
         yield return new WaitForSeconds(1);
