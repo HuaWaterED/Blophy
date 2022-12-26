@@ -263,7 +263,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
+  m_MaskInteraction: 1
   m_SpriteSortPoint: 0
 --- !u!1 &7496068998751932708
 GameObject:
@@ -339,3 +339,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
+  decideLineController: {fileID: 0}
+  isOnlineNote: 0
+  holdBody: {fileID: 8684928917179229485}
+  holdHead: {fileID: 7530131069725985595}

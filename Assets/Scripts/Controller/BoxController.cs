@@ -14,8 +14,6 @@ public class BoxController : MonoBehaviour
     public int sortSeed = 0;
     public SpriteMask spriteMask;
 
-    public float currentScaleX;
-    public float currentScaleY;
     public BoxController SetSortSeed(int sortSeed)
     {
         this.sortSeed = sortSeed;
@@ -49,7 +47,7 @@ public class BoxController : MonoBehaviour
             out float currentPositionY, out float currentAngle,
             out float currentAlpha, out float currentLineAlpha,
             out float currentCenterX, out float currentCenterY,
-            out currentScaleX, out currentScaleY,
+            out float currentScaleX, out float currentScaleY,
             (float)ProgressManager.Instance.CurrentTime);
         //将当前这一刻的数据全部赋值给方框
         GiveEventData2Box(currentPositionX, currentPositionY,

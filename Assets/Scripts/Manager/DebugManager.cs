@@ -7,7 +7,7 @@ public class DebugManager : MonoBehaviourSingleton<DebugManager>
 
     private void Update()
     {
-        UIManager.Instance.debugText.text = $"CurrentTime:{ProgressManager.Instance.CurrentTime}\n" +
+        UIManager.Instance.DebugTextString = $"CurrentTime:{ProgressManager.Instance.CurrentTime}\n" +
             $"CurrentFPS:{1 / GetSmoothDeltaTime():F2}";
     }
     private static readonly Queue<float> DeltaTimeSamples = new Queue<float>();//估计是用来存DeltaTime的样本的，配合下面的属性工作

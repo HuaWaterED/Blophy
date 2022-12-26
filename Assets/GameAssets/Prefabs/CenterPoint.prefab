@@ -1351,8 +1351,6 @@ MonoBehaviour:
     lines: []
   sortSeed: 0
   spriteMask: {fileID: 3551648482430810191}
-  currentScaleX: 0
-  currentScaleY: 0
 --- !u!1 &8223208737381543598
 GameObject:
   m_ObjectHideFlags: 0

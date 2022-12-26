@@ -15,7 +15,6 @@ public class LineNoteController : MonoBehaviour
     public List<NoteController> ariseOfflineNotes = new();//判定线下方已经出现的音符列表
 
     public float CurrentAriseTime => 2 / decideLineController.canvasSpeed.Evaluate((float)ProgressManager.Instance.CurrentTime);//根据当前速度计算出按照当前速度走完两个单位长度需要多长时间
-
     public int lastOnlineIndex = 0;//上次召唤到Note[]列表的什么位置了，从上次的位置继续
     public int lastOfflineIndex = 0;//上次召唤到Note[]列表的什么位置了，从上次的位置继续
     private void Update()
@@ -45,27 +44,19 @@ public class LineNoteController : MonoBehaviour
             Note note = notes[i];//拿出当前遍历到的音符
             NoteController noteController = decideLineController.GetNote(note.noteType, isOnlineNote);//从对象池拿出来
             noteController.thisNote = note;//将这个音符的源数据赋值过去
-            switch (noteController.thisNote.noteType)
+            noteController.isOnlineNote = isOnlineNote;
+            noteController.decideLineController = decideLineController;
+            noteController.noteCanvas = isOnlineNote switch
             {
-                case NoteType.Tap:
-                case NoteType.Drag:
-                case NoteType.Flick:
-                case NoteType.FullFlickPink:
-                case NoteType.FullFlickBlue:
-                    noteController.transform.localPosition = new Vector2(note.positionX, note.hitFloorPosition * direction.z);//复制localPosition
-                    noteController.transform.localRotation = Quaternion.Euler(isOnlineNote ? Vector3.zero : Vector3.forward * 180);
-                    break;
-                case NoteType.Hold:
-                    noteController.transform.localPosition = new Vector2(note.positionX, note.hitFloorPosition * direction.z);//复制localPosition
-                    noteController.transform.localRotation = Quaternion.Euler(isOnlineNote ? Vector3.zero : Vector3.forward * 180);
+                true => decideLineController.onlineNote,
+                false => decideLineController.offlineNote
+            };
 
-                    break;
-                case NoteType.Point:
-                    break;
-                default:
-                    Debug.LogError("Invalid note!");
-                    break;
-            }
+            noteController.transform.localPosition = new Vector2(note.positionX, note.hitFloorPosition * direction.z);//复制localPosition
+            noteController.transform.localRotation = Quaternion.Euler(isOnlineNote ? Vector3.zero : Vector3.forward * 180);
+
+            noteController.Init();
+
             arisedNote.Add(noteController);//添加到音符存放点
         }
         lastIndex = index;//更新暂停位置
@@ -75,13 +66,14 @@ public class LineNoteController : MonoBehaviour
     /// </summary>
     /// <param name="notes">已经出现的音符列表存放点</param>
     /// <param name="isOnlineNote">是判定线上方还是下方</param>
-    private void FindAndReturnNote(List<NoteController> notes, bool isOnlineNote)
+    void FindAndReturnNote(List<NoteController> notes, bool isOnlineNote)
     {
-        int index = Algorithm.BinarySearch(notes, m => ProgressManager.Instance.CurrentTime >= m.thisNote.hitTime + JudgeManager.bad, false);//寻找已经出现的音符中有没有Miss掉的音符
+        int index = FindMissNote(notes);
 
         for (int i = 0; i < index; i++)//循环遍历所有Miss掉的音符
         {
             NoteController note = notes[i];//吧音符单独拿出来
+            if (note.thisNote.noteType == NoteType.Hold) continue;
             switch (isOnlineNote)
             {
                 case true://如果是判定线上方
@@ -93,5 +85,11 @@ public class LineNoteController : MonoBehaviour
             }
             notes.RemoveAt(i);//回收掉Miss音符后，从已出现的音符列表中移除
         }
+    }
+
+    static int FindMissNote(List<NoteController> notes)
+    {
+        return Algorithm.BinarySearch(notes, m => ProgressManager.Instance.CurrentTime >= m.thisNote.hitTime + JudgeManager.bad, false);
+        //寻找已经出现的音符中有没有Miss掉的音符
     }
 }

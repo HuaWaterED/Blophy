@@ -24,4 +24,15 @@ public class AssetManager : MonoBehaviourSingleton<AssetManager>
     public FullFlickController fullFlickPinkBlock;
     public FullFlickController fullFlickBlueBlock;
 
+    [Header("程序自动获取到的数值萌~")]
+    public int currentTargetFPS;
+    protected override void OnAwake()
+    {
+        currentTargetFPS = Application.isEditor switch
+        {
+            true => ValueManager.Instance.editorTargetFPS,
+            false => Screen.currentResolution.refreshRate
+        };
+    }
+
 }
