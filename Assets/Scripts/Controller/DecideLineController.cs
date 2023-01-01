@@ -12,7 +12,6 @@ using System.Security.Cryptography;
 using System.Runtime.InteropServices;
 using Blophy.Extension;
 using UnityEngine.Pool;
-using System.Drawing.Printing;
 using Quaternion = UnityEngine.Quaternion;
 /*
 * 声明：
@@ -42,7 +41,7 @@ public class DecideLineController : MonoBehaviour
     public BoxController box;
     public LineNoteController lineNoteController;//判定线音符管理脚本
 
-    public Line thisLine;//这根线的源数据
+    Line thisLine;//这根线的源数据
     public Line ThisLine
     {
         get => thisLine;
@@ -59,7 +58,7 @@ public class DecideLineController : MonoBehaviour
     void Init()
     {
         InitNotesObjectPool();//初始化对象池
-        Debug.LogWarning("请注意我的袁术局的隐私性");
+        SpeckleManager.Instance.allLineNoteControllers.Add(lineNoteController);
         List<Keyframe> keyframes = GameUtility.CalculatedSpeedCurve(ThisLine.speed);//将获得到的Key列表全部赋值
         canvasSpeed = new() { keys = keyframes.ToArray(), preWrapMode = WrapMode.ClampForever, postWrapMode = WrapMode.ClampForever };//把上边获得到的点转换为速度图
         canvasLocalOffset = GameUtility.CalculatedOffsetCurve(canvasSpeed, keyframes);//吧速度图转换为位移图

@@ -16,13 +16,6 @@ public class AssetManager : MonoBehaviourSingleton<AssetManager>
 
     [Header("音符萌~")]
     public NoteController[] noteControllers;
-    public TapController tap;
-    public HoldController hold;
-    public DragController drag;
-    public FlickController flick;
-    public PointController point;
-    public FullFlickController fullFlickPinkBlock;
-    public FullFlickController fullFlickBlueBlock;
 
     [Header("程序自动获取到的数值萌~")]
     public int currentTargetFPS;

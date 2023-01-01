@@ -65,9 +65,16 @@ namespace Blophy.Chart
         public NoteType noteType;
         public float hitTime;//打击时间
         public float holdTime;
+        [JsonIgnore]
+        public float HoldTime
+        {
+            get => holdTime == 0 ? JudgeManager.bad : holdTime;
+            set => holdTime = value;
+        }
         public BoxEffect boxEffect;
         public float positionX;
         public bool isClockwise;//是逆时针
+        [JsonIgnore] public float EndTime => hitTime + HoldTime;
         [JsonIgnore] public Event[] speed;
         [JsonIgnore] public float hitFloorPosition;//打击地板上距离
         [JsonIgnore] public float ariseFloorPosition;//从什么地方出现

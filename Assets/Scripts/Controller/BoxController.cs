@@ -135,7 +135,8 @@ public class BoxController : MonoBehaviour
     /// <returns></returns>
     public float CalculateCurrentValue(Blophy.Chart.Event[] events, float currentTime)
     {
-        int eventIndex = Algorithm.BinarySearch(events, currentTime);
+        int eventIndex = /*Algorithm.BinarySearch(events, currentTime);*/
+            Algorithm.BinarySearch(events, m => ProgressManager.Instance.CurrentTime >= m.startTime, true);
         return GameUtility.GetValueWithEvent(events[eventIndex], currentTime);
     }
 }
