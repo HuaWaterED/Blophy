@@ -1,6 +1,8 @@
+using Blophy.Chart;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 using static UnityEngine.Camera;
 public class SpeckleManager : MonoBehaviourSingleton<SpeckleManager>
@@ -8,6 +10,8 @@ public class SpeckleManager : MonoBehaviourSingleton<SpeckleManager>
     public Speckle[] speckles;//手指触摸列表
 
     public List<LineNoteController> allLineNoteControllers = new();//所有的判定线，一个框默认五个判定线
+    public List<LineNoteController> isInRangeLine = new();
+    public List<NoteController> waitNote = new();
     public int lineNoteControllerCount = -1;//初始化为-1
     public int LineNoteControllerCount
     {
@@ -37,21 +41,83 @@ public class SpeckleManager : MonoBehaviourSingleton<SpeckleManager>
         {
             Touch currentTouch = Input.GetTouch(i);
             speckles[i].SetCurrentTouch(currentTouch, i);
-            for (int j = 0; j < LineNoteControllerCount; j++)//每根手指遍历每根线
+            isInRangeLine.Clear();
+            waitNote.Clear();
+            //思路：先判定判定线的横轴，在那个判定线范围区间内
+            //然后时间判定，找到时间值最低的Notes
+            //然后根据Notes做竖轴空间判定
+            for (int j = 0; j < LineNoteControllerCount; j++)//每根手指遍历每根线,在哪些线的横轴范围内
             {
-                FindNotes(allLineNoteControllers[j].ariseOnlineNotes);
-                FindNotes(allLineNoteControllers[j].ariseOfflineNotes);
+                if (allLineNoteControllers[j].SpeckleInThisLine(speckles[i].CurrentPosition))
+                    isInRangeLine.Add(allLineNoteControllers[j]);
+            }
+            for (int j = 0; j < isInRangeLine.Count; j++)//时间判定
+            {
+                FindNotes(isInRangeLine[j].ariseOnlineNotes, waitNote);
+                FindNotes(isInRangeLine[j].ariseOfflineNotes, waitNote);
+            }
+            for (int j = 0; j < waitNote.Count; j++)//音符竖轴判定
+            {
+                switch (speckles[i].Phase)
+                {
+                    case TouchPhase.Began:
+                        switch (waitNote[j].thisNote.noteType)
+                        {
+                            case NoteType.Flick:
+                                break;
+                            default:
+                                if (!speckles[i].isUsed)
+                                {
+                                    if (waitNote[j].IsinRange(speckles[i].CurrentPosition))
+                                    {
+                                        speckles[i].isUsed = !speckles[i].isUsed;
+                                        waitNote[j].Judge(ProgressManager.Instance.CurrentTime);
+                                    }
+                                }
+                                break;
+                        }
+                        break;
+                    case TouchPhase.Moved:
+                        switch (waitNote[j].thisNote.noteType)
+                        {
+                            case NoteType.Flick:
+                            case NoteType.FullFlickPink:
+                            case NoteType.FullFlickBlue:
+                            case NoteType.Drag:
+                                if (waitNote[j].IsinRange(speckles[i].CurrentPosition))
+                                {
+                                    waitNote[j].Judge(ProgressManager.Instance.CurrentTime);
+                                }
+                                break;
+
+                        }
+                        break;
+                    case TouchPhase.Stationary:
+                        switch (waitNote[j].thisNote.noteType)
+                        {
+                            case NoteType.Hold:
+                            case NoteType.Drag:
+                                if (waitNote[j].IsinRange(speckles[i].CurrentPosition))
+                                {
+                                    waitNote[j].Judge(ProgressManager.Instance.CurrentTime);
+                                }
+                                break;
+                        }
+                        break;
+                }
             }
         }
     }
-
-    private void FindNotes(List<NoteController> needFindNotes)
+    private void FindNotes(List<NoteController> needFindNotes, List<NoteController> waitNotes)
     {
-        int index_startJudge_needJudgeNote = Algorithm.BinarySearch(needFindNotes, m => m.thisNote.hitTime < ProgressManager.Instance.CurrentTime - JudgeManager.bad, false);
-        int index_endJudge_needJudgeNote = Algorithm.BinarySearch(needFindNotes, m => m.thisNote.hitTime < ProgressManager.Instance.CurrentTime + JudgeManager.bad + .00001, false);
+        double currentTime = ProgressManager.Instance.CurrentTime;
+        int index_startJudge_needJudgeNote = Algorithm.BinarySearch(needFindNotes, m => m.thisNote.hitTime < currentTime - JudgeManager.bad, false);
+        int index_endJudge_needJudgeNote = Algorithm.BinarySearch(needFindNotes, m => m.thisNote.hitTime < currentTime + JudgeManager.bad + .00001, false);
         for (int i = index_startJudge_needJudgeNote; i < index_endJudge_needJudgeNote; i++)//每根线遍历每个出现的音符
         {
-            needFindNotes[i].JudgeNote();
+            //waitNote.Add(needFindNotes[i]);
+            int index = Algorithm.BinarySearch(waitNote, m => m.thisNote.hitTime < needFindNotes[i].thisNote.hitTime, false);//寻找这个音符按照hitTime排序的话，应该插在什么位置
+            waitNotes.Insert(index, needFindNotes[i]);//插入音符
         }
     }
 }
@@ -64,6 +130,8 @@ public struct Speckle//翻译为斑点，亦为安卓系统的触摸小白点，
     public int index_movePath;//移动过的路径的索引
     public bool isFull_movePath;//移动过的路径是否已被全部填充
     public int length_movePath;
+    public bool isUsed;
+    public Vector2 CurrentPosition => movePath[index_movePath];
     public Vector2 startPoint;//开始位置
     [SerializeField] private TouchPhase phase;//当前的触摸阶段
     public TouchPhase Phase//当前触摸阶段
@@ -79,6 +147,7 @@ public struct Speckle//翻译为斑点，亦为安卓系统的触摸小白点，
                     ResetIndex(ref index_movePath);//重置索引
                     startPoint = movePath[index_movePath++];//把第0个StartPoint赋值过去
                     isFull_movePath = false;//重置状态
+                    isUsed = false;
                     break;
             }
         }
@@ -99,11 +168,12 @@ public struct Speckle//翻译为斑点，亦为安卓系统的触摸小白点，
         this.beganTime = beganTime;
         this.thisIndex = thisIndex;
         this.index_movePath = index_movePath;
-        this.length_movePath = movePath.Length;
         this.isFull_movePath = isFull_movePath;
         this.phase = phase;
         this.movePath = movePath;
         this.startPoint = startPoint;
+        length_movePath = movePath.Length;
+        isUsed = false;
     }
     public float FlickDirection//滑动方向
     {

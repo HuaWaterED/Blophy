@@ -13,7 +13,7 @@ public class HoldController : NoteController
         AnimationCurve localOffset = decideLineController.canvasLocalOffset;
         holdBody.transform.localScale = new Vector2(1, localOffset.Evaluate(thisNote.hitTime + thisNote.HoldTime) - localOffset.Evaluate(thisNote.hitTime));
     }
-    private void Update()
+    public override void NoteHoldArise()
     {
         AnimationCurve localOffset = decideLineController.canvasLocalOffset;
         if (ProgressManager.Instance.CurrentTime >= thisNote.hitTime)
@@ -22,4 +22,5 @@ public class HoldController : NoteController
             holdBody.transform.localScale = new Vector2(1, localOffset.Evaluate(thisNote.hitTime + thisNote.holdTime) - localOffset.Evaluate((float)ProgressManager.Instance.CurrentTime));
         }
     }
+
 }

@@ -21,17 +21,42 @@ public class NoteController : MonoBehaviour
     /// <summary>
     /// 判定音符
     /// </summary>
-    public void JudgeNote()
+    public void Judge(double currentTime)
     {
         //这里放分数之类的
-        UIManager.Instance.DebugTextString = $"我是{thisNote.noteType},应该在{thisNote.hitTime}的时候被打击";
+        UIManager.Instance.DebugTextString = $"我是{thisNote.noteType},应该在{thisNote.hitTime}的时候被打击,传递给我的时间是{currentTime},我自行获取到的时间是{ProgressManager.Instance.CurrentTime}";
+        Debug.Log($"我是{thisNote.noteType},应该在{thisNote.hitTime}的时候被打击,传递给我的时间是{currentTime},我自行获取到的时间是{ProgressManager.Instance.CurrentTime}");
         //**************
-        CompleteJudge();
+        CompleteJudge(currentTime);
     }
     /// <summary>
     /// 这里是被子类重写的方法，用于执行某些音符判定后特性的方法
     /// </summary>
-    protected virtual void CompleteJudge() { }
+    protected virtual void CompleteJudge(double currentTime) { }
+    /// <summary>
+    /// 音符出现的时候每帧调用
+    /// </summary>
+    public virtual void NoteHoldArise() { }
+    public virtual bool IsinRange(Vector2 currentPosition)
+    {
+        //float onlineJudge = ValueManager.Instance.onlineJudgeRange;
+        //float offlineJudge = ValueManager.Instance.offlineJudgeRange;
+
+        float inThisLine = transform.InverseTransformPoint(currentPosition).x;
+
+        if (inThisLine <= ValueManager.Instance.noteRightJudgeRange &&
+            inThisLine >= ValueManager.Instance.noteLeftJudgeRange)
+        {
+            //UIManager.Instance.DebugTextString = $"onlineJudge:{onlineJudge}||offlineJudge:{offlineJudge}||Result:true ||inThisLine:{inThisLine}";
+            return true;
+        }
+        else
+        {
+            //UIManager.Instance.DebugTextString = $"onlineJudge:{onlineJudge}||offlineJudge:{offlineJudge}||Result:false||inThisLine:{inThisLine}";
+            return false;
+        }
+    }
+
 }
 [Serializable]
 public class SpriteRenderers

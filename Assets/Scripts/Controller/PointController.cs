@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PointController : NoteController
 {
-    private void Update()
+    public override void NoteHoldArise()
     {
         transform.localPosition = Vector2.up * PointNoteCurrentOffset;
     }

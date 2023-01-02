@@ -28,8 +28,17 @@ public class LineNoteController : MonoBehaviour
     {
         FindAndGetNote(decideLineController.ThisLine.onlineNotes, ref lastOnlineIndex, ariseOnlineNotes, endTime_ariseOnlineNotes, true);//寻找这一时刻，在判定线上方需要生成的音符
         FindAndGetNote(decideLineController.ThisLine.offlineNotes, ref lastOfflineIndex, ariseOfflineNotes, endTime_ariseOfflineNotes, false);//寻找这一时刻，在判定线下方需要生成的音符
+        UpdateNote(ariseOnlineNotes);
+        UpdateNote(ariseOfflineNotes);
         FindAndReturnNote(ariseOnlineNotes, endTime_ariseOnlineNotes, true);//寻找这一时刻，在判定线上方需要回收的Miss掉的音符
         FindAndReturnNote(ariseOfflineNotes, endTime_ariseOfflineNotes, false);//寻找这一时刻，在判定线下方需要回收的Miss掉的音符
+    }
+    void UpdateNote(List<NoteController> ariseNotes)
+    {
+        foreach (var item in ariseNotes)
+        {
+            item.NoteHoldArise();
+        }
     }
     /// <summary>
     /// 寻找这一时刻，在判定线需要生成的音符
@@ -121,5 +130,24 @@ public class LineNoteController : MonoBehaviour
     {
         return Algorithm.BinarySearch(notes, m => ProgressManager.Instance.CurrentTime >= m.thisNote.EndTime, false);
         //寻找已经出现的音符中有没有Miss掉的音符
+    }
+    public bool SpeckleInThisLine(Vector2 currentPosition)
+    {
+        //float onlineJudge = ValueManager.Instance.onlineJudgeRange;
+        //float offlineJudge = ValueManager.Instance.offlineJudgeRange;
+
+        float inThisLine = transform.InverseTransformPoint(currentPosition).y;
+
+        if (inThisLine <= ValueManager.Instance.onlineJudgeRange &&
+            inThisLine >= ValueManager.Instance.offlineJudgeRange)
+        {
+            //UIManager.Instance.DebugTextString = $"onlineJudge:{onlineJudge}||offlineJudge:{offlineJudge}||Result:true ||inThisLine:{inThisLine}";
+            return true;
+        }
+        else
+        {
+            //UIManager.Instance.DebugTextString = $"onlineJudge:{onlineJudge}||offlineJudge:{offlineJudge}||Result:false||inThisLine:{inThisLine}";
+            return false;
+        }
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FullFlickController : NoteController
 {
-    private void Update()
+    public override void NoteHoldArise()
     {
         if (ProgressManager.Instance.CurrentTime >= thisNote.hitTime)
         {
