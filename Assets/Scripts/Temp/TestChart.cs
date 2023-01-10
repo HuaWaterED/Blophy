@@ -14,4 +14,7 @@ public class TestChart : MonoBehaviourSingleton<TestChart>
         AssetManager.Instance.chartData = chartData;
         AssetManager.Instance.musicPlayer.clip = clip;
     }
+    private void Update()
+    {
+    }
 }

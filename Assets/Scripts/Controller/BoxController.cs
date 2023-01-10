@@ -11,27 +11,38 @@ public class BoxController : MonoBehaviour
 
     public Box box;//谱面，单独这个box的谱面
 
-    public int sortSeed = 0;
-    public SpriteMask spriteMask;
-
+    public int sortSeed = 0;//层级顺序种子
+    public SpriteMask spriteMask;//遮罩
+    /// <summary>
+    /// 设置遮罩种子
+    /// </summary>
+    /// <param name="sortSeed">种子开始</param>
+    /// <returns>返回自身</returns>
     public BoxController SetSortSeed(int sortSeed)
     {
-        this.sortSeed = sortSeed;
-        spriteMask.frontSortingOrder = sortSeed + 2;
-        spriteMask.backSortingOrder = sortSeed - 1;
-        foreach (var item in spriteRenderers)
+        this.sortSeed = sortSeed;//设置我自己的遮罩到我自己
+        spriteMask.frontSortingOrder = sortSeed + ValueManager.Instance.noteRendererOrder - 1;//遮罩种子+一共多少层-1（这个1是我自己占用了，所以减去）
+        spriteMask.backSortingOrder = sortSeed - 1;//遮罩的优先级是前包容后不包容，所以后的遮罩层级向下探一个
+        foreach (var item in spriteRenderers)//赋值渲染层级到组成渲染的各个组件们
         {
-            item.sortingOrder = sortSeed;
+            item.sortingOrder = sortSeed;//赋值
         }
-        return this;
+        return this;//返回自己
     }
+    /// <summary>
+    /// 初始化
+    /// </summary>
+    /// <param name="thisBox">这个方框</param>
+    /// <returns></returns>
     public BoxController Init(Box thisBox)
     {
-        this.box = thisBox; for (int i = 0; i < decideLineControllers.Length; i++)
+        box = thisBox;//赋值thisBox到box
+        int length_decideLineControllers = decideLineControllers.Length;//获得到当前判定线的数量
+        for (int i = 0; i < length_decideLineControllers; i++)//遍历
         {
-            decideLineControllers[i].ThisLine = box.lines[i];
+            decideLineControllers[i].ThisLine = box.lines[i];//将line的源数据赋值过去
         }
-        return this;
+        return this;//返回自身
     }
     private void Update()
     {
@@ -136,7 +147,7 @@ public class BoxController : MonoBehaviour
     public float CalculateCurrentValue(Blophy.Chart.Event[] events, float currentTime)
     {
         int eventIndex = /*Algorithm.BinarySearch(events, currentTime);*/
-            Algorithm.BinarySearch(events, m => ProgressManager.Instance.CurrentTime >= m.startTime, true);
-        return GameUtility.GetValueWithEvent(events[eventIndex], currentTime);
+            Algorithm.BinarySearch(events, m => currentTime >= m.startTime, true);//找到当前时间下，应该是哪个事件
+        return GameUtility.GetValueWithEvent(events[eventIndex], currentTime);//拿到事件后根据时间Get到当前值
     }
 }

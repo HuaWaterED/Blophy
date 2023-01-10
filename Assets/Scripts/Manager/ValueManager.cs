@@ -17,7 +17,7 @@ public class ValueManager : MonoBehaviourSingleton<ValueManager>//这里存放�
 
     [Tooltip("手指按下后我要保存多少秒的位置")] public float fingerSavePosition;
 
-    [Tooltip("音符渲染小层，每一大层有多少小层")] public int noteRendererOrder;
+    [Tooltip("音符渲染小层，每一大层有多少小层,方框默认占用一层，所以音符赋值的之后长度应当为总长度-1，比如3层，框用一层，音符就只能用两层，代表层级的数组长度就是2而不是3")] public int noteRendererOrder;
 
     [Tooltip("因为编辑器检测屏幕刷新了始终是0，所以这里手动设置编辑器目标FPS")] public int editorTargetFPS;
 
@@ -29,11 +29,29 @@ public class ValueManager : MonoBehaviourSingleton<ValueManager>//这里存放�
     [Tooltip("判定线下边的空间判定范围，世界坐标为主")] public float offlineJudgeRange;
     [Tooltip("音符右边的空间判定范围，世界坐标为主")] public float noteRightJudgeRange;
     [Tooltip("音符左边的空间判定范围，世界坐标为主")] public float noteLeftJudgeRange;
+    [Tooltip("大滑键音符左边的空间判定范围，世界坐标为主")] public float fullFlick_noteRightJudgeRange;
+    [Tooltip("大滑键音符左边的空间判定范围，世界坐标为主")] public float fullFlick_noteLeftJudgeRange;
+
+    [Tooltip("当前系统的目标帧率")] public int currentTargetFPS;
+
+    [Tooltip("perfect判定的打击特效的颜色")] public Color perfectJudge;
+    [Tooltip("good判定的打击特效的颜色")] public Color goodJudge;
+    [Tooltip("bad判定的打击特效的颜色")] public Color badJudge;
+
+    [Tooltip("打击特效的大小")] public float hitEffectScale;
 
     [Header("下面这些值是代码自动算出来的，不需要人为干涉")]
     public Score score;
 
-    protected override void OnAwake() => Application.targetFrameRate = FPS;
+    protected override void OnAwake()
+    {
+        Application.targetFrameRate = FPS;
+        currentTargetFPS = Application.isEditor switch
+        {
+            true => editorTargetFPS,
+            false => Screen.currentResolution.refreshRate
+        };
+    }
 }
 [Serializable]
 public struct Score

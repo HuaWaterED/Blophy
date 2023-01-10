@@ -161,7 +161,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1ff94608989e1d45934536dd60ac704, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spriteRenderers:
+  renderOrder:
+  - spriteRenderers: []
   - spriteRenderers:
     - {fileID: 4510815753451436333}
   - spriteRenderers: []
@@ -189,3 +190,6 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
+  decideLineController: {fileID: 0}
+  isOnlineNote: 0
+  noteCanvas: {fileID: 0}

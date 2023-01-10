@@ -129,7 +129,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f49f429c63ca2f4ab18c5383288dc76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spriteRenderers:
+  renderOrder:
+  - spriteRenderers: []
   - spriteRenderers:
     - {fileID: 482928321145076333}
   - spriteRenderers: []
@@ -157,6 +158,9 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
+  decideLineController: {fileID: 0}
+  isOnlineNote: 0
+  noteCanvas: {fileID: 0}
 --- !u!1 &2936678047011189888
 GameObject:
   m_ObjectHideFlags: 0

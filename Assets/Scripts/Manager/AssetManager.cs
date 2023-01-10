@@ -17,15 +17,6 @@ public class AssetManager : MonoBehaviourSingleton<AssetManager>
     [Header("音符萌~")]
     public NoteController[] noteControllers;
 
-    [Header("程序自动获取到的数值萌~")]
-    public int currentTargetFPS;
-    protected override void OnAwake()
-    {
-        currentTargetFPS = Application.isEditor switch
-        {
-            true => ValueManager.Instance.editorTargetFPS,
-            false => Screen.currentResolution.refreshRate
-        };
-    }
-
+    [Header("打击特效的预制件")]
+    public HitEffectController hitEffect;
 }

@@ -310,11 +310,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0516ae90d6524994289e6c937dbb3518, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spriteRenderers:
+  renderOrder:
   - spriteRenderers:
     - {fileID: 1055111832930579929}
   - spriteRenderers:
     - {fileID: 6735959982253518055}
+  - spriteRenderers: []
   thisNote:
     noteType: 0
     hitTime: 0
@@ -341,5 +342,7 @@ MonoBehaviour:
       m_RotationOrder: 4
   decideLineController: {fileID: 0}
   isOnlineNote: 0
+  noteCanvas: {fileID: 0}
   holdBody: {fileID: 8684928917179229485}
   holdHead: {fileID: 7530131069725985595}
+  remainTime: 0

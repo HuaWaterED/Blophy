@@ -246,11 +246,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eaf575967e0b2b14aa50545ad4d33d2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spriteRenderers:
+  renderOrder:
   - spriteRenderers:
     - {fileID: 7870038656611709239}
   - spriteRenderers:
     - {fileID: 1681120255519769037}
+  - spriteRenderers: []
   thisNote:
     noteType: 0
     hitTime: 0
@@ -275,3 +276,6 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
+  decideLineController: {fileID: 0}
+  isOnlineNote: 0
+  noteCanvas: {fileID: 0}

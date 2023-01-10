@@ -77,8 +77,8 @@ public class DecideLineController : MonoBehaviour
             new ObjectPoolQueue<NoteController>(AssetManager.Instance.noteControllers[(int)NoteType.Drag],5,box.sortSeed,onlineNote),
             new ObjectPoolQueue<NoteController>(AssetManager.Instance.noteControllers[(int)NoteType.Flick],0,box.sortSeed,  onlineNote),
             new ObjectPoolQueue<NoteController>(AssetManager.Instance.noteControllers[(int)NoteType.Point],2,box.sortSeed,  onlineNote),
-            new ObjectPoolQueue<NoteController>(AssetManager.Instance.noteControllers[(int)NoteType.FullFlickPink],2,box.sortSeed,  onlineNote),
-            new ObjectPoolQueue<NoteController>(AssetManager.Instance.noteControllers[(int)NoteType.FullFlickBlue],2,box.sortSeed,  onlineNote)
+            new ObjectPoolQueue<NoteController>(AssetManager.Instance.noteControllers[(int)NoteType.FullFlickPink],1,box.sortSeed,  onlineNote),
+            new ObjectPoolQueue<NoteController>(AssetManager.Instance.noteControllers[(int)NoteType.FullFlickBlue],1,box.sortSeed,  onlineNote)
         };
         offlineNotes = new()
         {
@@ -87,8 +87,8 @@ public class DecideLineController : MonoBehaviour
             new ObjectPoolQueue<NoteController>(AssetManager.Instance.noteControllers[(int)NoteType.Drag],5,box.sortSeed, offlineNote),
             new ObjectPoolQueue<NoteController>(AssetManager.Instance.noteControllers[(int)NoteType.Flick],0,box.sortSeed,  offlineNote),
             new ObjectPoolQueue<NoteController>(AssetManager.Instance.noteControllers[(int)NoteType.Point],2,box.sortSeed, offlineNote),
-            new ObjectPoolQueue<NoteController>(AssetManager.Instance.noteControllers[(int)NoteType.FullFlickPink],2,box.sortSeed, offlineNote),
-            new ObjectPoolQueue<NoteController>(AssetManager.Instance.noteControllers[(int)NoteType.FullFlickBlue],2,box.sortSeed, offlineNote)
+            new ObjectPoolQueue<NoteController>(AssetManager.Instance.noteControllers[(int)NoteType.FullFlickPink],1,box.sortSeed, offlineNote),
+            new ObjectPoolQueue<NoteController>(AssetManager.Instance.noteControllers[(int)NoteType.FullFlickBlue],1,box.sortSeed, offlineNote)
         };
     }
     /// <summary>
@@ -101,8 +101,8 @@ public class DecideLineController : MonoBehaviour
     {
         return isOnlineNote switch
         {
-            true => onlineNotes[(int)noteType].PrepareObject(),//如果是判定线上方，就返回判定线上方的音符
-            false => offlineNotes[(int)noteType].PrepareObject(),//如果是判定线下方，就返回判定线下方的音符
+            true => onlineNotes[(int)noteType].PrepareNote(),//如果是判定线上方，就返回判定线上方的音符
+            false => offlineNotes[(int)noteType].PrepareNote(),//如果是判定线下方，就返回判定线下方的音符
         };
     }
     /// <summary>
@@ -116,10 +116,10 @@ public class DecideLineController : MonoBehaviour
         switch (isOnlineNote)
         {
             case true://上方就回上方去
-                onlineNotes[(int)noteType].ReturnObject(note);
+                onlineNotes[(int)noteType].ReturnNote(note);
                 break;
             case false://下方就回下方去
-                offlineNotes[(int)noteType].ReturnObject(note);
+                offlineNotes[(int)noteType].ReturnNote(note);
                 break;
         }
     }

@@ -10,7 +10,7 @@ public class DebugManager : MonoBehaviourSingleton<DebugManager>
         UIManager.Instance.DebugTextString = $"CurrentTime:{ProgressManager.Instance.CurrentTime}\n" +
             $"CurrentFPS:{1 / GetSmoothDeltaTime():F2}";
     }
-    private static readonly Queue<float> DeltaTimeSamples = new Queue<float>();//估计是用来存DeltaTime的样本的，配合下面的属性工作
+    private static readonly Queue<float> DeltaTimeSamples = new();//估计是用来存DeltaTime的样本的，配合下面的属性工作
     private const float SmoothDeltaTimePeriod = 1.5f;//因为直接用1/Time.unscaledDeltaTime会导致变化特别快，人眼无法捕捉，所以取1.5秒之内的平滑值
     public static float GetSmoothDeltaTime()//方法
     {

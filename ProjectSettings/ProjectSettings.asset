@@ -155,7 +155,7 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
-    Android: net.LemonSpirit.Blophy
+    Android: net.blophy
     Standalone: com.DefaultCompany.2DProject
   buildNumber:
     Standalone: 0

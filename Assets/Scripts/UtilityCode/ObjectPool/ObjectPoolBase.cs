@@ -16,13 +16,18 @@ public abstract class ObjectPoolBase<T> where T : MonoBehaviour
         this.sortSeed = sortSeed;
         PoolObject = @object;
     }
-    protected T CreateObject()
+    protected ObjectPoolBase(T @object, int poolLength, Transform parent = null)
+    {
+        this.parent = parent;
+        PoolObject = @object;
+    }
+    protected T CreateNote()
     {
         T obj = Object.Instantiate(PoolObject, Vector3.zero, Quaternion.identity, parent == null ? PoolObject.transform : parent);
         NoteController note = obj.GetComponent<NoteController>();
-        for (int i = 0; i < note.spriteRenderers.Count; i++)
+        for (int i = 0; i < note.renderOrder.Count; i++)
         {
-            foreach (var item in note.spriteRenderers[i].spriteRenderers)
+            foreach (var item in note.renderOrder[i].spriteRenderers)
             {
                 item.sortingOrder = sortSeed + 1 + i;
             }
@@ -30,10 +35,20 @@ public abstract class ObjectPoolBase<T> where T : MonoBehaviour
         obj.gameObject.SetActive(false);
         return obj;
     }
+    protected virtual T GetNote() => null;
 
+    public virtual void ReturnNote(T obj)
+    {
+    }
     protected virtual T GetObject() => null;
 
     public virtual void ReturnObject(T obj)
     {
+    }
+    protected T CreateObject()
+    {
+        T obj = Object.Instantiate(PoolObject, Vector3.zero, Quaternion.identity, parent == null ? PoolObject.transform : parent);
+        obj.gameObject.SetActive(false);
+        return obj;
     }
 }

@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Runtime.InteropServices;
+using System.Security.Cryptography;
 using System.Text;
 using UnityEngine;
 
@@ -26,18 +27,37 @@ public class LineNoteController : MonoBehaviour
     public int movedOfflineNotesCount = 0;
     private void Update()
     {
-        FindAndGetNote(decideLineController.ThisLine.onlineNotes, ref lastOnlineIndex, ariseOnlineNotes, endTime_ariseOnlineNotes, true);//寻找这一时刻，在判定线上方需要生成的音符
-        FindAndGetNote(decideLineController.ThisLine.offlineNotes, ref lastOfflineIndex, ariseOfflineNotes, endTime_ariseOfflineNotes, false);//寻找这一时刻，在判定线下方需要生成的音符
-        UpdateNote(ariseOnlineNotes);
-        UpdateNote(ariseOfflineNotes);
-        FindAndReturnNote(ariseOnlineNotes, endTime_ariseOnlineNotes, true);//寻找这一时刻，在判定线上方需要回收的Miss掉的音符
-        FindAndReturnNote(ariseOfflineNotes, endTime_ariseOfflineNotes, false);//寻找这一时刻，在判定线下方需要回收的Miss掉的音符
+        FindAndGetNotes(decideLineController.ThisLine.onlineNotes, ref lastOnlineIndex, ariseOnlineNotes, endTime_ariseOnlineNotes, true);//寻找这一时刻，在判定线上方需要生成的音符
+        FindAndGetNotes(decideLineController.ThisLine.offlineNotes, ref lastOfflineIndex, ariseOfflineNotes, endTime_ariseOfflineNotes, false);//寻找这一时刻，在判定线下方需要生成的音符
+        UpdateNotes(ariseOnlineNotes);//音符出现后每一帧调用
+        UpdateNotes(ariseOfflineNotes);//音符出现后每一帧调用
+        FindPassHitTimeNotes(ariseOnlineNotes);//音符过了打击时间但是没有Miss掉的这个期间每一帧调用
+        FindPassHitTimeNotes(ariseOfflineNotes);//音符过了打击时间但是没有Miss掉的这个期间每一帧调用
+        FindAndReturnNotes(ariseOnlineNotes, endTime_ariseOnlineNotes, true);//寻找这一时刻，在判定线上方需要回收的Miss掉的音符
+        FindAndReturnNotes(ariseOfflineNotes, endTime_ariseOfflineNotes, false);//寻找这一时刻，在判定线下方需要回收的Miss掉的音符
     }
-    void UpdateNote(List<NoteController> ariseNotes)
+    /// <summary>
+    /// 音符出现后每一帧调用
+    /// </summary>
+    /// <param name="ariseNotes">需要调用的列表</param>
+    void UpdateNotes(List<NoteController> ariseNotes)
     {
-        foreach (var item in ariseNotes)
+        foreach (var item in ariseNotes)//循环调用
         {
-            item.NoteHoldArise();
+            item.NoteHoldArise();//调用
+        }
+    }
+    /// <summary>
+    /// 音符过了打击时间但是没有Miss掉的这个期间每一帧调用
+    /// </summary>
+    /// <param name="ariseNotes">需要调用的列表</param>
+    void FindPassHitTimeNotes(List<NoteController> ariseNotes)
+    {
+        double currentTime = ProgressManager.Instance.CurrentTime;//当前时间
+        int index = Algorithm.BinarySearch(ariseNotes, m => currentTime >= m.thisNote.hitTime, false);//寻找音符过了打击时间但是没有Miss掉的音符
+        for (int i = 0; i < index; i++)//循环遍历所有找到的音符
+        {
+            ariseNotes[i].PassHitTime(currentTime);//吧音符单独拿出来
         }
     }
     /// <summary>
@@ -47,7 +67,7 @@ public class LineNoteController : MonoBehaviour
     /// <param name="lastIndex">上次在什么地方结束，这次就从什么地方继续</param>
     /// <param name="arisedNotes">生成后的音符存放点</param>
     /// <param name="isOnlineNote">当前处理的是不是判定线上方的音符，true代表是判定线上方的音符，false代表不是判定线上方的音符</param>
-    private void FindAndGetNote(Note[] notes, ref int lastIndex, List<NoteController> arisedNotes, List<NoteController> endTime_arisedNotes, bool isOnlineNote)
+    private void FindAndGetNotes(Note[] notes, ref int lastIndex, List<NoteController> arisedNotes, List<NoteController> endTime_arisedNotes, bool isOnlineNote)
     {
         Vector3 direction = isOnlineNote switch//确定方向，如果是判定线上方，就是正值，如果是判定线下方，就是负值
         {
@@ -61,32 +81,44 @@ public class LineNoteController : MonoBehaviour
         }
         lastIndex = index;//更新暂停位置
     }
-
+    /// <summary>
+    /// 寻找音符
+    /// </summary>
+    /// <param name="notes">寻找当前的需要出现的时间的音符</param>
+    /// <returns>返回索引</returns>
     private int FindNote(Note[] notes)
     {
         return Algorithm.BinarySearch(notes, m => (float)ProgressManager.Instance.CurrentTime > m.hitTime - CurrentAriseTime, false);
         //寻找这个时刻需要出现的音符，出现要提前两个单位长度的时间出现
     }
-
+    /// <summary>
+    /// 获取到音符
+    /// </summary>
+    /// <param name="notes">音符源数据列表</param>
+    /// <param name="arisedNotes">出现的音符列表</param>
+    /// <param name="endTime_arisedNotes">按照endTime排序的出现的音符列表</param>
+    /// <param name="isOnlineNote">是否是线上的音符</param>
+    /// <param name="direction">音符朝向</param>
+    /// <param name="i">当前处于什么循环</param>
     private void GetNote(Note[] notes, List<NoteController> arisedNotes, List<NoteController> endTime_arisedNotes, bool isOnlineNote, Vector3 direction, int i)
     {
         Note note = notes[i];//拿出当前遍历到的音符
         NoteController noteController = decideLineController.GetNote(note.noteType, isOnlineNote);//从对象池拿出来
         noteController.thisNote = note;//将这个音符的源数据赋值过去
-        noteController.isOnlineNote = isOnlineNote;
-        noteController.decideLineController = decideLineController;
+        noteController.isOnlineNote = isOnlineNote;//将这个音符的源数据赋值过去
+        noteController.decideLineController = decideLineController;//将这个音符的源数据赋值过去
         noteController.noteCanvas = isOnlineNote switch
         {
-            true => decideLineController.onlineNote,
-            false => decideLineController.offlineNote
+            true => decideLineController.onlineNote,//如果是线上音符就赋值onlineNote
+            false => decideLineController.offlineNote//如果是线上音符就赋值offlineNote
         };
 
         noteController.transform.localPosition = new Vector2(note.positionX, note.hitFloorPosition * direction.z);//复制localPosition
-        noteController.transform.localRotation = Quaternion.Euler(isOnlineNote ? Vector3.zero : Vector3.forward * 180);
+        noteController.transform.localRotation = Quaternion.Euler(isOnlineNote ? Vector3.zero : Vector3.forward * 180);//音符旋转，如果是线上的音符就什么也不管，如果是线下的音符就旋转180度
 
-        noteController.Init();
+        noteController.Init();//执行音符初始化
 
-        AddNote2NoteList(arisedNotes, endTime_arisedNotes, noteController);
+        AddNote2NoteList(arisedNotes, endTime_arisedNotes, noteController);//添加音符到音符列表
     }
     /// <summary>
     /// 添加音符到音符列表
@@ -105,15 +137,15 @@ public class LineNoteController : MonoBehaviour
     /// </summary>
     /// <param name="endTime_ariseNotes">已经出现的音符列表存放点</param>
     /// <param name="isOnlineNote">是判定线上方还是下方</param>
-    void FindAndReturnNote(List<NoteController> ariseNotes, List<NoteController> endTime_ariseNotes, bool isOnlineNote)
+    void FindAndReturnNotes(List<NoteController> ariseNotes, List<NoteController> endTime_ariseNotes, bool isOnlineNote)
     {
         int index = FindMissNote(endTime_ariseNotes);
-
         for (int i = 0; i < index; i++)//循环遍历所有Miss掉的音符
         {
             NoteController note = endTime_ariseNotes[i];//吧音符单独拿出来
-            endTime_ariseNotes.Remove(note);
-            ariseNotes.Remove(note);
+            ariseNotes.Remove(note);//移除
+            endTime_ariseNotes.Remove(note);//移除
+            index--;//移除后当前索引--，不然可能会误伤到其他音符
             switch (isOnlineNote)
             {
                 case true://如果是判定线上方
@@ -125,29 +157,38 @@ public class LineNoteController : MonoBehaviour
             }
         }
     }
-
+    /// <summary>
+    /// 寻找已经出现的音符中有没有Miss掉的音符
+    /// </summary>
+    /// <param name="notes">音符列表</param>
+    /// <returns>索引</returns>
     static int FindMissNote(List<NoteController> notes)
     {
         return Algorithm.BinarySearch(notes, m => ProgressManager.Instance.CurrentTime >= m.thisNote.EndTime, false);
         //寻找已经出现的音符中有没有Miss掉的音符
     }
+    /// <summary>
+    /// 看看世界坐标轴的触摸是不是在这根线的判定范围内
+    /// </summary>
+    /// <param name="currentPosition">当前手指的世界坐标</param>
+    /// <returns>返回是或否</returns>
     public bool SpeckleInThisLine(Vector2 currentPosition)
     {
         //float onlineJudge = ValueManager.Instance.onlineJudgeRange;
         //float offlineJudge = ValueManager.Instance.offlineJudgeRange;
 
-        float inThisLine = transform.InverseTransformPoint(currentPosition).y;
+        float inThisLine = transform.InverseTransformPoint(currentPosition).y;//将手指的世界坐标转换为局部坐标后的y拿到
 
-        if (inThisLine <= ValueManager.Instance.onlineJudgeRange &&
+        if (inThisLine <= ValueManager.Instance.onlineJudgeRange &&//如果y介于ValueManager设定的数值之间
             inThisLine >= ValueManager.Instance.offlineJudgeRange)
         {
             //UIManager.Instance.DebugTextString = $"onlineJudge:{onlineJudge}||offlineJudge:{offlineJudge}||Result:true ||inThisLine:{inThisLine}";
-            return true;
+            return true;//返回是
         }
         else
         {
             //UIManager.Instance.DebugTextString = $"onlineJudge:{onlineJudge}||offlineJudge:{offlineJudge}||Result:false||inThisLine:{inThisLine}";
-            return false;
+            return false;//返回否
         }
     }
 }

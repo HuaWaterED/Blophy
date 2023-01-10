@@ -13,7 +13,7 @@ public class GameController : MonoBehaviourSingleton<GameController>
                 .Init(AssetManager.Instance.chartData.boxes[i]);
         }
 
-        yield return new WaitForSeconds(8);
-        StateManager.Instance.IsStart = true;
+        yield return new WaitForSeconds(8);//等8秒
+        StateManager.Instance.IsStart = true;//设置状态IsStart为True
     }
 }

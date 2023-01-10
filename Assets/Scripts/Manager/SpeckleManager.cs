@@ -10,8 +10,8 @@ public class SpeckleManager : MonoBehaviourSingleton<SpeckleManager>
     public Speckle[] speckles;//手指触摸列表
 
     public List<LineNoteController> allLineNoteControllers = new();//所有的判定线，一个框默认五个判定线
-    public List<LineNoteController> isInRangeLine = new();
-    public List<NoteController> waitNote = new();
+    public List<LineNoteController> isInRangeLine = new();//根据横轴判定，在范围内的判定线列表
+    public List<NoteController> waitNote = new();//等待确定判定的音符
     public int lineNoteControllerCount = -1;//初始化为-1
     public int LineNoteControllerCount
     {
@@ -27,97 +27,130 @@ public class SpeckleManager : MonoBehaviourSingleton<SpeckleManager>
         speckles = new Speckle[ValueManager.Instance.maxSpeckleCount];//初始化手指触摸列表
         for (int i = 0; i < speckles.Length; i++)//循环每个列表
         {
-            speckles[i] = new Speckle(new Vector2[(int)(AssetManager.Instance.currentTargetFPS * ValueManager.Instance.fingerSavePosition)], Vector2.zero);
+            speckles[i] = new Speckle(new Vector2[(int)(ValueManager.Instance.currentTargetFPS * ValueManager.Instance.fingerSavePosition)], Vector2.zero);//初始化触摸
         }
     }
     private void Update()
     {
         UpdateTouch();
     }
+    /// <summary>
+    /// 更新触摸
+    /// </summary>
     void UpdateTouch()
     {
 
         for (int i = 0; i < Input.touchCount; i++)//遍历所有手指
         {
-            Touch currentTouch = Input.GetTouch(i);
-            speckles[i].SetCurrentTouch(currentTouch, i);
-            isInRangeLine.Clear();
-            waitNote.Clear();
+            Touch currentTouch = Input.GetTouch(i);//获取到这一帧的当前循环到的手指
+            speckles[i].SetCurrentTouch(currentTouch, i);//设置当前触摸到触摸管理列表
+            isInRangeLine.Clear();//清除“所有在手指周围的判定线”
+            waitNote.Clear();//清除等待判定的音符
             //思路：先判定判定线的横轴，在那个判定线范围区间内
             //然后时间判定，找到时间值最低的Notes
             //然后根据Notes做竖轴空间判定
             for (int j = 0; j < LineNoteControllerCount; j++)//每根手指遍历每根线,在哪些线的横轴范围内
             {
-                if (allLineNoteControllers[j].SpeckleInThisLine(speckles[i].CurrentPosition))
-                    isInRangeLine.Add(allLineNoteControllers[j]);
+                if (allLineNoteControllers[j].SpeckleInThisLine(speckles[i].CurrentPosition))//如果判定线说：确实在范围内
+                    isInRangeLine.Add(allLineNoteControllers[j]);//加入“所有在手指周围的判定线”
             }
             for (int j = 0; j < isInRangeLine.Count; j++)//时间判定
             {
-                FindNotes(isInRangeLine[j].ariseOnlineNotes, waitNote);
-                FindNotes(isInRangeLine[j].ariseOfflineNotes, waitNote);
+                FindNotes(isInRangeLine[j].ariseOnlineNotes, waitNote);//时间判定，当前时间±bad时间直接的所有音符
+                FindNotes(isInRangeLine[j].ariseOfflineNotes, waitNote);//时间判定，当前时间±bad时间直接的所有音符
             }
             for (int j = 0; j < waitNote.Count; j++)//音符竖轴判定
             {
-                switch (speckles[i].Phase)
+                switch (speckles[i].Phase)//判定阶段
                 {
-                    case TouchPhase.Began:
-                        switch (waitNote[j].thisNote.noteType)
-                        {
-                            case NoteType.Flick:
-                                break;
-                            default:
-                                if (!speckles[i].isUsed)
-                                {
-                                    if (waitNote[j].IsinRange(speckles[i].CurrentPosition))
-                                    {
-                                        speckles[i].isUsed = !speckles[i].isUsed;
-                                        waitNote[j].Judge(ProgressManager.Instance.CurrentTime);
-                                    }
-                                }
-                                break;
-                        }
+                    case TouchPhase.Began://开始
+                        BeganJudge(i, j);
                         break;
-                    case TouchPhase.Moved:
-                        switch (waitNote[j].thisNote.noteType)
-                        {
-                            case NoteType.Flick:
-                            case NoteType.FullFlickPink:
-                            case NoteType.FullFlickBlue:
-                            case NoteType.Drag:
-                                if (waitNote[j].IsinRange(speckles[i].CurrentPosition))
-                                {
-                                    waitNote[j].Judge(ProgressManager.Instance.CurrentTime);
-                                }
-                                break;
-
-                        }
+                    case TouchPhase.Moved://移动
+                        MovedJudge(i, j);
                         break;
-                    case TouchPhase.Stationary:
-                        switch (waitNote[j].thisNote.noteType)
-                        {
-                            case NoteType.Hold:
-                            case NoteType.Drag:
-                                if (waitNote[j].IsinRange(speckles[i].CurrentPosition))
-                                {
-                                    waitNote[j].Judge(ProgressManager.Instance.CurrentTime);
-                                }
-                                break;
-                        }
+                    case TouchPhase.Stationary://静止不动
+                        StationaryJudge(i, j);
                         break;
                 }
             }
         }
     }
+    /// <summary>
+    /// 判定的开始阶段
+    /// </summary>
+    /// <param name="i">for循环索引</param>
+    /// <param name="j">for循环索引</param>
+    private void BeganJudge(int i, int j)
+    {
+        switch (waitNote[j].thisNote.noteType)//看看这个阶段遇到了啥音符
+        {
+            case NoteType.Flick://如果是flick
+            case NoteType.Drag://和drag
+                break;//啥也不干
+            default://如果是别的音符
+                if (!speckles[i].isUsed && !waitNote[j].isJudged &&//如果这个手指没判定过并且音符也没有被判定过并且在音符判定范围内
+                    waitNote[j].IsinRange(speckles[i].CurrentPosition))
+                {
+                    speckles[i].isUsed = !speckles[i].isUsed;//修改isUsed为True
+                    waitNote[j].Judge(ProgressManager.Instance.CurrentTime);//调用音符的判定
+                }
+                break;
+        }
+    }
+    /// <summary>
+    /// 如果是移动判定
+    /// </summary>
+    /// <param name="i">for循环索引</param>
+    /// <param name="j">for循环索引</param>
+    private void MovedJudge(int i, int j)
+    {
+        switch (waitNote[j].thisNote.noteType)//看看这个阶段遇到了啥音符
+        {
+            case NoteType.Flick://如果是Flick
+            case NoteType.FullFlickPink://或者FullFlick
+            case NoteType.FullFlickBlue://或者FullFlick
+            case NoteType.Drag://或者Drag
+                if (waitNote[j].IsinRange(speckles[i].CurrentPosition))//看看音符是否在判定范围
+                {
+                    waitNote[j].Judge(ProgressManager.Instance.CurrentTime);//调用音符的判定
+                }
+                break;//其余音符不管
+        }
+    }
+    /// <summary>
+    /// 如果是静止不动的触摸阶段
+    /// </summary>
+    /// <param name="i">for循环索引</param>
+    /// <param name="j">for循环索引</param>
+    private void StationaryJudge(int i, int j)
+    {
+        switch (waitNote[j].thisNote.noteType)//看看这个阶段遇到了啥音符
+        {
+            case NoteType.Hold://如果是Hold
+            case NoteType.Drag://或者Drag
+                if (waitNote[j].IsinRange(speckles[i].CurrentPosition))//看看音符是否在判定范围
+                {
+                    waitNote[j].Judge(ProgressManager.Instance.CurrentTime);//调用音符的判定
+                }
+                break;
+        }
+    }
+    /// <summary>
+    /// 寻找音符
+    /// </summary>
+    /// <param name="needFindNotes">需要寻找的音符列表</param>
+    /// <param name="waitNotes">找到后放到什么地方</param>
     private void FindNotes(List<NoteController> needFindNotes, List<NoteController> waitNotes)
     {
-        double currentTime = ProgressManager.Instance.CurrentTime;
-        int index_startJudge_needJudgeNote = Algorithm.BinarySearch(needFindNotes, m => m.thisNote.hitTime < currentTime - JudgeManager.bad, false);
-        int index_endJudge_needJudgeNote = Algorithm.BinarySearch(needFindNotes, m => m.thisNote.hitTime < currentTime + JudgeManager.bad + .00001, false);
+        double currentTime = ProgressManager.Instance.CurrentTime;//拿到当前时间
+        int index_startJudge_needJudgeNote = Algorithm.BinarySearch(needFindNotes, m => m.thisNote.hitTime < currentTime - JudgeManager.bad, false);//获取到当前时间-bad所得到的需要判定的音符的开始界限
+        int index_endJudge_needJudgeNote = Algorithm.BinarySearch(needFindNotes, m => m.thisNote.hitTime < currentTime + JudgeManager.bad + .00001, false);//获取到当前时间+bad所得到的需要判定的音符的结束界限
         for (int i = index_startJudge_needJudgeNote; i < index_endJudge_needJudgeNote; i++)//每根线遍历每个出现的音符
         {
-            //waitNote.Add(needFindNotes[i]);
             int index = Algorithm.BinarySearch(waitNote, m => m.thisNote.hitTime < needFindNotes[i].thisNote.hitTime, false);//寻找这个音符按照hitTime排序的话，应该插在什么位置
             waitNotes.Insert(index, needFindNotes[i]);//插入音符
+            //waitNotes.Add(needFindNotes[i]);
         }
     }
 }
@@ -129,9 +162,9 @@ public struct Speckle//翻译为斑点，亦为安卓系统的触摸小白点，
     public Vector2[] movePath;//移动过的路径
     public int index_movePath;//移动过的路径的索引
     public bool isFull_movePath;//移动过的路径是否已被全部填充
-    public int length_movePath;
-    public bool isUsed;
-    public Vector2 CurrentPosition => movePath[index_movePath];
+    public int length_movePath;//movePath的长度
+    public bool isUsed;//这个触摸是否已经用过了
+    public Vector2 CurrentPosition => movePath[index_movePath];//当前位置，返回值为movePath【当前索引】（世界坐标轴）
     public Vector2 startPoint;//开始位置
     [SerializeField] private TouchPhase phase;//当前的触摸阶段
     public TouchPhase Phase//当前触摸阶段
@@ -147,7 +180,7 @@ public struct Speckle//翻译为斑点，亦为安卓系统的触摸小白点，
                     ResetIndex(ref index_movePath);//重置索引
                     startPoint = movePath[index_movePath++];//把第0个StartPoint赋值过去
                     isFull_movePath = false;//重置状态
-                    isUsed = false;
+                    isUsed = false;//重置isUsed
                     break;
             }
         }
@@ -184,7 +217,7 @@ public struct Speckle//翻译为斑点，亦为安卓系统的触摸小白点，
             return v < 0 ? -v : 360 - v;//如果是负数就取赋值，如果是正数直接360-当前值返回出去
         }
     }
-    public float FlickLength => (movePath[isFull_movePath ? ^1 : index_movePath] - movePath[0]).magnitude;//滑动长度
+    public float FlickLength => (movePath[isFull_movePath ? ^1 : index_movePath] - movePath[0]).sqrMagnitude;//滑动长度
     public void SetCurrentTouch(Touch touch, int currentIndex)//当前触摸处理的初始化方法
     {
         thisIndex = currentIndex;//先赋值当前索引
@@ -211,7 +244,7 @@ public struct Speckle//翻译为斑点，亦为安卓系统的触摸小白点，
         UIManager.Instance.DebugTextString = $"FingerIndex：{thisIndex}\n" +
             $"FlickLength:{deltaLength}\n" +
             $"TouchPhase:{phase}\n" +
-            $"CurrentTargetFPS:{AssetManager.Instance.currentTargetFPS}";
+            $"CurrentTargetFPS:{ValueManager.Instance.currentTargetFPS}";
         return deltaLength < deltaRange ? TouchPhase.Stationary : TouchPhase.Moved;//如果小于设定的值就判定为Stationary ，否侧判定为Moved
     }
     /// <summary>

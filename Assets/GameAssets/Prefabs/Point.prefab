@@ -343,7 +343,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50c50b09ec13f7b469882a403b7b0709, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spriteRenderers:
+  renderOrder:
   - spriteRenderers:
     - {fileID: 5547647067597061505}
     - {fileID: 3742894975374827354}
@@ -363,6 +363,7 @@ MonoBehaviour:
     - {fileID: 3203439825687077205}
     - {fileID: 90584543144713311}
     - {fileID: 5682447873640930639}
+  - spriteRenderers: []
   - spriteRenderers: []
   thisNote:
     noteType: 0
@@ -388,6 +389,9 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
+  decideLineController: {fileID: 0}
+  isOnlineNote: 0
+  noteCanvas: {fileID: 0}
 --- !u!1 &2209706850601440806
 GameObject:
   m_ObjectHideFlags: 0
