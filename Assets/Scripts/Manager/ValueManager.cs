@@ -40,8 +40,7 @@ public class ValueManager : MonoBehaviourSingleton<ValueManager>//这里存放�
 
     [Tooltip("打击特效的大小")] public float hitEffectScale;
 
-    [Header("下面这些值是代码自动算出来的，不需要人为干涉")]
-    public Score score;
+    [Tooltip("hold音符判定手指离开多长时间重新放回去是为不Miss")] public float holdLeaveScreenTime;
 
     protected override void OnAwake()
     {
@@ -52,6 +51,8 @@ public class ValueManager : MonoBehaviourSingleton<ValueManager>//这里存放�
             false => Screen.currentResolution.refreshRate
         };
     }
+    [Header("下面这些值是代码自动算出来的，不需要人为干涉")]
+    public Score score;
 }
 [Serializable]
 public struct Score

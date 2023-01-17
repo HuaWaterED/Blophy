@@ -26,13 +26,6 @@ namespace Blophy.Chart
         public string description = "";
     }
     [Serializable]
-    public struct Box
-    {
-        public BoxType type;
-        public BoxEvents boxEvents;
-        public Line[] lines;
-    }
-    [Serializable]
     public struct GlobalData
     {
         public float offset;
@@ -45,6 +38,13 @@ namespace Blophy.Chart
     }
     #region 下面都是依赖
 
+    [Serializable]
+    public struct Box
+    {
+        public BoxType type;
+        public BoxEvents boxEvents;
+        public Line[] lines;
+    }
     [Serializable]
     public enum BoxType
     {

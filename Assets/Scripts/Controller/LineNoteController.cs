@@ -1,5 +1,6 @@
 using Blophy.Chart;
 using Newtonsoft.Json.Serialization;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
@@ -57,7 +58,16 @@ public class LineNoteController : MonoBehaviour
         int index = Algorithm.BinarySearch(ariseNotes, m => currentTime >= m.thisNote.hitTime, false);//寻找音符过了打击时间但是没有Miss掉的音符
         for (int i = 0; i < index; i++)//循环遍历所有找到的音符
         {
-            ariseNotes[i].PassHitTime(currentTime);//吧音符单独拿出来
+            try
+            {
+                ariseNotes[i].PassHitTime(currentTime);//吧音符单独拿出来
+            }
+            catch (IndexOutOfRangeException)
+            {
+                Debug.LogError($"音符过了打击时间但是没有Miss掉的这个期间每一帧调用发生错误！" +
+                    $"错误类型：数组越界！" +
+                    $"错误信息：看见音符长度:{ariseNotes.Count}||索引:{index}||内部索引:{i}");
+            }
         }
     }
     /// <summary>
@@ -146,6 +156,7 @@ public class LineNoteController : MonoBehaviour
             ariseNotes.Remove(note);//移除
             endTime_ariseNotes.Remove(note);//移除
             index--;//移除后当前索引--，不然可能会误伤到其他音符
+            note.ReturnPool();
             switch (isOnlineNote)
             {
                 case true://如果是判定线上方

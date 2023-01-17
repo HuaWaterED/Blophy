@@ -13,6 +13,9 @@ public class BoxController : MonoBehaviour
 
     public int sortSeed = 0;//层级顺序种子
     public SpriteMask spriteMask;//遮罩
+
+    public float currentScaleX;
+    public float currentScaleY;
     /// <summary>
     /// 设置遮罩种子
     /// </summary>
@@ -58,7 +61,7 @@ public class BoxController : MonoBehaviour
             out float currentPositionY, out float currentAngle,
             out float currentAlpha, out float currentLineAlpha,
             out float currentCenterX, out float currentCenterY,
-            out float currentScaleX, out float currentScaleY,
+            out currentScaleX, out currentScaleY,
             (float)ProgressManager.Instance.CurrentTime);
         //将当前这一刻的数据全部赋值给方框
         GiveEventData2Box(currentPositionX, currentPositionY,

@@ -246,7 +246,7 @@ MonoBehaviour:
   calculatedAreaRange: 0.0001
   reservedBits: 4
   boxFineness: 0.05
-  flickRange: 0.1
+  flickRange: 0.01
   maxSpeckleCount: 20
   fingerSavePosition: 0.2
   noteRendererOrder: 4
@@ -264,6 +264,7 @@ MonoBehaviour:
   goodJudge: {r: 0, g: 1, b: 1, a: 1}
   badJudge: {r: 1, g: 0, b: 0, a: 1}
   hitEffectScale: 0.3
+  holdLeaveScreenTime: 0.5
   score:
     perfect: 0
     good: 0
@@ -2397,7 +2398,7 @@ MonoBehaviour:
         - startTime: -0.1
           endTime: 0
           startValue: 0
-          endValue: 1
+          endValue: 0.1
           curve:
             serializedVersion: 2
             m_Curve:
@@ -3436,7 +3437,7 @@ MonoBehaviour:
             m_PreInfinity: 2
             m_PostInfinity: 2
             m_RotationOrder: 4
-        - noteType: 4
+        - noteType: 0
           hitTime: 20
           holdTime: 0
           boxEffect: 1
@@ -4150,7 +4151,237 @@ MonoBehaviour:
             m_PreInfinity: 2
             m_PostInfinity: 2
             m_RotationOrder: 4
-        offlineNotes: []
+        offlineNotes:
+        - noteType: 2
+          hitTime: 24
+          holdTime: 0
+          boxEffect: 0
+          positionX: 0
+          isClockwise: 0
+          speed: []
+          hitFloorPosition: 0
+          ariseFloorPosition: 0
+          ariseTime: 0
+          isArise: 0
+          localDisplacement:
+            serializedVersion: 2
+            m_Curve: []
+            m_PreInfinity: 0
+            m_PostInfinity: 0
+            m_RotationOrder: 0
+          localVelocity:
+            serializedVersion: 2
+            m_Curve: []
+            m_PreInfinity: 0
+            m_PostInfinity: 0
+            m_RotationOrder: 0
+        - noteType: 2
+          hitTime: 24.1
+          holdTime: 0
+          boxEffect: 0
+          positionX: 0
+          isClockwise: 0
+          speed: []
+          hitFloorPosition: 0
+          ariseFloorPosition: 0
+          ariseTime: 0
+          isArise: 0
+          localDisplacement:
+            serializedVersion: 2
+            m_Curve: []
+            m_PreInfinity: 0
+            m_PostInfinity: 0
+            m_RotationOrder: 0
+          localVelocity:
+            serializedVersion: 2
+            m_Curve: []
+            m_PreInfinity: 0
+            m_PostInfinity: 0
+            m_RotationOrder: 0
+        - noteType: 2
+          hitTime: 24.2
+          holdTime: 0
+          boxEffect: 0
+          positionX: 0
+          isClockwise: 0
+          speed: []
+          hitFloorPosition: 0
+          ariseFloorPosition: 0
+          ariseTime: 0
+          isArise: 0
+          localDisplacement:
+            serializedVersion: 2
+            m_Curve: []
+            m_PreInfinity: 0
+            m_PostInfinity: 0
+            m_RotationOrder: 0
+          localVelocity:
+            serializedVersion: 2
+            m_Curve: []
+            m_PreInfinity: 0
+            m_PostInfinity: 0
+            m_RotationOrder: 0
+        - noteType: 2
+          hitTime: 24.3
+          holdTime: 0
+          boxEffect: 0
+          positionX: 0
+          isClockwise: 0
+          speed: []
+          hitFloorPosition: 0
+          ariseFloorPosition: 0
+          ariseTime: 0
+          isArise: 0
+          localDisplacement:
+            serializedVersion: 2
+            m_Curve: []
+            m_PreInfinity: 0
+            m_PostInfinity: 0
+            m_RotationOrder: 0
+          localVelocity:
+            serializedVersion: 2
+            m_Curve: []
+            m_PreInfinity: 0
+            m_PostInfinity: 0
+            m_RotationOrder: 0
+        - noteType: 2
+          hitTime: 24.4
+          holdTime: 0
+          boxEffect: 0
+          positionX: 0
+          isClockwise: 0
+          speed: []
+          hitFloorPosition: 0
+          ariseFloorPosition: 0
+          ariseTime: 0
+          isArise: 0
+          localDisplacement:
+            serializedVersion: 2
+            m_Curve: []
+            m_PreInfinity: 0
+            m_PostInfinity: 0
+            m_RotationOrder: 0
+          localVelocity:
+            serializedVersion: 2
+            m_Curve: []
+            m_PreInfinity: 0
+            m_PostInfinity: 0
+            m_RotationOrder: 0
+        - noteType: 2
+          hitTime: 24.5
+          holdTime: 0
+          boxEffect: 0
+          positionX: 0
+          isClockwise: 0
+          speed: []
+          hitFloorPosition: 0
+          ariseFloorPosition: 0
+          ariseTime: 0
+          isArise: 0
+          localDisplacement:
+            serializedVersion: 2
+            m_Curve: []
+            m_PreInfinity: 0
+            m_PostInfinity: 0
+            m_RotationOrder: 0
+          localVelocity:
+            serializedVersion: 2
+            m_Curve: []
+            m_PreInfinity: 0
+            m_PostInfinity: 0
+            m_RotationOrder: 0
+        - noteType: 2
+          hitTime: 24.6
+          holdTime: 0
+          boxEffect: 0
+          positionX: 0
+          isClockwise: 0
+          speed: []
+          hitFloorPosition: 0
+          ariseFloorPosition: 0
+          ariseTime: 0
+          isArise: 0
+          localDisplacement:
+            serializedVersion: 2
+            m_Curve: []
+            m_PreInfinity: 0
+            m_PostInfinity: 0
+            m_RotationOrder: 0
+          localVelocity:
+            serializedVersion: 2
+            m_Curve: []
+            m_PreInfinity: 0
+            m_PostInfinity: 0
+            m_RotationOrder: 0
+        - noteType: 2
+          hitTime: 24.7
+          holdTime: 0
+          boxEffect: 0
+          positionX: 0
+          isClockwise: 0
+          speed: []
+          hitFloorPosition: 0
+          ariseFloorPosition: 0
+          ariseTime: 0
+          isArise: 0
+          localDisplacement:
+            serializedVersion: 2
+            m_Curve: []
+            m_PreInfinity: 0
+            m_PostInfinity: 0
+            m_RotationOrder: 0
+          localVelocity:
+            serializedVersion: 2
+            m_Curve: []
+            m_PreInfinity: 0
+            m_PostInfinity: 0
+            m_RotationOrder: 0
+        - noteType: 2
+          hitTime: 24.8
+          holdTime: 0
+          boxEffect: 0
+          positionX: 0
+          isClockwise: 0
+          speed: []
+          hitFloorPosition: 0
+          ariseFloorPosition: 0
+          ariseTime: 0
+          isArise: 0
+          localDisplacement:
+            serializedVersion: 2
+            m_Curve: []
+            m_PreInfinity: 0
+            m_PostInfinity: 0
+            m_RotationOrder: 0
+          localVelocity:
+            serializedVersion: 2
+            m_Curve: []
+            m_PreInfinity: 0
+            m_PostInfinity: 0
+            m_RotationOrder: 0
+        - noteType: 2
+          hitTime: 24.9
+          holdTime: 0
+          boxEffect: 0
+          positionX: 0
+          isClockwise: 0
+          speed: []
+          hitFloorPosition: 0
+          ariseFloorPosition: 0
+          ariseTime: 0
+          isArise: 0
+          localDisplacement:
+            serializedVersion: 2
+            m_Curve: []
+            m_PreInfinity: 0
+            m_PostInfinity: 0
+            m_RotationOrder: 0
+          localVelocity:
+            serializedVersion: 2
+            m_Curve: []
+            m_PreInfinity: 0
+            m_PostInfinity: 0
+            m_RotationOrder: 0
         speed:
         - startTime: 0
           endTime: 200
@@ -4273,11 +4504,34 @@ MonoBehaviour:
             m_PreInfinity: 2
             m_PostInfinity: 2
             m_RotationOrder: 0
-      - onlineNotes: []
+      - onlineNotes:
+        - noteType: 4
+          hitTime: 25
+          holdTime: 0
+          boxEffect: 0
+          positionX: 0
+          isClockwise: 0
+          speed: []
+          hitFloorPosition: 0
+          ariseFloorPosition: 0
+          ariseTime: 0
+          isArise: 0
+          localDisplacement:
+            serializedVersion: 2
+            m_Curve: []
+            m_PreInfinity: 0
+            m_PostInfinity: 0
+            m_RotationOrder: 0
+          localVelocity:
+            serializedVersion: 2
+            m_Curve: []
+            m_PreInfinity: 0
+            m_PostInfinity: 0
+            m_RotationOrder: 0
         offlineNotes: []
         speed:
-        - startTime: -0.1
-          endTime: 0
+        - startTime: 0
+          endTime: 200
           startValue: 1
           endValue: 1
           curve:

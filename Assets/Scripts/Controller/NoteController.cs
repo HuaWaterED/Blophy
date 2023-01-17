@@ -27,27 +27,55 @@ public class NoteController : MonoBehaviour
 
     public Transform noteCanvas;//音符画布的引用
 
-    public float PointNoteCurrentOffset => 1 + decideLineController.canvasLocalOffset.Evaluate((float)ProgressManager.Instance.CurrentTime);//根据当前速度计算出按照当前的位移再+1就是现在的Point应该在的位置
+    public float PointNoteCurrentOffset => decideLineController.canvasLocalOffset.Evaluate((float)ProgressManager.Instance.CurrentTime);//根据当前速度计算出按照当前的位移就是现在的Point应该在的位置
     /// <summary>
     /// 从对象池出来召唤一次
     /// </summary>
     public virtual void Init()
     {
+        ChangeColor(Color.white);
+        isJudged = false;//是否判定过设为假
+
+    }//初始化方法
+
+    protected void ChangeColor(Color targetColor)
+    {
         for (int i = 0; i < Length_renderOrder; i++)//循环渲染层级的每一层
         {
             for (int j = 0; j < renderOrder[i].Length_spriteRenderers; j++)//循环每一层的所有素材
             {
-                renderOrder[i].spriteRenderers[j].color = Color.white;//改为白色
+                renderOrder[i].spriteRenderers[j].color = targetColor;//改为目标颜色
             }
         }
-        isJudged = false;//是否判定过设为假
-    }//初始化方法
+    }
+
     /// <summary>
-    /// 这里是被子类重写的方法，用于执行某些音符判定后特性的方法
+    /// 这里是被子类重写的方法，用于执行某些音符判定后特性的方法(非空)
     /// </summary>
-    public virtual void Judge(double currentTime) { }
+    public virtual void Judge(double currentTime, TouchPhase touchPhase)
+    {
+        HitEffectManager.Instance.PlayHitEffect(transform.position, transform.rotation, ValueManager.Instance.perfectJudge);//播放打击特效
+        ReturnObjectPool();
+    }
+
+    protected void ReturnObjectPool()
+    {
+        switch (isOnlineNote)//看看自己试线上的音符还是线下的音符
+        {
+            case true://线上的音符的话就从两个线上排序中移除自己
+                decideLineController.lineNoteController.ariseOnlineNotes.Remove(this);//hitTime排序中移除自己
+                decideLineController.lineNoteController.endTime_ariseOnlineNotes.Remove(this);//endTime排序中移除自己
+                break;
+            case false://线下的音符的话就从两个线下排序中移除自己
+                decideLineController.lineNoteController.ariseOfflineNotes.Remove(this);//hitTime排序中移除自己
+                decideLineController.lineNoteController.endTime_ariseOfflineNotes.Remove(this);//endTime排序中移除自己
+                break;
+        }
+        decideLineController.ReturnNote(this, thisNote.noteType, isOnlineNote);//把自己返回对象池
+    }
+
     /// <summary>
-    /// 如果当前音符超过了打击时间并且没有销毁的这段时间，每帧调用
+    /// 如果当前音符超过了打击时间并且没有销毁的这段时间，每帧调用（非空）
     /// </summary>
     /// <param name="currentTime">当前时间</param>
     public virtual void PassHitTime(double currentTime)
@@ -65,11 +93,15 @@ public class NoteController : MonoBehaviour
         }
     }
     /// <summary>
-    /// 音符出现的时候每帧调用
+    /// 音符出现的时候每帧调用（空）
     /// </summary>
     public virtual void NoteHoldArise() { }
     /// <summary>
-    /// 判定触摸是否在音符的数轴判定范围内
+    /// 返回对象池调用一次(air)
+    /// </summary>
+    public virtual void ReturnPool() { }
+    /// <summary>
+    /// 判定触摸是否在音符的数轴判定范围内（非空）
     /// </summary>
     /// <param name="currentPosition">当前位置</param>
     /// <returns>是否在判定范围内</returns>

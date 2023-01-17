@@ -15,10 +15,10 @@ public class GameUtility
     /// <returns>返回的是这个时间（就是第二个参数）点上的值</returns>
     public static float GetValueWithEvent(Event @event, float time)
     {
-        if (time < @event.startTime) return -.1f;//如果时间还没到开始时间，就直接返回-.1f
+        if (time < @event.startTime) return -.0001f;//如果时间还没到开始时间，就直接返回-.000001f
         float percentage = CalculatedPercentage(@event, time);
         float res = percentage * (@event.endValue - @event.startValue) + @event.startValue;//用百分比*总时间再加上开始时间就是当前这个时间所代表的值了
-        return res == 0 ? -.1f : res;//返回这个值
+        return res == 0 ? -.0001f : res;//返回这个值
     }
 
     private static float CalculatedPercentage(Event @event, float time)

@@ -93,7 +93,7 @@ public class SpeckleManager : MonoBehaviourSingleton<SpeckleManager>
                     waitNote[j].IsinRange(speckles[i].CurrentPosition))
                 {
                     speckles[i].isUsed = !speckles[i].isUsed;//修改isUsed为True
-                    waitNote[j].Judge(ProgressManager.Instance.CurrentTime);//调用音符的判定
+                    waitNote[j].Judge(ProgressManager.Instance.CurrentTime, TouchPhase.Began);//调用音符的判定
                 }
                 break;
         }
@@ -111,9 +111,10 @@ public class SpeckleManager : MonoBehaviourSingleton<SpeckleManager>
             case NoteType.FullFlickPink://或者FullFlick
             case NoteType.FullFlickBlue://或者FullFlick
             case NoteType.Drag://或者Drag
+            case NoteType.Hold:
                 if (waitNote[j].IsinRange(speckles[i].CurrentPosition))//看看音符是否在判定范围
                 {
-                    waitNote[j].Judge(ProgressManager.Instance.CurrentTime);//调用音符的判定
+                    waitNote[j].Judge(ProgressManager.Instance.CurrentTime, TouchPhase.Moved);//调用音符的判定
                 }
                 break;//其余音符不管
         }
@@ -131,7 +132,7 @@ public class SpeckleManager : MonoBehaviourSingleton<SpeckleManager>
             case NoteType.Drag://或者Drag
                 if (waitNote[j].IsinRange(speckles[i].CurrentPosition))//看看音符是否在判定范围
                 {
-                    waitNote[j].Judge(ProgressManager.Instance.CurrentTime);//调用音符的判定
+                    waitNote[j].Judge(ProgressManager.Instance.CurrentTime, TouchPhase.Stationary);//调用音符的判定
                 }
                 break;
         }
@@ -144,8 +145,8 @@ public class SpeckleManager : MonoBehaviourSingleton<SpeckleManager>
     private void FindNotes(List<NoteController> needFindNotes, List<NoteController> waitNotes)
     {
         double currentTime = ProgressManager.Instance.CurrentTime;//拿到当前时间
-        int index_startJudge_needJudgeNote = Algorithm.BinarySearch(needFindNotes, m => m.thisNote.hitTime < currentTime - JudgeManager.bad, false);//获取到当前时间-bad所得到的需要判定的音符的开始界限
-        int index_endJudge_needJudgeNote = Algorithm.BinarySearch(needFindNotes, m => m.thisNote.hitTime < currentTime + JudgeManager.bad + .00001, false);//获取到当前时间+bad所得到的需要判定的音符的结束界限
+        int index_startJudge_needJudgeNote = Algorithm.BinarySearch(needFindNotes, m => m.thisNote.hitTime < currentTime - m.thisNote.HoldTime, false);//获取到当前时间-bad所得到的需要判定的音符的开始界限
+        int index_endJudge_needJudgeNote = Algorithm.BinarySearch(needFindNotes, m => m.thisNote.hitTime < currentTime + m.thisNote.HoldTime + .00001, false);//获取到当前时间+bad所得到的需要判定的音符的结束界限
         for (int i = index_startJudge_needJudgeNote; i < index_endJudge_needJudgeNote; i++)//每根线遍历每个出现的音符
         {
             int index = Algorithm.BinarySearch(waitNote, m => m.thisNote.hitTime < needFindNotes[i].thisNote.hitTime, false);//寻找这个音符按照hitTime排序的话，应该插在什么位置
