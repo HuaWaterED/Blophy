@@ -11,6 +11,6 @@ public class TapController : NoteController
     public override void Judge(double currentTime, TouchPhase touchPhase)
     {
         isJudged = true;//修改属性为成功判定
-        base.Judge(currentTime, touchPhase);
+        base.Judge(currentTime, touchPhase);//执行基类的判定方法
     }
 }

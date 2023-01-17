@@ -33,11 +33,14 @@ public class NoteController : MonoBehaviour
     /// </summary>
     public virtual void Init()
     {
-        ChangeColor(Color.white);
+        ChangeColor(Color.white);//初始化为白色
         isJudged = false;//是否判定过设为假
 
     }//初始化方法
-
+    /// <summary>
+    /// 更改颜色
+    /// </summary>
+    /// <param name="targetColor"></param>
     protected void ChangeColor(Color targetColor)
     {
         for (int i = 0; i < Length_renderOrder; i++)//循环渲染层级的每一层
@@ -55,9 +58,11 @@ public class NoteController : MonoBehaviour
     public virtual void Judge(double currentTime, TouchPhase touchPhase)
     {
         HitEffectManager.Instance.PlayHitEffect(transform.position, transform.rotation, ValueManager.Instance.perfectJudge);//播放打击特效
-        ReturnObjectPool();
+        ReturnObjectPool();//返回对象池
     }
-
+    /// <summary>
+    /// 吧音符返回对象池
+    /// </summary>
     protected void ReturnObjectPool()
     {
         switch (isOnlineNote)//看看自己试线上的音符还是线下的音符

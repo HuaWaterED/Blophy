@@ -27,27 +27,6 @@ namespace Blophy.Extension
             for (int i = 0; i < length; i++)//遍历所有Key
                 curve.RemoveKey(0);//移除
         }
-        //public static void SyncKeysCount(this AnimationCurve curve, int keysCount)
-        //{
-        //    if (curve.keys.Length == keysCount) return;
-        //    curve.ClearAll();
-        //    curve.preWrapMode = WrapMode.ClampForever;
-        //    curve.postWrapMode = WrapMode.ClampForever;
-        //    for (int i = 0; i < keysCount; i++)
-        //    {
-        //        Keyframe key = new()
-        //        {
-        //            time = i / 10f,
-        //            value = i / 10f,
-        //            outTangent = i / 10f,
-        //            outWeight = i / 10f,
-        //            inWeight = i / 10f,
-        //            inTangent = i / 10f,
-        //            weightedMode = WeightedMode.Both
-        //        };
-        //        curve.AddKey(key);
-        //    }
-        //}
     }
     /// <summary>
     /// 自行拓展的数学类

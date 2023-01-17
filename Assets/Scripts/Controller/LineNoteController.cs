@@ -62,10 +62,11 @@ public class LineNoteController : MonoBehaviour
             {
                 ariseNotes[i].PassHitTime(currentTime);//吧音符单独拿出来
             }
-            catch (IndexOutOfRangeException)
+            catch (IndexOutOfRangeException)//这次发生过一次报错，但是不太好触发
             {
-                Debug.LogError($"音符过了打击时间但是没有Miss掉的这个期间每一帧调用发生错误！" +
-                    $"错误类型：数组越界！" +
+                Debug.LogError($"如果您看到此消息请务必截图发给花水终！这有助于我们改进游戏\n" +
+                    $"音符过了打击时间但是没有Miss掉的这个期间每一帧调用发生错误！\n" +
+                    $"错误类型：数组越界！\n" +
                     $"错误信息：看见音符长度:{ariseNotes.Count}||索引:{index}||内部索引:{i}");
             }
         }
@@ -149,14 +150,14 @@ public class LineNoteController : MonoBehaviour
     /// <param name="isOnlineNote">是判定线上方还是下方</param>
     void FindAndReturnNotes(List<NoteController> ariseNotes, List<NoteController> endTime_ariseNotes, bool isOnlineNote)
     {
-        int index = FindMissNote(endTime_ariseNotes);
+        int index = FindMissNote(endTime_ariseNotes);//寻找Miss的音符的索引
         for (int i = 0; i < index; i++)//循环遍历所有Miss掉的音符
         {
             NoteController note = endTime_ariseNotes[i];//吧音符单独拿出来
             ariseNotes.Remove(note);//移除
             endTime_ariseNotes.Remove(note);//移除
             index--;//移除后当前索引--，不然可能会误伤到其他音符
-            note.ReturnPool();
+            note.ReturnPool();//调用音符的返回对象池的回调方法
             switch (isOnlineNote)
             {
                 case true://如果是判定线上方

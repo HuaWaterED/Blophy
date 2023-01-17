@@ -14,8 +14,8 @@ public class BoxController : MonoBehaviour
     public int sortSeed = 0;//层级顺序种子
     public SpriteMask spriteMask;//遮罩
 
-    public float currentScaleX;
-    public float currentScaleY;
+    public float currentScaleX;//当前的X缩放，因为有别的组件要用这个数值，所以放在这里
+    public float currentScaleY;//当前的Y缩放，因为有别的组件要用这个数值，所以放在这里
     /// <summary>
     /// 设置遮罩种子
     /// </summary>
@@ -120,8 +120,8 @@ public class BoxController : MonoBehaviour
 
         //透明度
         for (int i = 0; i < spriteRenderers.Length - 1; i++)
-            spriteRenderers[i].color = new Color(0, 0, 0, currentAlpha);//1234根线赋值
-        spriteRenderers[4].color = new Color(0, 0, 0, currentLineAlpha);//最后那条线单独赋值
+            spriteRenderers[i].color = new Color(0, 0, 0, currentAlpha);//1234根线赋值，这里的0，0，0就是黑色的线
+        spriteRenderers[4].color = new Color(0, 0, 0, currentLineAlpha);//最后那条线单独赋值，这里的0，0，0就是黑色的线
 
         //方框的位置
         squarePosition.localPosition = new Vector2(currentPositionX, currentPositionY);
