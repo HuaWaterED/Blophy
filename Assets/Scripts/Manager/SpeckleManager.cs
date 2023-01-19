@@ -178,8 +178,9 @@ public struct Speckle//翻译为斑点，亦为安卓系统的触摸小白点，
             {
                 case TouchPhase.Began://如果触摸阶段是开始
                     beganTime = (float)ProgressManager.Instance.CurrentTime;//赋值当前时间进去
+                    startPoint = movePath[index_movePath - 1];//获取到刚才index_movePath自加之前的Vector2
                     ResetIndex(ref index_movePath);//重置索引
-                    startPoint = movePath[index_movePath];//把第0个StartPoint赋值过去
+                    movePath[index_movePath++] = startPoint;//把StartPoint赋值给第0个索引的movePath并且自加
                     isFull_movePath = false;//重置状态
                     isUsed = false;//重置isUsed
                     break;
@@ -222,6 +223,7 @@ public struct Speckle//翻译为斑点，亦为安卓系统的触摸小白点，
     public void SetCurrentTouch(Touch touch, int currentIndex)//当前触摸处理的初始化方法
     {
         thisIndex = currentIndex;//先赋值当前索引
+        movePath[index_movePath++] = main.ScreenToWorldPoint(touch.position);//然后吧传进来的屏幕像素坐标转换为世界坐标放进移动路径中
         Phase = touch.phase switch//看看人家系统给我传进来什么触摸阶段
         {
             TouchPhase.Began => TouchPhase.Began,//如果是触摸开始阶段那就直接赋值
@@ -229,7 +231,6 @@ public struct Speckle//翻译为斑点，亦为安卓系统的触摸小白点，
             TouchPhase.Ended => TouchPhase.Ended,//如果是抬起了手指那就直接赋值
             _ => IsMovedOrStationary(ValueManager.Instance.flickRange)//如果是剩下的Move阶段或者静止不动的阶段那就我自己来决定，不用人家给我的
         };
-        movePath[index_movePath++] = main.ScreenToWorldPoint(touch.position);//然后吧传进来的屏幕像素坐标转换为世界坐标放进移动路径中
         CheckIndex(ref index_movePath, movePath.Length);//检查index_movePath是不是越界了
     }
     /// <summary>

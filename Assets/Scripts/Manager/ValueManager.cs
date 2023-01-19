@@ -40,7 +40,8 @@ public class ValueManager : MonoBehaviourSingleton<ValueManager>//这里存放�
 
     [Tooltip("打击特效的大小")] public float hitEffectScale;
 
-    [Tooltip("hold音符判定手指离开多长时间重新放回去是为不Miss")] public float holdLeaveScreenTime;
+    [Tooltip("Hold音符判定手指离开多长时间重新放回去是为不Miss")] public float holdLeaveScreenTime;
+    [Tooltip("Hold音符的特效播放间隔多长时间")] public float holdHitEffectCDTime;//就是Hold打击特效播放完一次后CD是多少，播放完一次后多少秒内不能继续播放
 
     protected override void OnAwake()
     {

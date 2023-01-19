@@ -34,16 +34,16 @@ public class HoldController : NoteController
         {
             isJudged = true;//设置状态为判定过了
             checkTime = Time.time;//设置时间
-            HitEffectManager.Instance.PlayHitEffect(transform.position, transform.rotation, ValueManager.Instance.perfectJudge);//播放打击特效
         }
         switch (touchPhase)//如果触摸阶段
         {
             case TouchPhase.Began://是开始阶段
+                HitEffectManager.Instance.PlayHitEffect(transform.position, transform.rotation, ValueManager.Instance.perfectJudge);//播放打击特效
                 break;//啥也不干，因为上边已经干了
             default://剩下的
                 checkTime = Time.time;//更新时间
                 reJudgeTime += Time.deltaTime;//累加重新判定时间
-                if (reJudgeTime >= ValueManager.Instance.holdLeaveScreenTime)//如果已经到了这顶的时间，那就
+                if (reJudgeTime >= ValueManager.Instance.holdHitEffectCDTime)//如果已经到了这顶的时间，那就
                 {
                     reJudgeTime = 0;//重置为0
                     reJudge = true;//设置状态为可以重新播放打击特效了
@@ -70,7 +70,7 @@ public class HoldController : NoteController
                 isMissed = true;//这个条件下肯定已经Miss了，设置状态
                 HoldMiss();//调用Miss函数
             }
-            else if (Time.time - checkTime <= ValueManager.Instance.holdLeaveScreenTime && !isMissed && reJudge)//如果当前时间距离手指在我这里判定的最后一帧没有超过预先设置的时间并且没有Miss和可以进行重判了
+            else if (Time.time - checkTime <= ValueManager.Instance.holdHitEffectCDTime && !isMissed && reJudge)//如果当前时间距离手指在我这里判定的最后一帧没有超过预先设置的时间并且没有Miss和可以进行重判了
             {
                 //checkTime = Time.time;
                 //没有Miss

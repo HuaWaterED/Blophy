@@ -98,10 +98,10 @@ namespace Blophy.Chart
     [Serializable]
     public enum BoxEffect
     {
-        None = 0,
-        Ripple = 1,
-        FullLine = 2,
-        FullBox = 4
+        None = 1,
+        Ripple = 2,
+        FullLine = 4,
+        FullBox = 8
     }
     [Serializable]
     public struct BoxEvents

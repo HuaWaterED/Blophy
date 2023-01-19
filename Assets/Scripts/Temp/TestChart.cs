@@ -4,6 +4,7 @@ using UnityEngine;
 using Blophy.Chart;
 using System.Diagnostics;
 using Debug = UnityEngine.Debug;
+using Newtonsoft.Json;
 public class TestChart : MonoBehaviourSingleton<TestChart>
 {
     public ChartData chartData;
@@ -11,8 +12,10 @@ public class TestChart : MonoBehaviourSingleton<TestChart>
 
     private void Start()
     {
-        AssetManager.Instance.chartData = chartData;
+        ChartData c = JsonConvert.DeserializeObject<ChartData>(Resources.Load<TextAsset>("MusicPack/Chapter_I/FruitySpace/ChartFile/Chart").text);
+        AssetManager.Instance.chartData = c;
         AssetManager.Instance.musicPlayer.clip = clip;
+        Debug.Log(JsonConvert.SerializeObject(chartData));
     }
     private void Update()
     {
