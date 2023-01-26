@@ -20,7 +20,6 @@ public class LineNoteController : MonoBehaviour
     public List<NoteController> ariseOfflineNotes = new();//判定线下方已经出现的音符列表,
     public List<NoteController> endTime_ariseOfflineNotes = new();//判定线下方已经出现的音符列表,按照EndTime排序
 
-    public float CurrentAriseTime => 2 / decideLineController.canvasSpeed.Evaluate((float)ProgressManager.Instance.CurrentTime);//根据当前速度计算出按照当前速度走完两个单位长度需要多长时间
     public int lastOnlineIndex = 0;//上次召唤到Note[]列表的什么位置了，从上次的位置继续
     public int lastOfflineIndex = 0;//上次召唤到Note[]列表的什么位置了，从上次的位置继续
 
@@ -99,7 +98,10 @@ public class LineNoteController : MonoBehaviour
     /// <returns>返回索引</returns>
     private int FindNote(Note[] notes)
     {
-        return Algorithm.BinarySearch(notes, m => (float)ProgressManager.Instance.CurrentTime > m.hitTime - CurrentAriseTime, false);
+        //m.thisNote.hitTime < currentTime + m.thisNote.HoldTime + .00001
+        //return Algorithm.BinarySearch(notes, m => (float)ProgressManager.Instance.CurrentTime > m.hitTime - CurrentAriseTime, false);
+        //return Algorithm.BinarySearch(notes, m => m.hitTime < (float)ProgressManager.Instance.CurrentTime + CurrentAriseTime + .00001, false);
+        return Algorithm.BinarySearch(notes, m => m.hitFloorPosition < decideLineController.offlineNote.localPosition.y + 2.00001, false);
         //寻找这个时刻需要出现的音符，出现要提前两个单位长度的时间出现
     }
     /// <summary>

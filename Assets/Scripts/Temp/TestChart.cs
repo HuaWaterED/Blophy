@@ -12,10 +12,10 @@ public class TestChart : MonoBehaviourSingleton<TestChart>
 
     private void Start()
     {
-        ChartData c = JsonConvert.DeserializeObject<ChartData>(Resources.Load<TextAsset>("MusicPack/Chapter_I/FruitySpace/ChartFile/Chart").text);
-        AssetManager.Instance.chartData = c;
+        string chart = Resources.Load<TextAsset>("MusicPack/Chapter_I/VirtualSpace/ChartFile/Chart").text;
+        chartData = JsonConvert.DeserializeObject<ChartData>(chart);
+        AssetManager.Instance.chartData = chartData;
         AssetManager.Instance.musicPlayer.clip = clip;
-        Debug.Log(JsonConvert.SerializeObject(chartData));
     }
     private void Update()
     {

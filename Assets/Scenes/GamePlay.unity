@@ -251,7 +251,7 @@ MonoBehaviour:
   fingerSavePosition: 0.2
   noteRendererOrder: 4
   editorTargetFPS: 165
-  FPS: 999
+  FPS: 9999
   goodJudgePercent: 0.65
   onlineJudgeRange: 0.3
   offlineJudgeRange: -0.3
@@ -2309,97 +2309,43 @@ MonoBehaviour:
     - type: 0
       boxEvents:
         moveX:
-        - startTime: -0.1
+        - startTime: 0
           endTime: 0
           startValue: 0
           endValue: 0
           curve:
             serializedVersion: 2
-            m_Curve:
-            - serializedVersion: 3
-              time: 0
-              value: 0
-              inSlope: 1
-              outSlope: 1
-              tangentMode: 34
-              weightedMode: 0
-              inWeight: 0
-              outWeight: 0
-            - serializedVersion: 3
-              time: 1
-              value: 1
-              inSlope: 1
-              outSlope: 1
-              tangentMode: 34
-              weightedMode: 0
-              inWeight: 0
-              outWeight: 0
-            m_PreInfinity: 2
-            m_PostInfinity: 2
+            m_Curve: []
+            m_PreInfinity: 0
+            m_PostInfinity: 0
             m_RotationOrder: 0
         moveY:
-        - startTime: -0.1
+        - startTime: 0
           endTime: 0
           startValue: 0
           endValue: 0
           curve:
             serializedVersion: 2
-            m_Curve:
-            - serializedVersion: 3
-              time: 0
-              value: 0
-              inSlope: 1
-              outSlope: 1
-              tangentMode: 34
-              weightedMode: 0
-              inWeight: 0
-              outWeight: 0
-            - serializedVersion: 3
-              time: 1
-              value: 1
-              inSlope: 1
-              outSlope: 1
-              tangentMode: 34
-              weightedMode: 0
-              inWeight: 0
-              outWeight: 0
-            m_PreInfinity: 2
-            m_PostInfinity: 2
+            m_Curve: []
+            m_PreInfinity: 0
+            m_PostInfinity: 0
             m_RotationOrder: 0
         rotate:
-        - startTime: -0.1
+        - startTime: 0
           endTime: 0
           startValue: 0
-          endValue: 135
+          endValue: 0
           curve:
             serializedVersion: 2
-            m_Curve:
-            - serializedVersion: 3
-              time: 0
-              value: 0
-              inSlope: 1
-              outSlope: 1
-              tangentMode: 34
-              weightedMode: 0
-              inWeight: 0
-              outWeight: 0
-            - serializedVersion: 3
-              time: 1
-              value: 1
-              inSlope: 1
-              outSlope: 1
-              tangentMode: 34
-              weightedMode: 0
-              inWeight: 0
-              outWeight: 0
-            m_PreInfinity: 2
-            m_PostInfinity: 2
+            m_Curve: []
+            m_PreInfinity: 0
+            m_PostInfinity: 0
             m_RotationOrder: 0
         alpha:
-        - startTime: -0.1
+        - startTime: 0
           endTime: 0
           startValue: 0
-          endValue: 0.1
+          endValue: 1
           curve:
             serializedVersion: 2
             m_Curve:
@@ -2425,10 +2371,38 @@ MonoBehaviour:
             m_PostInfinity: 2
             m_RotationOrder: 0
         scaleX:
-        - startTime: -0.1
+        - startTime: 0
           endTime: 0
           startValue: 0
-          endValue: 3
+          endValue: 1
+          curve:
+            serializedVersion: 2
+            m_Curve:
+            - serializedVersion: 3
+              time: 0
+              value: 0
+              inSlope: 1
+              outSlope: 1
+              tangentMode: 34
+              weightedMode: 0
+              inWeight: 0
+              outWeight: 0
+            - serializedVersion: 3
+              time: 1
+              value: 1
+              inSlope: 1
+              outSlope: 1
+              tangentMode: 34
+              weightedMode: 0
+              inWeight: 0
+              outWeight: 0
+            m_PreInfinity: 2
+            m_PostInfinity: 2
+            m_RotationOrder: 0
+        - startTime: 5
+          endTime: 5
+          startValue: 0
+          endValue: 5
           curve:
             serializedVersion: 2
             m_Curve:
@@ -2454,10 +2428,10 @@ MonoBehaviour:
             m_PostInfinity: 2
             m_RotationOrder: 0
         scaleY:
-        - startTime: -0.1
+        - startTime: 0
           endTime: 0
           startValue: 0
-          endValue: 3
+          endValue: 1
           curve:
             serializedVersion: 2
             m_Curve:
@@ -2483,9 +2457,9 @@ MonoBehaviour:
             m_PostInfinity: 2
             m_RotationOrder: 0
         centerX:
-        - startTime: -0.1
+        - startTime: 0
           endTime: 0
-          startValue: 0.5
+          startValue: 0
           endValue: 0.5
           curve:
             serializedVersion: 2
@@ -2512,9 +2486,9 @@ MonoBehaviour:
             m_PostInfinity: 2
             m_RotationOrder: 0
         centerY:
-        - startTime: -0.1
+        - startTime: 0
           endTime: 0
-          startValue: 0.5
+          startValue: 0
           endValue: 0.5
           curve:
             serializedVersion: 2
@@ -2541,7 +2515,21 @@ MonoBehaviour:
             m_PostInfinity: 2
             m_RotationOrder: 0
         lineAlpha:
-        - startTime: -0.1
+        - startTime: 0
+          endTime: 0
+          startValue: 0
+          endValue: 0
+          curve:
+            serializedVersion: 2
+            m_Curve: []
+            m_PreInfinity: 0
+            m_PostInfinity: 0
+            m_RotationOrder: 0
+      lines:
+      - onlineNotes: []
+        offlineNotes: []
+        speed:
+        - startTime: 0
           endTime: 0
           startValue: 0
           endValue: 0
@@ -2569,1972 +2557,13 @@ MonoBehaviour:
             m_PreInfinity: 2
             m_PostInfinity: 2
             m_RotationOrder: 0
-      lines:
-      - onlineNotes:
-        - noteType: 2
-          hitTime: 1
-          holdTime: 0
-          boxEffect: 1
-          positionX: 0.23
-          isClockwise: 0
-          speed:
-          - startTime: 0
-            endTime: 2
-            startValue: 1
-            endValue: 1
-            curve:
-              serializedVersion: 2
-              m_Curve:
-              - serializedVersion: 3
-                time: 0
-                value: 0
-                inSlope: 1
-                outSlope: 1
-                tangentMode: 1
-                weightedMode: 3
-                inWeight: 0
-                outWeight: 0.33333334
-              - serializedVersion: 3
-                time: 1
-                value: 1
-                inSlope: 1
-                outSlope: 1
-                tangentMode: 1
-                weightedMode: 3
-                inWeight: 0.33333334
-                outWeight: 0
-              m_PreInfinity: 2
-              m_PostInfinity: 2
-              m_RotationOrder: 0
-          hitFloorPosition: 0
-          ariseFloorPosition: 0
-          ariseTime: 0
-          isArise: 0
-          localDisplacement:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 2
-            m_PostInfinity: 2
-            m_RotationOrder: 4
-          localVelocity:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 2
-            m_PostInfinity: 2
-            m_RotationOrder: 4
-        - noteType: 3
-          hitTime: 3
-          holdTime: 0
-          boxEffect: 1
-          positionX: -0.23
-          isClockwise: 0
-          speed:
-          - startTime: 0
-            endTime: 2
-            startValue: 1
-            endValue: 1
-            curve:
-              serializedVersion: 2
-              m_Curve:
-              - serializedVersion: 3
-                time: 0
-                value: 0
-                inSlope: 1
-                outSlope: 1
-                tangentMode: 1
-                weightedMode: 3
-                inWeight: 0
-                outWeight: 0.33333334
-              - serializedVersion: 3
-                time: 1
-                value: 1
-                inSlope: 1
-                outSlope: 1
-                tangentMode: 1
-                weightedMode: 3
-                inWeight: 0.33333334
-                outWeight: 0
-              m_PreInfinity: 2
-              m_PostInfinity: 2
-              m_RotationOrder: 0
-          hitFloorPosition: 0
-          ariseFloorPosition: 0
-          ariseTime: 0
-          isArise: 0
-          localDisplacement:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 2
-            m_PostInfinity: 2
-            m_RotationOrder: 4
-          localVelocity:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 2
-            m_PostInfinity: 2
-            m_RotationOrder: 4
-        - noteType: 0
-          hitTime: 4
-          holdTime: 0
-          boxEffect: 1
-          positionX: 1
-          isClockwise: 0
-          speed:
-          - startTime: 0
-            endTime: 2
-            startValue: 1
-            endValue: 1
-            curve:
-              serializedVersion: 2
-              m_Curve:
-              - serializedVersion: 3
-                time: 0
-                value: 0
-                inSlope: 1
-                outSlope: 1
-                tangentMode: 1
-                weightedMode: 3
-                inWeight: 0
-                outWeight: 0.33333334
-              - serializedVersion: 3
-                time: 1
-                value: 1
-                inSlope: 1
-                outSlope: 1
-                tangentMode: 1
-                weightedMode: 3
-                inWeight: 0.33333334
-                outWeight: 0
-              m_PreInfinity: 2
-              m_PostInfinity: 2
-              m_RotationOrder: 0
-          hitFloorPosition: 0
-          ariseFloorPosition: 0
-          ariseTime: 0
-          isArise: 0
-          localDisplacement:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 2
-            m_PostInfinity: 2
-            m_RotationOrder: 4
-          localVelocity:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 2
-            m_PostInfinity: 2
-            m_RotationOrder: 4
-        - noteType: 0
-          hitTime: 5
-          holdTime: 0
-          boxEffect: 1
-          positionX: -0.8
-          isClockwise: 0
-          speed:
-          - startTime: 0
-            endTime: 2
-            startValue: 1
-            endValue: 1
-            curve:
-              serializedVersion: 2
-              m_Curve:
-              - serializedVersion: 3
-                time: 0
-                value: 0
-                inSlope: 1
-                outSlope: 1
-                tangentMode: 1
-                weightedMode: 3
-                inWeight: 0
-                outWeight: 0.33333334
-              - serializedVersion: 3
-                time: 1
-                value: 1
-                inSlope: 1
-                outSlope: 1
-                tangentMode: 1
-                weightedMode: 3
-                inWeight: 0.33333334
-                outWeight: 0
-              m_PreInfinity: 2
-              m_PostInfinity: 2
-              m_RotationOrder: 0
-          hitFloorPosition: 0
-          ariseFloorPosition: 0
-          ariseTime: 0
-          isArise: 0
-          localDisplacement:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 2
-            m_PostInfinity: 2
-            m_RotationOrder: 4
-          localVelocity:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 2
-            m_PostInfinity: 2
-            m_RotationOrder: 4
-        - noteType: 3
-          hitTime: 6
-          holdTime: 0
-          boxEffect: 1
-          positionX: 0.23
-          isClockwise: 0
-          speed:
-          - startTime: 0
-            endTime: 2
-            startValue: 1
-            endValue: 1
-            curve:
-              serializedVersion: 2
-              m_Curve:
-              - serializedVersion: 3
-                time: 0
-                value: 0
-                inSlope: 1
-                outSlope: 1
-                tangentMode: 1
-                weightedMode: 3
-                inWeight: 0
-                outWeight: 0.33333334
-              - serializedVersion: 3
-                time: 1
-                value: 1
-                inSlope: 1
-                outSlope: 1
-                tangentMode: 1
-                weightedMode: 3
-                inWeight: 0.33333334
-                outWeight: 0
-              m_PreInfinity: 2
-              m_PostInfinity: 2
-              m_RotationOrder: 0
-          hitFloorPosition: 0
-          ariseFloorPosition: 0
-          ariseTime: 0
-          isArise: 0
-          localDisplacement:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 2
-            m_PostInfinity: 2
-            m_RotationOrder: 4
-          localVelocity:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 2
-            m_PostInfinity: 2
-            m_RotationOrder: 4
-        - noteType: 1
-          hitTime: 7
-          holdTime: 5
-          boxEffect: 1
-          positionX: 0.23
-          isClockwise: 0
-          speed:
-          - startTime: 0
-            endTime: 2
-            startValue: 1
-            endValue: 1
-            curve:
-              serializedVersion: 2
-              m_Curve:
-              - serializedVersion: 3
-                time: 0
-                value: 0
-                inSlope: 1
-                outSlope: 1
-                tangentMode: 1
-                weightedMode: 3
-                inWeight: 0
-                outWeight: 0.33333334
-              - serializedVersion: 3
-                time: 1
-                value: 1
-                inSlope: 1
-                outSlope: 1
-                tangentMode: 1
-                weightedMode: 3
-                inWeight: 0.33333334
-                outWeight: 0
-              m_PreInfinity: 2
-              m_PostInfinity: 2
-              m_RotationOrder: 0
-          hitFloorPosition: 0
-          ariseFloorPosition: 0
-          ariseTime: 0
-          isArise: 0
-          localDisplacement:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 2
-            m_PostInfinity: 2
-            m_RotationOrder: 4
-          localVelocity:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 2
-            m_PostInfinity: 2
-            m_RotationOrder: 4
-        - noteType: 0
-          hitTime: 8
-          holdTime: 0
-          boxEffect: 1
-          positionX: 0.23
-          isClockwise: 0
-          speed:
-          - startTime: 0
-            endTime: 2
-            startValue: 1
-            endValue: 1
-            curve:
-              serializedVersion: 2
-              m_Curve:
-              - serializedVersion: 3
-                time: 0
-                value: 0
-                inSlope: 1
-                outSlope: 1
-                tangentMode: 1
-                weightedMode: 3
-                inWeight: 0
-                outWeight: 0.33333334
-              - serializedVersion: 3
-                time: 1
-                value: 1
-                inSlope: 1
-                outSlope: 1
-                tangentMode: 1
-                weightedMode: 3
-                inWeight: 0.33333334
-                outWeight: 0
-              m_PreInfinity: 2
-              m_PostInfinity: 2
-              m_RotationOrder: 0
-          hitFloorPosition: 0
-          ariseFloorPosition: 0
-          ariseTime: 0
-          isArise: 0
-          localDisplacement:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 2
-            m_PostInfinity: 2
-            m_RotationOrder: 4
-          localVelocity:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 2
-            m_PostInfinity: 2
-            m_RotationOrder: 4
-        - noteType: 5
-          hitTime: 9
-          holdTime: 0
-          boxEffect: 1
-          positionX: 0.23
-          isClockwise: 0
-          speed:
-          - startTime: 0
-            endTime: 2
-            startValue: 1
-            endValue: 1
-            curve:
-              serializedVersion: 2
-              m_Curve:
-              - serializedVersion: 3
-                time: 0
-                value: 0
-                inSlope: 1
-                outSlope: 1
-                tangentMode: 1
-                weightedMode: 3
-                inWeight: 0
-                outWeight: 0.33333334
-              - serializedVersion: 3
-                time: 1
-                value: 1
-                inSlope: 1
-                outSlope: 1
-                tangentMode: 1
-                weightedMode: 3
-                inWeight: 0.33333334
-                outWeight: 0
-              m_PreInfinity: 2
-              m_PostInfinity: 2
-              m_RotationOrder: 0
-          hitFloorPosition: 0
-          ariseFloorPosition: 0
-          ariseTime: 0
-          isArise: 0
-          localDisplacement:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 2
-            m_PostInfinity: 2
-            m_RotationOrder: 4
-          localVelocity:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 2
-            m_PostInfinity: 2
-            m_RotationOrder: 4
-        - noteType: 6
-          hitTime: 10
-          holdTime: 0
-          boxEffect: 1
-          positionX: 0.23
-          isClockwise: 0
-          speed:
-          - startTime: 0
-            endTime: 2
-            startValue: 1
-            endValue: 1
-            curve:
-              serializedVersion: 2
-              m_Curve:
-              - serializedVersion: 3
-                time: 0
-                value: 0
-                inSlope: 1
-                outSlope: 1
-                tangentMode: 1
-                weightedMode: 3
-                inWeight: 0
-                outWeight: 0.33333334
-              - serializedVersion: 3
-                time: 1
-                value: 1
-                inSlope: 1
-                outSlope: 1
-                tangentMode: 1
-                weightedMode: 3
-                inWeight: 0.33333334
-                outWeight: 0
-              m_PreInfinity: 2
-              m_PostInfinity: 2
-              m_RotationOrder: 0
-          hitFloorPosition: 0
-          ariseFloorPosition: 0
-          ariseTime: 0
-          isArise: 0
-          localDisplacement:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 2
-            m_PostInfinity: 2
-            m_RotationOrder: 4
-          localVelocity:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 2
-            m_PostInfinity: 2
-            m_RotationOrder: 4
-        - noteType: 1
-          hitTime: 12
-          holdTime: 1
-          boxEffect: 1
-          positionX: 0
-          isClockwise: 0
-          speed:
-          - startTime: 0
-            endTime: 2
-            startValue: 1
-            endValue: 1
-            curve:
-              serializedVersion: 2
-              m_Curve:
-              - serializedVersion: 3
-                time: 0
-                value: 0
-                inSlope: 1
-                outSlope: 1
-                tangentMode: 1
-                weightedMode: 3
-                inWeight: 0
-                outWeight: 0.33333334
-              - serializedVersion: 3
-                time: 1
-                value: 1
-                inSlope: 1
-                outSlope: 1
-                tangentMode: 1
-                weightedMode: 3
-                inWeight: 0.33333334
-                outWeight: 0
-              m_PreInfinity: 2
-              m_PostInfinity: 2
-              m_RotationOrder: 0
-          hitFloorPosition: 0
-          ariseFloorPosition: 0
-          ariseTime: 0
-          isArise: 0
-          localDisplacement:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 2
-            m_PostInfinity: 2
-            m_RotationOrder: 4
-          localVelocity:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 2
-            m_PostInfinity: 2
-            m_RotationOrder: 4
-        - noteType: 1
-          hitTime: 13
-          holdTime: 1
-          boxEffect: 1
-          positionX: 0
-          isClockwise: 0
-          speed:
-          - startTime: 0
-            endTime: 2
-            startValue: 1
-            endValue: 1
-            curve:
-              serializedVersion: 2
-              m_Curve:
-              - serializedVersion: 3
-                time: 0
-                value: 0
-                inSlope: 1
-                outSlope: 1
-                tangentMode: 1
-                weightedMode: 3
-                inWeight: 0
-                outWeight: 0.33333334
-              - serializedVersion: 3
-                time: 1
-                value: 1
-                inSlope: 1
-                outSlope: 1
-                tangentMode: 1
-                weightedMode: 3
-                inWeight: 0.33333334
-                outWeight: 0
-              m_PreInfinity: 2
-              m_PostInfinity: 2
-              m_RotationOrder: 0
-          hitFloorPosition: 0
-          ariseFloorPosition: 0
-          ariseTime: 0
-          isArise: 0
-          localDisplacement:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 2
-            m_PostInfinity: 2
-            m_RotationOrder: 4
-          localVelocity:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 2
-            m_PostInfinity: 2
-            m_RotationOrder: 4
-        - noteType: 1
-          hitTime: 14
-          holdTime: 1
-          boxEffect: 1
-          positionX: 0
-          isClockwise: 0
-          speed:
-          - startTime: 0
-            endTime: 2
-            startValue: 1
-            endValue: 1
-            curve:
-              serializedVersion: 2
-              m_Curve:
-              - serializedVersion: 3
-                time: 0
-                value: 0
-                inSlope: 1
-                outSlope: 1
-                tangentMode: 1
-                weightedMode: 3
-                inWeight: 0
-                outWeight: 0.33333334
-              - serializedVersion: 3
-                time: 1
-                value: 1
-                inSlope: 1
-                outSlope: 1
-                tangentMode: 1
-                weightedMode: 3
-                inWeight: 0.33333334
-                outWeight: 0
-              m_PreInfinity: 2
-              m_PostInfinity: 2
-              m_RotationOrder: 0
-          hitFloorPosition: 0
-          ariseFloorPosition: 0
-          ariseTime: 0
-          isArise: 0
-          localDisplacement:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 2
-            m_PostInfinity: 2
-            m_RotationOrder: 4
-          localVelocity:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 2
-            m_PostInfinity: 2
-            m_RotationOrder: 4
-        - noteType: 1
-          hitTime: 15
-          holdTime: 1
-          boxEffect: 1
-          positionX: -1.5
-          isClockwise: 0
-          speed:
-          - startTime: 0
-            endTime: 2
-            startValue: 1
-            endValue: 1
-            curve:
-              serializedVersion: 2
-              m_Curve:
-              - serializedVersion: 3
-                time: 0
-                value: 0
-                inSlope: 1
-                outSlope: 1
-                tangentMode: 1
-                weightedMode: 3
-                inWeight: 0
-                outWeight: 0.33333334
-              - serializedVersion: 3
-                time: 1
-                value: 1
-                inSlope: 1
-                outSlope: 1
-                tangentMode: 1
-                weightedMode: 3
-                inWeight: 0.33333334
-                outWeight: 0
-              m_PreInfinity: 2
-              m_PostInfinity: 2
-              m_RotationOrder: 0
-          hitFloorPosition: 0
-          ariseFloorPosition: 0
-          ariseTime: 0
-          isArise: 0
-          localDisplacement:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 2
-            m_PostInfinity: 2
-            m_RotationOrder: 4
-          localVelocity:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 2
-            m_PostInfinity: 2
-            m_RotationOrder: 4
-        - noteType: 1
-          hitTime: 16
-          holdTime: 2
-          boxEffect: 1
-          positionX: -1
-          isClockwise: 0
-          speed:
-          - startTime: 0
-            endTime: 2
-            startValue: 1
-            endValue: 1
-            curve:
-              serializedVersion: 2
-              m_Curve:
-              - serializedVersion: 3
-                time: 0
-                value: 0
-                inSlope: 1
-                outSlope: 1
-                tangentMode: 1
-                weightedMode: 3
-                inWeight: 0
-                outWeight: 0.33333334
-              - serializedVersion: 3
-                time: 1
-                value: 1
-                inSlope: 1
-                outSlope: 1
-                tangentMode: 1
-                weightedMode: 3
-                inWeight: 0.33333334
-                outWeight: 0
-              m_PreInfinity: 2
-              m_PostInfinity: 2
-              m_RotationOrder: 0
-          hitFloorPosition: 0
-          ariseFloorPosition: 0
-          ariseTime: 0
-          isArise: 0
-          localDisplacement:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 2
-            m_PostInfinity: 2
-            m_RotationOrder: 4
-          localVelocity:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 2
-            m_PostInfinity: 2
-            m_RotationOrder: 4
-        - noteType: 1
-          hitTime: 17
-          holdTime: 2
-          boxEffect: 1
-          positionX: -0.5
-          isClockwise: 0
-          speed:
-          - startTime: 0
-            endTime: 2
-            startValue: 1
-            endValue: 1
-            curve:
-              serializedVersion: 2
-              m_Curve:
-              - serializedVersion: 3
-                time: 0
-                value: 0
-                inSlope: 1
-                outSlope: 1
-                tangentMode: 1
-                weightedMode: 3
-                inWeight: 0
-                outWeight: 0.33333334
-              - serializedVersion: 3
-                time: 1
-                value: 1
-                inSlope: 1
-                outSlope: 1
-                tangentMode: 1
-                weightedMode: 3
-                inWeight: 0.33333334
-                outWeight: 0
-              m_PreInfinity: 2
-              m_PostInfinity: 2
-              m_RotationOrder: 0
-          hitFloorPosition: 0
-          ariseFloorPosition: 0
-          ariseTime: 0
-          isArise: 0
-          localDisplacement:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 2
-            m_PostInfinity: 2
-            m_RotationOrder: 4
-          localVelocity:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 2
-            m_PostInfinity: 2
-            m_RotationOrder: 4
-        - noteType: 1
-          hitTime: 18
-          holdTime: 2
-          boxEffect: 1
-          positionX: 0
-          isClockwise: 0
-          speed:
-          - startTime: 0
-            endTime: 2
-            startValue: 1
-            endValue: 1
-            curve:
-              serializedVersion: 2
-              m_Curve:
-              - serializedVersion: 3
-                time: 0
-                value: 0
-                inSlope: 1
-                outSlope: 1
-                tangentMode: 1
-                weightedMode: 3
-                inWeight: 0
-                outWeight: 0.33333334
-              - serializedVersion: 3
-                time: 1
-                value: 1
-                inSlope: 1
-                outSlope: 1
-                tangentMode: 1
-                weightedMode: 3
-                inWeight: 0.33333334
-                outWeight: 0
-              m_PreInfinity: 2
-              m_PostInfinity: 2
-              m_RotationOrder: 0
-          hitFloorPosition: 0
-          ariseFloorPosition: 0
-          ariseTime: 0
-          isArise: 0
-          localDisplacement:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 2
-            m_PostInfinity: 2
-            m_RotationOrder: 4
-          localVelocity:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 2
-            m_PostInfinity: 2
-            m_RotationOrder: 4
-        - noteType: 1
-          hitTime: 19
-          holdTime: 2
-          boxEffect: 1
-          positionX: 0.5
-          isClockwise: 0
-          speed:
-          - startTime: 0
-            endTime: 2
-            startValue: 1
-            endValue: 1
-            curve:
-              serializedVersion: 2
-              m_Curve:
-              - serializedVersion: 3
-                time: 0
-                value: 0
-                inSlope: 1
-                outSlope: 1
-                tangentMode: 1
-                weightedMode: 3
-                inWeight: 0
-                outWeight: 0.33333334
-              - serializedVersion: 3
-                time: 1
-                value: 1
-                inSlope: 1
-                outSlope: 1
-                tangentMode: 1
-                weightedMode: 3
-                inWeight: 0.33333334
-                outWeight: 0
-              m_PreInfinity: 2
-              m_PostInfinity: 2
-              m_RotationOrder: 0
-          hitFloorPosition: 0
-          ariseFloorPosition: 0
-          ariseTime: 0
-          isArise: 0
-          localDisplacement:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 2
-            m_PostInfinity: 2
-            m_RotationOrder: 4
-          localVelocity:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 2
-            m_PostInfinity: 2
-            m_RotationOrder: 4
-        - noteType: 0
-          hitTime: 20
-          holdTime: 0
-          boxEffect: 1
-          positionX: 0
-          isClockwise: 0
-          speed:
-          - startTime: 0
-            endTime: 2
-            startValue: 1
-            endValue: 1
-            curve:
-              serializedVersion: 2
-              m_Curve:
-              - serializedVersion: 3
-                time: 0
-                value: 0
-                inSlope: 1
-                outSlope: 1
-                tangentMode: 1
-                weightedMode: 3
-                inWeight: 0
-                outWeight: 0.33333334
-              - serializedVersion: 3
-                time: 1
-                value: 1
-                inSlope: 1
-                outSlope: 1
-                tangentMode: 1
-                weightedMode: 3
-                inWeight: 0.33333334
-                outWeight: 0
-              m_PreInfinity: 2
-              m_PostInfinity: 2
-              m_RotationOrder: 0
-          hitFloorPosition: 0
-          ariseFloorPosition: 0
-          ariseTime: 0
-          isArise: 0
-          localDisplacement:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 2
-            m_PostInfinity: 2
-            m_RotationOrder: 4
-          localVelocity:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 2
-            m_PostInfinity: 2
-            m_RotationOrder: 4
-        - noteType: 0
-          hitTime: 21
-          holdTime: 0
-          boxEffect: 1
-          positionX: 0
-          isClockwise: 0
-          speed:
-          - startTime: 0
-            endTime: 2
-            startValue: 1
-            endValue: 1
-            curve:
-              serializedVersion: 2
-              m_Curve:
-              - serializedVersion: 3
-                time: 0
-                value: 0
-                inSlope: 1
-                outSlope: 1
-                tangentMode: 1
-                weightedMode: 3
-                inWeight: 0
-                outWeight: 0.33333334
-              - serializedVersion: 3
-                time: 1
-                value: 1
-                inSlope: 1
-                outSlope: 1
-                tangentMode: 1
-                weightedMode: 3
-                inWeight: 0.33333334
-                outWeight: 0
-              m_PreInfinity: 2
-              m_PostInfinity: 2
-              m_RotationOrder: 0
-          hitFloorPosition: 0
-          ariseFloorPosition: 0
-          ariseTime: 0
-          isArise: 0
-          localDisplacement:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 2
-            m_PostInfinity: 2
-            m_RotationOrder: 4
-          localVelocity:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 2
-            m_PostInfinity: 2
-            m_RotationOrder: 4
-        - noteType: 0
-          hitTime: 22
-          holdTime: 0
-          boxEffect: 1
-          positionX: 0
-          isClockwise: 0
-          speed:
-          - startTime: 0
-            endTime: 2
-            startValue: 1
-            endValue: 1
-            curve:
-              serializedVersion: 2
-              m_Curve:
-              - serializedVersion: 3
-                time: 0
-                value: 0
-                inSlope: 1
-                outSlope: 1
-                tangentMode: 1
-                weightedMode: 3
-                inWeight: 0
-                outWeight: 0.33333334
-              - serializedVersion: 3
-                time: 1
-                value: 1
-                inSlope: 1
-                outSlope: 1
-                tangentMode: 1
-                weightedMode: 3
-                inWeight: 0.33333334
-                outWeight: 0
-              m_PreInfinity: 2
-              m_PostInfinity: 2
-              m_RotationOrder: 0
-          hitFloorPosition: 0
-          ariseFloorPosition: 0
-          ariseTime: 0
-          isArise: 0
-          localDisplacement:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 2
-            m_PostInfinity: 2
-            m_RotationOrder: 4
-          localVelocity:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 2
-            m_PostInfinity: 2
-            m_RotationOrder: 4
-        - noteType: 0
-          hitTime: 23
-          holdTime: 0
-          boxEffect: 1
-          positionX: 0
-          isClockwise: 0
-          speed:
-          - startTime: 0
-            endTime: 2
-            startValue: 1
-            endValue: 1
-            curve:
-              serializedVersion: 2
-              m_Curve:
-              - serializedVersion: 3
-                time: 0
-                value: 0
-                inSlope: 1
-                outSlope: 1
-                tangentMode: 1
-                weightedMode: 3
-                inWeight: 0
-                outWeight: 0.33333334
-              - serializedVersion: 3
-                time: 1
-                value: 1
-                inSlope: 1
-                outSlope: 1
-                tangentMode: 1
-                weightedMode: 3
-                inWeight: 0.33333334
-                outWeight: 0
-              m_PreInfinity: 2
-              m_PostInfinity: 2
-              m_RotationOrder: 0
-          hitFloorPosition: 0
-          ariseFloorPosition: 0
-          ariseTime: 0
-          isArise: 0
-          localDisplacement:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 2
-            m_PostInfinity: 2
-            m_RotationOrder: 4
-          localVelocity:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 2
-            m_PostInfinity: 2
-            m_RotationOrder: 4
-        - noteType: 0
-          hitTime: 23.1
-          holdTime: 0
-          boxEffect: 1
-          positionX: 0
-          isClockwise: 0
-          speed:
-          - startTime: 0
-            endTime: 2
-            startValue: 1
-            endValue: 1
-            curve:
-              serializedVersion: 2
-              m_Curve:
-              - serializedVersion: 3
-                time: 0
-                value: 0
-                inSlope: 1
-                outSlope: 1
-                tangentMode: 1
-                weightedMode: 3
-                inWeight: 0
-                outWeight: 0.33333334
-              - serializedVersion: 3
-                time: 1
-                value: 1
-                inSlope: 1
-                outSlope: 1
-                tangentMode: 1
-                weightedMode: 3
-                inWeight: 0.33333334
-                outWeight: 0
-              m_PreInfinity: 2
-              m_PostInfinity: 2
-              m_RotationOrder: 0
-          hitFloorPosition: 0
-          ariseFloorPosition: 0
-          ariseTime: 0
-          isArise: 0
-          localDisplacement:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 2
-            m_PostInfinity: 2
-            m_RotationOrder: 4
-          localVelocity:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 2
-            m_PostInfinity: 2
-            m_RotationOrder: 4
-        - noteType: 0
-          hitTime: 23.2
-          holdTime: 0
-          boxEffect: 1
-          positionX: 0
-          isClockwise: 0
-          speed:
-          - startTime: 0
-            endTime: 2
-            startValue: 1
-            endValue: 1
-            curve:
-              serializedVersion: 2
-              m_Curve:
-              - serializedVersion: 3
-                time: 0
-                value: 0
-                inSlope: 1
-                outSlope: 1
-                tangentMode: 1
-                weightedMode: 3
-                inWeight: 0
-                outWeight: 0.33333334
-              - serializedVersion: 3
-                time: 1
-                value: 1
-                inSlope: 1
-                outSlope: 1
-                tangentMode: 1
-                weightedMode: 3
-                inWeight: 0.33333334
-                outWeight: 0
-              m_PreInfinity: 2
-              m_PostInfinity: 2
-              m_RotationOrder: 0
-          hitFloorPosition: 0
-          ariseFloorPosition: 0
-          ariseTime: 0
-          isArise: 0
-          localDisplacement:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 2
-            m_PostInfinity: 2
-            m_RotationOrder: 4
-          localVelocity:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 2
-            m_PostInfinity: 2
-            m_RotationOrder: 4
-        - noteType: 0
-          hitTime: 23.3
-          holdTime: 0
-          boxEffect: 1
-          positionX: 0
-          isClockwise: 0
-          speed:
-          - startTime: 0
-            endTime: 2
-            startValue: 1
-            endValue: 1
-            curve:
-              serializedVersion: 2
-              m_Curve:
-              - serializedVersion: 3
-                time: 0
-                value: 0
-                inSlope: 1
-                outSlope: 1
-                tangentMode: 1
-                weightedMode: 3
-                inWeight: 0
-                outWeight: 0.33333334
-              - serializedVersion: 3
-                time: 1
-                value: 1
-                inSlope: 1
-                outSlope: 1
-                tangentMode: 1
-                weightedMode: 3
-                inWeight: 0.33333334
-                outWeight: 0
-              m_PreInfinity: 2
-              m_PostInfinity: 2
-              m_RotationOrder: 0
-          hitFloorPosition: 0
-          ariseFloorPosition: 0
-          ariseTime: 0
-          isArise: 0
-          localDisplacement:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 2
-            m_PostInfinity: 2
-            m_RotationOrder: 4
-          localVelocity:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 2
-            m_PostInfinity: 2
-            m_RotationOrder: 4
-        - noteType: 0
-          hitTime: 23.4
-          holdTime: 0
-          boxEffect: 1
-          positionX: 0
-          isClockwise: 0
-          speed:
-          - startTime: 0
-            endTime: 2
-            startValue: 1
-            endValue: 1
-            curve:
-              serializedVersion: 2
-              m_Curve:
-              - serializedVersion: 3
-                time: 0
-                value: 0
-                inSlope: 1
-                outSlope: 1
-                tangentMode: 1
-                weightedMode: 3
-                inWeight: 0
-                outWeight: 0.33333334
-              - serializedVersion: 3
-                time: 1
-                value: 1
-                inSlope: 1
-                outSlope: 1
-                tangentMode: 1
-                weightedMode: 3
-                inWeight: 0.33333334
-                outWeight: 0
-              m_PreInfinity: 2
-              m_PostInfinity: 2
-              m_RotationOrder: 0
-          hitFloorPosition: 0
-          ariseFloorPosition: 0
-          ariseTime: 0
-          isArise: 0
-          localDisplacement:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 2
-            m_PostInfinity: 2
-            m_RotationOrder: 4
-          localVelocity:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 2
-            m_PostInfinity: 2
-            m_RotationOrder: 4
-        - noteType: 0
-          hitTime: 23.5
-          holdTime: 0
-          boxEffect: 1
-          positionX: 0
-          isClockwise: 0
-          speed:
-          - startTime: 0
-            endTime: 2
-            startValue: 1
-            endValue: 1
-            curve:
-              serializedVersion: 2
-              m_Curve:
-              - serializedVersion: 3
-                time: 0
-                value: 0
-                inSlope: 1
-                outSlope: 1
-                tangentMode: 1
-                weightedMode: 3
-                inWeight: 0
-                outWeight: 0.33333334
-              - serializedVersion: 3
-                time: 1
-                value: 1
-                inSlope: 1
-                outSlope: 1
-                tangentMode: 1
-                weightedMode: 3
-                inWeight: 0.33333334
-                outWeight: 0
-              m_PreInfinity: 2
-              m_PostInfinity: 2
-              m_RotationOrder: 0
-          hitFloorPosition: 0
-          ariseFloorPosition: 0
-          ariseTime: 0
-          isArise: 0
-          localDisplacement:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 2
-            m_PostInfinity: 2
-            m_RotationOrder: 4
-          localVelocity:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 2
-            m_PostInfinity: 2
-            m_RotationOrder: 4
-        - noteType: 0
-          hitTime: 23.6
-          holdTime: 0
-          boxEffect: 1
-          positionX: 0
-          isClockwise: 0
-          speed:
-          - startTime: 0
-            endTime: 2
-            startValue: 1
-            endValue: 1
-            curve:
-              serializedVersion: 2
-              m_Curve:
-              - serializedVersion: 3
-                time: 0
-                value: 0
-                inSlope: 1
-                outSlope: 1
-                tangentMode: 1
-                weightedMode: 3
-                inWeight: 0
-                outWeight: 0.33333334
-              - serializedVersion: 3
-                time: 1
-                value: 1
-                inSlope: 1
-                outSlope: 1
-                tangentMode: 1
-                weightedMode: 3
-                inWeight: 0.33333334
-                outWeight: 0
-              m_PreInfinity: 2
-              m_PostInfinity: 2
-              m_RotationOrder: 0
-          hitFloorPosition: 0
-          ariseFloorPosition: 0
-          ariseTime: 0
-          isArise: 0
-          localDisplacement:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 2
-            m_PostInfinity: 2
-            m_RotationOrder: 4
-          localVelocity:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 2
-            m_PostInfinity: 2
-            m_RotationOrder: 4
-        - noteType: 0
-          hitTime: 23.7
-          holdTime: 0
-          boxEffect: 1
-          positionX: 0
-          isClockwise: 0
-          speed:
-          - startTime: 0
-            endTime: 2
-            startValue: 1
-            endValue: 1
-            curve:
-              serializedVersion: 2
-              m_Curve:
-              - serializedVersion: 3
-                time: 0
-                value: 0
-                inSlope: 1
-                outSlope: 1
-                tangentMode: 1
-                weightedMode: 3
-                inWeight: 0
-                outWeight: 0.33333334
-              - serializedVersion: 3
-                time: 1
-                value: 1
-                inSlope: 1
-                outSlope: 1
-                tangentMode: 1
-                weightedMode: 3
-                inWeight: 0.33333334
-                outWeight: 0
-              m_PreInfinity: 2
-              m_PostInfinity: 2
-              m_RotationOrder: 0
-          hitFloorPosition: 0
-          ariseFloorPosition: 0
-          ariseTime: 0
-          isArise: 0
-          localDisplacement:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 2
-            m_PostInfinity: 2
-            m_RotationOrder: 4
-          localVelocity:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 2
-            m_PostInfinity: 2
-            m_RotationOrder: 4
-        - noteType: 0
-          hitTime: 23.8
-          holdTime: 0
-          boxEffect: 1
-          positionX: 0
-          isClockwise: 0
-          speed:
-          - startTime: 0
-            endTime: 2
-            startValue: 1
-            endValue: 1
-            curve:
-              serializedVersion: 2
-              m_Curve:
-              - serializedVersion: 3
-                time: 0
-                value: 0
-                inSlope: 1
-                outSlope: 1
-                tangentMode: 1
-                weightedMode: 3
-                inWeight: 0
-                outWeight: 0.33333334
-              - serializedVersion: 3
-                time: 1
-                value: 1
-                inSlope: 1
-                outSlope: 1
-                tangentMode: 1
-                weightedMode: 3
-                inWeight: 0.33333334
-                outWeight: 0
-              m_PreInfinity: 2
-              m_PostInfinity: 2
-              m_RotationOrder: 0
-          hitFloorPosition: 0
-          ariseFloorPosition: 0
-          ariseTime: 0
-          isArise: 0
-          localDisplacement:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 2
-            m_PostInfinity: 2
-            m_RotationOrder: 4
-          localVelocity:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 2
-            m_PostInfinity: 2
-            m_RotationOrder: 4
-        - noteType: 0
-          hitTime: 23.9
-          holdTime: 0
-          boxEffect: 1
-          positionX: 0
-          isClockwise: 0
-          speed:
-          - startTime: 0
-            endTime: 2
-            startValue: 1
-            endValue: 1
-            curve:
-              serializedVersion: 2
-              m_Curve:
-              - serializedVersion: 3
-                time: 0
-                value: 0
-                inSlope: 1
-                outSlope: 1
-                tangentMode: 1
-                weightedMode: 3
-                inWeight: 0
-                outWeight: 0.33333334
-              - serializedVersion: 3
-                time: 1
-                value: 1
-                inSlope: 1
-                outSlope: 1
-                tangentMode: 1
-                weightedMode: 3
-                inWeight: 0.33333334
-                outWeight: 0
-              m_PreInfinity: 2
-              m_PostInfinity: 2
-              m_RotationOrder: 0
-          hitFloorPosition: 0
-          ariseFloorPosition: 0
-          ariseTime: 0
-          isArise: 0
-          localDisplacement:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 2
-            m_PostInfinity: 2
-            m_RotationOrder: 4
-          localVelocity:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 2
-            m_PostInfinity: 2
-            m_RotationOrder: 4
-        - noteType: 0
-          hitTime: 24
-          holdTime: 0
-          boxEffect: 1
-          positionX: 0
-          isClockwise: 0
-          speed:
-          - startTime: 0
-            endTime: 2
-            startValue: 1
-            endValue: 1
-            curve:
-              serializedVersion: 2
-              m_Curve:
-              - serializedVersion: 3
-                time: 0
-                value: 0
-                inSlope: 1
-                outSlope: 1
-                tangentMode: 1
-                weightedMode: 3
-                inWeight: 0
-                outWeight: 0.33333334
-              - serializedVersion: 3
-                time: 1
-                value: 1
-                inSlope: 1
-                outSlope: 1
-                tangentMode: 1
-                weightedMode: 3
-                inWeight: 0.33333334
-                outWeight: 0
-              m_PreInfinity: 2
-              m_PostInfinity: 2
-              m_RotationOrder: 0
-          hitFloorPosition: 0
-          ariseFloorPosition: 0
-          ariseTime: 0
-          isArise: 0
-          localDisplacement:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 2
-            m_PostInfinity: 2
-            m_RotationOrder: 4
-          localVelocity:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 2
-            m_PostInfinity: 2
-            m_RotationOrder: 4
-        offlineNotes:
-        - noteType: 2
-          hitTime: 24
-          holdTime: 0
-          boxEffect: 0
-          positionX: 0
-          isClockwise: 0
-          speed: []
-          hitFloorPosition: 0
-          ariseFloorPosition: 0
-          ariseTime: 0
-          isArise: 0
-          localDisplacement:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 0
-            m_PostInfinity: 0
-            m_RotationOrder: 0
-          localVelocity:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 0
-            m_PostInfinity: 0
-            m_RotationOrder: 0
-        - noteType: 2
-          hitTime: 24.1
-          holdTime: 0
-          boxEffect: 0
-          positionX: 0
-          isClockwise: 0
-          speed: []
-          hitFloorPosition: 0
-          ariseFloorPosition: 0
-          ariseTime: 0
-          isArise: 0
-          localDisplacement:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 0
-            m_PostInfinity: 0
-            m_RotationOrder: 0
-          localVelocity:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 0
-            m_PostInfinity: 0
-            m_RotationOrder: 0
-        - noteType: 2
-          hitTime: 24.2
-          holdTime: 0
-          boxEffect: 0
-          positionX: 0
-          isClockwise: 0
-          speed: []
-          hitFloorPosition: 0
-          ariseFloorPosition: 0
-          ariseTime: 0
-          isArise: 0
-          localDisplacement:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 0
-            m_PostInfinity: 0
-            m_RotationOrder: 0
-          localVelocity:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 0
-            m_PostInfinity: 0
-            m_RotationOrder: 0
-        - noteType: 2
-          hitTime: 24.3
-          holdTime: 0
-          boxEffect: 0
-          positionX: 0
-          isClockwise: 0
-          speed: []
-          hitFloorPosition: 0
-          ariseFloorPosition: 0
-          ariseTime: 0
-          isArise: 0
-          localDisplacement:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 0
-            m_PostInfinity: 0
-            m_RotationOrder: 0
-          localVelocity:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 0
-            m_PostInfinity: 0
-            m_RotationOrder: 0
-        - noteType: 2
-          hitTime: 24.4
-          holdTime: 0
-          boxEffect: 0
-          positionX: 0
-          isClockwise: 0
-          speed: []
-          hitFloorPosition: 0
-          ariseFloorPosition: 0
-          ariseTime: 0
-          isArise: 0
-          localDisplacement:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 0
-            m_PostInfinity: 0
-            m_RotationOrder: 0
-          localVelocity:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 0
-            m_PostInfinity: 0
-            m_RotationOrder: 0
-        - noteType: 2
-          hitTime: 24.5
-          holdTime: 0
-          boxEffect: 0
-          positionX: 0
-          isClockwise: 0
-          speed: []
-          hitFloorPosition: 0
-          ariseFloorPosition: 0
-          ariseTime: 0
-          isArise: 0
-          localDisplacement:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 0
-            m_PostInfinity: 0
-            m_RotationOrder: 0
-          localVelocity:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 0
-            m_PostInfinity: 0
-            m_RotationOrder: 0
-        - noteType: 2
-          hitTime: 24.6
-          holdTime: 0
-          boxEffect: 0
-          positionX: 0
-          isClockwise: 0
-          speed: []
-          hitFloorPosition: 0
-          ariseFloorPosition: 0
-          ariseTime: 0
-          isArise: 0
-          localDisplacement:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 0
-            m_PostInfinity: 0
-            m_RotationOrder: 0
-          localVelocity:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 0
-            m_PostInfinity: 0
-            m_RotationOrder: 0
-        - noteType: 2
-          hitTime: 24.7
-          holdTime: 0
-          boxEffect: 0
-          positionX: 0
-          isClockwise: 0
-          speed: []
-          hitFloorPosition: 0
-          ariseFloorPosition: 0
-          ariseTime: 0
-          isArise: 0
-          localDisplacement:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 0
-            m_PostInfinity: 0
-            m_RotationOrder: 0
-          localVelocity:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 0
-            m_PostInfinity: 0
-            m_RotationOrder: 0
-        - noteType: 2
-          hitTime: 24.8
-          holdTime: 0
-          boxEffect: 0
-          positionX: 0
-          isClockwise: 0
-          speed: []
-          hitFloorPosition: 0
-          ariseFloorPosition: 0
-          ariseTime: 0
-          isArise: 0
-          localDisplacement:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 0
-            m_PostInfinity: 0
-            m_RotationOrder: 0
-          localVelocity:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 0
-            m_PostInfinity: 0
-            m_RotationOrder: 0
-        - noteType: 2
-          hitTime: 24.9
-          holdTime: 0
-          boxEffect: 0
-          positionX: 0
-          isClockwise: 0
-          speed: []
-          hitFloorPosition: 0
-          ariseFloorPosition: 0
-          ariseTime: 0
-          isArise: 0
-          localDisplacement:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 0
-            m_PostInfinity: 0
-            m_RotationOrder: 0
-          localVelocity:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 0
-            m_PostInfinity: 0
-            m_RotationOrder: 0
-        speed:
-        - startTime: 0
-          endTime: 200
-          startValue: 1
-          endValue: 1
-          curve:
-            serializedVersion: 2
-            m_Curve:
-            - serializedVersion: 3
-              time: 0
-              value: 0
-              inSlope: 1
-              outSlope: 1
-              tangentMode: 1
-              weightedMode: 3
-              inWeight: 0
-              outWeight: 0.33333334
-            - serializedVersion: 3
-              time: 1
-              value: 1
-              inSlope: 1
-              outSlope: 1
-              tangentMode: 1
-              weightedMode: 3
-              inWeight: 0.33333334
-              outWeight: 0
-            m_PreInfinity: 2
-            m_PostInfinity: 2
-            m_RotationOrder: 0
       - onlineNotes: []
-        offlineNotes: []
-        speed:
-        - startTime: -0.1
-          endTime: 0
-          startValue: 1
-          endValue: 1
-          curve:
-            serializedVersion: 2
-            m_Curve:
-            - serializedVersion: 3
-              time: 0
-              value: 0
-              inSlope: 1
-              outSlope: 1
-              tangentMode: 1
-              weightedMode: 3
-              inWeight: 0
-              outWeight: 0.33333334
-            - serializedVersion: 3
-              time: 1
-              value: 1
-              inSlope: 1
-              outSlope: 1
-              tangentMode: 1
-              weightedMode: 3
-              inWeight: 0.33333334
-              outWeight: 0
-            m_PreInfinity: 2
-            m_PostInfinity: 2
-            m_RotationOrder: 0
-      - onlineNotes: []
-        offlineNotes: []
-        speed:
-        - startTime: -0.1
-          endTime: 0
-          startValue: 1
-          endValue: 1
-          curve:
-            serializedVersion: 2
-            m_Curve:
-            - serializedVersion: 3
-              time: 0
-              value: 0
-              inSlope: 1
-              outSlope: 1
-              tangentMode: 1
-              weightedMode: 3
-              inWeight: 0
-              outWeight: 0.33333334
-            - serializedVersion: 3
-              time: 1
-              value: 1
-              inSlope: 1
-              outSlope: 1
-              tangentMode: 1
-              weightedMode: 3
-              inWeight: 0.33333334
-              outWeight: 0
-            m_PreInfinity: 2
-            m_PostInfinity: 2
-            m_RotationOrder: 0
-      - onlineNotes: []
-        offlineNotes: []
-        speed:
-        - startTime: -0.1
-          endTime: 0
-          startValue: 1
-          endValue: 1
-          curve:
-            serializedVersion: 2
-            m_Curve:
-            - serializedVersion: 3
-              time: 0
-              value: 0
-              inSlope: 1
-              outSlope: 1
-              tangentMode: 1
-              weightedMode: 3
-              inWeight: 0
-              outWeight: 0.33333334
-            - serializedVersion: 3
-              time: 1
-              value: 1
-              inSlope: 1
-              outSlope: 1
-              tangentMode: 1
-              weightedMode: 3
-              inWeight: 0.33333334
-              outWeight: 0
-            m_PreInfinity: 2
-            m_PostInfinity: 2
-            m_RotationOrder: 0
-      - onlineNotes:
-        - noteType: 4
-          hitTime: 25
-          holdTime: 0
-          boxEffect: 0
-          positionX: 0
-          isClockwise: 0
-          speed: []
-          hitFloorPosition: 0
-          ariseFloorPosition: 0
-          ariseTime: 0
-          isArise: 0
-          localDisplacement:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 0
-            m_PostInfinity: 0
-            m_RotationOrder: 0
-          localVelocity:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 0
-            m_PostInfinity: 0
-            m_RotationOrder: 0
         offlineNotes: []
         speed:
         - startTime: 0
-          endTime: 200
-          startValue: 1
-          endValue: 1
+          endTime: 0
+          startValue: 0
+          endValue: 0
           curve:
             serializedVersion: 2
             m_Curve:
@@ -4543,18 +2572,111 @@ MonoBehaviour:
               value: 0
               inSlope: 1
               outSlope: 1
-              tangentMode: 1
-              weightedMode: 3
+              tangentMode: 34
+              weightedMode: 0
               inWeight: 0
-              outWeight: 0.33333334
+              outWeight: 0
             - serializedVersion: 3
               time: 1
               value: 1
               inSlope: 1
               outSlope: 1
-              tangentMode: 1
-              weightedMode: 3
-              inWeight: 0.33333334
+              tangentMode: 34
+              weightedMode: 0
+              inWeight: 0
+              outWeight: 0
+            m_PreInfinity: 2
+            m_PostInfinity: 2
+            m_RotationOrder: 0
+      - onlineNotes: []
+        offlineNotes: []
+        speed:
+        - startTime: 0
+          endTime: 0
+          startValue: 0
+          endValue: 0
+          curve:
+            serializedVersion: 2
+            m_Curve:
+            - serializedVersion: 3
+              time: 0
+              value: 0
+              inSlope: 1
+              outSlope: 1
+              tangentMode: 34
+              weightedMode: 0
+              inWeight: 0
+              outWeight: 0
+            - serializedVersion: 3
+              time: 1
+              value: 1
+              inSlope: 1
+              outSlope: 1
+              tangentMode: 34
+              weightedMode: 0
+              inWeight: 0
+              outWeight: 0
+            m_PreInfinity: 2
+            m_PostInfinity: 2
+            m_RotationOrder: 0
+      - onlineNotes: []
+        offlineNotes: []
+        speed:
+        - startTime: 0
+          endTime: 0
+          startValue: 0
+          endValue: 0
+          curve:
+            serializedVersion: 2
+            m_Curve:
+            - serializedVersion: 3
+              time: 0
+              value: 0
+              inSlope: 1
+              outSlope: 1
+              tangentMode: 34
+              weightedMode: 0
+              inWeight: 0
+              outWeight: 0
+            - serializedVersion: 3
+              time: 1
+              value: 1
+              inSlope: 1
+              outSlope: 1
+              tangentMode: 34
+              weightedMode: 0
+              inWeight: 0
+              outWeight: 0
+            m_PreInfinity: 2
+            m_PostInfinity: 2
+            m_RotationOrder: 0
+      - onlineNotes: []
+        offlineNotes: []
+        speed:
+        - startTime: 0
+          endTime: 0
+          startValue: 0
+          endValue: 0
+          curve:
+            serializedVersion: 2
+            m_Curve:
+            - serializedVersion: 3
+              time: 0
+              value: 0
+              inSlope: 1
+              outSlope: 1
+              tangentMode: 34
+              weightedMode: 0
+              inWeight: 0
+              outWeight: 0
+            - serializedVersion: 3
+              time: 1
+              value: 1
+              inSlope: 1
+              outSlope: 1
+              tangentMode: 34
+              weightedMode: 0
+              inWeight: 0
               outWeight: 0
             m_PreInfinity: 2
             m_PostInfinity: 2
@@ -4562,7 +2684,7 @@ MonoBehaviour:
     globalData:
       offset: 0
       musicLength: 0
-  clip: {fileID: 8300000, guid: 9cf0d6759534aa34db10cb2a7b95bc1c, type: 3}
+  clip: {fileID: 8300000, guid: a35fa0734a049274183b9b0c44323840, type: 3}
 --- !u!1 &1165070292
 GameObject:
   m_ObjectHideFlags: 0
