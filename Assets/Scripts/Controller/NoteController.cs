@@ -57,7 +57,7 @@ public class NoteController : MonoBehaviour
     /// </summary>
     public virtual void Judge(double currentTime, TouchPhase touchPhase)
     {
-        HitEffectManager.Instance.PlayHitEffect(transform.position, transform.rotation, ValueManager.Instance.perfectJudge);//播放打击特效
+        HitEffectManager.Instance.PlayHitEffect(new Vector2(transform.position.x, decideLineController.lineTexture.transform.position.y), transform.rotation, ValueManager.Instance.perfectJudge);//播放打击特效
         ReturnObjectPool();//返回对象池
     }
     /// <summary>

@@ -133,6 +133,7 @@ MonoBehaviour:
   offlineNote: {fileID: 8414123189369247029}
   onlineNotes: []
   offlineNotes: []
+  lineTexture: {fileID: 7860544464297355684}
   box: {fileID: 2812981860159532905}
   lineNoteController: {fileID: 5122208234408603399}
 --- !u!114 &5122208234408603399
@@ -222,6 +223,7 @@ MonoBehaviour:
   offlineNote: {fileID: 6617246351048337357}
   onlineNotes: []
   offlineNotes: []
+  lineTexture: {fileID: 8691635155744236437}
   box: {fileID: 2812981860159532905}
   lineNoteController: {fileID: 323890600802986010}
 --- !u!114 &323890600802986010
@@ -311,6 +313,7 @@ MonoBehaviour:
   offlineNote: {fileID: 1862021682680572520}
   onlineNotes: []
   offlineNotes: []
+  lineTexture: {fileID: 6458697084622260732}
   box: {fileID: 2812981860159532905}
   lineNoteController: {fileID: 555974982157619623}
 --- !u!114 &555974982157619623
@@ -630,6 +633,7 @@ MonoBehaviour:
   offlineNote: {fileID: 8456826913762907855}
   onlineNotes: []
   offlineNotes: []
+  lineTexture: {fileID: 3746573344842827060}
   box: {fileID: 2812981860159532905}
   lineNoteController: {fileID: 3474532405289055257}
 --- !u!114 &3474532405289055257
@@ -1010,6 +1014,7 @@ MonoBehaviour:
   offlineNote: {fileID: 4649643865117320511}
   onlineNotes: []
   offlineNotes: []
+  lineTexture: {fileID: 6928414127062336489}
   box: {fileID: 2812981860159532905}
   lineNoteController: {fileID: 2332721750854021627}
 --- !u!114 &2332721750854021627
@@ -1222,6 +1227,8 @@ MonoBehaviour:
     lines: []
   sortSeed: 0
   spriteMask: {fileID: 3551648482430810191}
+  currentScaleX: 0
+  currentScaleY: 0
 --- !u!1 &8592862652095322561
 GameObject:
   m_ObjectHideFlags: 0

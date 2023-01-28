@@ -38,6 +38,7 @@ public class DecideLineController : MonoBehaviour
     public List<ObjectPoolQueue<NoteController>> onlineNotes;//判定线上方的音符对象池
     public List<ObjectPoolQueue<NoteController>> offlineNotes;//判定线下方的音符对象池
 
+    public SpriteRenderer lineTexture;
     public BoxController box;
     public LineNoteController lineNoteController;//判定线音符管理脚本
 
