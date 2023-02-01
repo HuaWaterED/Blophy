@@ -140,14 +140,21 @@ public class NoteController : MonoBehaviour
         {
             NoteJudge.Perfect => ValueManager.Instance.perfectJudge,
             NoteJudge.Good => ValueManager.Instance.goodJudge,
-            _ => ValueManager.Instance.badJudge,
+            NoteJudge.Bad => ValueManager.Instance.badJudge,
+            _ => ValueManager.Instance.otherJudge,
         };
         switch (noteJudge)
         {
             case NoteJudge.Miss:
                 break;
             default:
-                HitEffectManager.Instance.PlayHitEffect(new Vector2(transform.position.x, decideLineController.lineTexture.transform.position.y), transform.rotation, hitJudgeEffectColor);//播放打击特效
+
+                Vector2 noteLocalPosition = new(transform.position.x, decideLineController.lineTexture.transform.position.y);
+                if (!decideLineController.isHorizontal)
+                {
+                    noteLocalPosition = new(decideLineController.lineTexture.transform.position.x, transform.position.y);
+                }
+                HitEffectManager.Instance.PlayHitEffect(noteLocalPosition, transform.rotation, hitJudgeEffectColor);//播放打击特效
                 break;
         }
         ScoreManager.Instance.AddScore(thisNote.noteType, noteJudge, isEarly);

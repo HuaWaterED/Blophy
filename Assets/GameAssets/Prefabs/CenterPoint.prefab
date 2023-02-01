@@ -117,6 +117,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lineDistance: 0
+  isHorizontal: 1
   canvasSpeed:
     serializedVersion: 2
     m_Curve: []
@@ -207,6 +208,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lineDistance: 0
+  isHorizontal: 1
   canvasSpeed:
     serializedVersion: 2
     m_Curve: []
@@ -297,6 +299,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lineDistance: 0
+  isHorizontal: 1
   canvasSpeed:
     serializedVersion: 2
     m_Curve: []
@@ -617,6 +620,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lineDistance: 0
+  isHorizontal: 0
   canvasSpeed:
     serializedVersion: 2
     m_Curve: []
@@ -998,6 +1002,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lineDistance: 0
+  isHorizontal: 0
   canvasSpeed:
     serializedVersion: 2
     m_Curve: []

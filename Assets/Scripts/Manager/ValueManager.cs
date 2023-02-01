@@ -37,6 +37,7 @@ public class ValueManager : MonoBehaviourSingleton<ValueManager>//这里存放�
     [Tooltip("perfect判定的打击特效的颜色")] public Color perfectJudge;
     [Tooltip("good判定的打击特效的颜色")] public Color goodJudge;
     [Tooltip("bad判定的打击特效的颜色")] public Color badJudge;
+    [Tooltip("other判定的打击特效的颜色（错误判定，不应该出现，方便Debug）")] public Color otherJudge;
 
     [Tooltip("打击特效的大小")] public float hitEffectScale;
 
