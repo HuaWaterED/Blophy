@@ -52,31 +52,4 @@ public class ValueManager : MonoBehaviourSingleton<ValueManager>//这里存放�
             false => Screen.currentResolution.refreshRate
         };
     }
-    [Header("下面这些值是代码自动算出来的，不需要人为干涉")]
-    public Score score;
-}
-[Serializable]
-public struct Score
-{
-    public int perfect;
-
-    public int good;
-    public int early_good;
-    public int late_good;
-
-    public int bad;
-    public int early_bad;
-    public int late_bad;
-
-    public int miss;
-    public int combo;
-    public int maxCombo;
-
-    public int noteCount;
-    public int NoteCount
-    {
-        get => noteCount;
-        set => noteCount = value;
-    }
-    public float Accuracy => (perfect + good * ValueManager.Instance.goodJudgePercent) / noteCount;
 }

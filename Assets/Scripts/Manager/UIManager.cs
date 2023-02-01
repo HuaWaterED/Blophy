@@ -16,6 +16,8 @@ public class UIManager : MonoBehaviourSingleton<UIManager>
             debugText.text = debugTextString;//赋值
         }
     }
+    public TextMeshProUGUI combo;
+    public TextMeshProUGUI score;
     private void Update()
     {
         debugTextString = "";//每帧清空字符串本身

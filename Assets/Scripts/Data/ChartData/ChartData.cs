@@ -30,6 +30,12 @@ namespace Blophy.Chart
     {
         public float offset;
         public float musicLength;
+        public int tapCount;
+        public int holdCount;
+        public int dragCount;
+        public int flickCount;
+        public int fullFlickCount;
+        public int pointCount;
     }
     [Serializable]
     public class Text

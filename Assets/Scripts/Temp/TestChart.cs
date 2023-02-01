@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using Blophy.Chart;
 using System.Diagnostics;
-using Debug = UnityEngine.Debug;
 using Newtonsoft.Json;
 public class TestChart : MonoBehaviourSingleton<TestChart>
 {
@@ -14,8 +13,8 @@ public class TestChart : MonoBehaviourSingleton<TestChart>
     {
         string chart = Resources.Load<TextAsset>("MusicPack/Chapter_I/VirtualSpace/ChartFile/Chart").text;
         chartData = JsonConvert.DeserializeObject<ChartData>(chart);
-        AssetManager.Instance.chartData = chartData;
-        AssetManager.Instance.musicPlayer.clip = clip;
+        WebManager.Instance.ChartData = chartData;
+        WebManager.Instance.MusicClip = clip;
     }
     private void Update()
     {

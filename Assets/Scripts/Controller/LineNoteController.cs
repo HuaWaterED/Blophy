@@ -61,11 +61,11 @@ public class LineNoteController : MonoBehaviour
             {
                 ariseNotes[i].PassHitTime(currentTime);//吧音符单独拿出来
             }
-            catch (IndexOutOfRangeException)//这次发生过一次报错，但是不太好触发
+            catch (ArgumentOutOfRangeException)//这次发生过一次报错，但是不太好触发
             {
                 Debug.LogError($"如果您看到此消息请务必截图发给花水终！这有助于我们改进游戏\n" +
                     $"音符过了打击时间但是没有Miss掉的这个期间每一帧调用发生错误！\n" +
-                    $"错误类型：数组越界！\n" +
+                    $"错误类型：ArgumentOutOfRangeException！\n" +
                     $"错误信息：看见音符长度:{ariseNotes.Count}||索引:{index}||内部索引:{i}");
             }
         }

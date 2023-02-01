@@ -57,7 +57,6 @@ public class NoteController : MonoBehaviour
     /// </summary>
     public virtual void Judge(double currentTime, TouchPhase touchPhase)
     {
-        HitEffectManager.Instance.PlayHitEffect(new Vector2(transform.position.x, decideLineController.lineTexture.transform.position.y), transform.rotation, ValueManager.Instance.perfectJudge);//播放打击特效
         ReturnObjectPool();//返回对象池
     }
     /// <summary>
@@ -76,6 +75,7 @@ public class NoteController : MonoBehaviour
                 decideLineController.lineNoteController.endTime_ariseOfflineNotes.Remove(this);//endTime排序中移除自己
                 break;
         }
+        ReturnPool();
         decideLineController.ReturnNote(this, thisNote.noteType, isOnlineNote);//把自己返回对象池
     }
 
@@ -102,9 +102,56 @@ public class NoteController : MonoBehaviour
     /// </summary>
     public virtual void NoteHoldArise() { }
     /// <summary>
-    /// 返回对象池调用一次(air)
+    /// 返回对象池调用一次（非空）
     /// </summary>
-    public virtual void ReturnPool() { }
+    public virtual void ReturnPool()
+    {
+        float currentTime = (float)ProgressManager.Instance.CurrentTime;
+        NoteJudge noteJudge = NoteJudge.Miss;
+        bool isEarly = true;
+        if (currentTime <= thisNote.hitTime + JudgeManager.perfect &&
+            currentTime >= thisNote.hitTime - JudgeManager.perfect)
+        {
+            noteJudge = NoteJudge.Perfect;
+        }
+        else if (currentTime <= thisNote.hitTime &&
+            currentTime >= thisNote.hitTime - JudgeManager.good)
+        {
+            noteJudge = NoteJudge.Good;
+        }
+        else if (currentTime <= thisNote.hitTime + JudgeManager.good &&
+            currentTime >= thisNote.hitTime)
+        {
+            noteJudge = NoteJudge.Good;
+            isEarly = false;
+        }
+        else if (currentTime <= thisNote.hitTime &&
+            currentTime >= thisNote.hitTime - JudgeManager.bad)
+        {
+            noteJudge = NoteJudge.Bad;
+        }
+        else if (currentTime <= thisNote.hitTime + JudgeManager.bad &&
+            currentTime >= thisNote.hitTime)
+        {
+            noteJudge = NoteJudge.Bad;
+            isEarly = false;
+        }
+        Color hitJudgeEffectColor = noteJudge switch
+        {
+            NoteJudge.Perfect => ValueManager.Instance.perfectJudge,
+            NoteJudge.Good => ValueManager.Instance.goodJudge,
+            _ => ValueManager.Instance.badJudge,
+        };
+        switch (noteJudge)
+        {
+            case NoteJudge.Miss:
+                break;
+            default:
+                HitEffectManager.Instance.PlayHitEffect(new Vector2(transform.position.x, decideLineController.lineTexture.transform.position.y), transform.rotation, hitJudgeEffectColor);//播放打击特效
+                break;
+        }
+        ScoreManager.Instance.AddScore(thisNote.noteType, noteJudge, isEarly);
+    }
     /// <summary>
     /// 判定触摸是否在音符的数轴判定范围内（非空）
     /// </summary>
