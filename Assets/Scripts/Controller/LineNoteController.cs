@@ -54,20 +54,10 @@ public class LineNoteController : MonoBehaviour
     void FindPassHitTimeNotes(List<NoteController> ariseNotes)
     {
         double currentTime = ProgressManager.Instance.CurrentTime;//当前时间
-        int index = Algorithm.BinarySearch(ariseNotes, m => currentTime >= m.thisNote.hitTime, false);//寻找音符过了打击时间但是没有Miss掉的音符
+        int index = Algorithm.BinarySearch(ariseNotes, m => m.thisNote.hitTime < currentTime + .00001, false);//寻找音符过了打击时间但是没有Miss掉的音符
         for (int i = 0; i < index; i++)//循环遍历所有找到的音符
         {
-            try
-            {
-                ariseNotes[i].PassHitTime(currentTime);//吧音符单独拿出来
-            }
-            catch (ArgumentOutOfRangeException)//这次发生过一次报错，但是不太好触发
-            {
-                Debug.LogError($"如果您看到此消息请务必截图发给花水终！这有助于我们改进游戏\n" +
-                    $"音符过了打击时间但是没有Miss掉的这个期间每一帧调用发生错误！\n" +
-                    $"错误类型：ArgumentOutOfRangeException！\n" +
-                    $"错误信息：看见音符长度:{ariseNotes.Count}||索引:{index}||内部索引:{i}");
-            }
+            ariseNotes[i].PassHitTime(currentTime);//吧音符单独拿出来
         }
     }
     /// <summary>

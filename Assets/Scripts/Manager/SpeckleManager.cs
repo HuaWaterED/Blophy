@@ -146,7 +146,7 @@ public class SpeckleManager : MonoBehaviourSingleton<SpeckleManager>
     {
         double currentTime = ProgressManager.Instance.CurrentTime;//拿到当前时间
         int index_startJudge_needJudgeNote = Algorithm.BinarySearch(needFindNotes, m => m.thisNote.hitTime < currentTime - m.thisNote.HoldTime, false);//获取到当前时间-bad所得到的需要判定的音符的开始界限
-        int index_endJudge_needJudgeNote = Algorithm.BinarySearch(needFindNotes, m => m.thisNote.hitTime < currentTime + m.thisNote.HoldTime + .00001, false);//获取到当前时间+bad所得到的需要判定的音符的结束界限
+        int index_endJudge_needJudgeNote = Algorithm.BinarySearch(needFindNotes, m => m.thisNote.hitTime < currentTime + JudgeManager.bad, false);//获取到当前时间+bad所得到的需要判定的音符的结束界限
         for (int i = index_startJudge_needJudgeNote; i < index_endJudge_needJudgeNote; i++)//每根线遍历每个出现的音符
         {
             int index = Algorithm.BinarySearch(waitNote, m => m.thisNote.hitTime < needFindNotes[i].thisNote.hitTime, false);//寻找这个音符按照hitTime排序的话，应该插在什么位置

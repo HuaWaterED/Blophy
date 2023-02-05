@@ -8,7 +8,7 @@ using UnityEngine;
 
 public class NoteController : MonoBehaviour
 {
-    public List<SpriteRenderers> renderOrder;//渲染层级
+    public List<RenderOrder> renderOrder;//渲染层级
     public int length_renderOrder = -1;//一共多少层
     public int Length_renderOrder
     {
@@ -47,7 +47,7 @@ public class NoteController : MonoBehaviour
         {
             for (int j = 0; j < renderOrder[i].Length_spriteRenderers; j++)//循环每一层的所有素材
             {
-                renderOrder[i].spriteRenderers[j].color = targetColor;//改为目标颜色
+                renderOrder[i].tierCount[j].color = targetColor;//改为目标颜色
             }
         }
     }
@@ -91,8 +91,8 @@ public class NoteController : MonoBehaviour
         {
             for (int j = 0; j < renderOrder[i].Length_spriteRenderers; j++)//遍历每一层中需要动手脚的素材
             {
-                Color changeBeforeColor = renderOrder[i].spriteRenderers[j].color;//记录一下修改前的Color值
-                renderOrder[i].spriteRenderers[j].color =//rgb保持不变，当前alpha=1-currentAlpha
+                Color changeBeforeColor = renderOrder[i].tierCount[j].color;//记录一下修改前的Color值
+                renderOrder[i].tierCount[j].color =//rgb保持不变，当前alpha=1-currentAlpha
                     new Color(changeBeforeColor.r, changeBeforeColor.g, changeBeforeColor.b, 1 - currentAlpha);
             }
         }
@@ -106,9 +106,45 @@ public class NoteController : MonoBehaviour
     /// </summary>
     public virtual void ReturnPool()
     {
+        JudgeLevel(out NoteJudge noteJudge, out bool isEarly);
+        Color hitJudgeEffectColor = GetColorWithNoteJudge(noteJudge);
+        PlayHitEffectWithJudgeLevel(noteJudge, hitJudgeEffectColor);
+        ScoreManager.Instance.AddScore(thisNote.noteType, noteJudge, isEarly);
+    }
+
+    protected virtual void PlayHitEffectWithJudgeLevel(NoteJudge noteJudge, Color hitJudgeEffectColor)
+    {
+        switch (noteJudge)
+        {
+            case NoteJudge.Miss:
+                break;
+            default:
+                Vector2 noteLocalPosition = new(transform.position.x, decideLineController.lineTexture.transform.position.y);
+                if (!decideLineController.isHorizontal)
+                {
+                    noteLocalPosition = new(decideLineController.lineTexture.transform.position.x, transform.position.y);
+                }
+                HitEffectManager.Instance.PlayHitEffect(noteLocalPosition, transform.rotation, hitJudgeEffectColor);//播放打击特效
+                break;
+        }
+    }
+
+    protected static Color GetColorWithNoteJudge(NoteJudge noteJudge)
+    {
+        return noteJudge switch
+        {
+            NoteJudge.Perfect => ValueManager.Instance.perfectJudge,
+            NoteJudge.Good => ValueManager.Instance.goodJudge,
+            NoteJudge.Bad => ValueManager.Instance.badJudge,
+            _ => ValueManager.Instance.otherJudge,
+        };
+    }
+
+    public virtual void JudgeLevel(out NoteJudge noteJudge, out bool isEarly)
+    {
         float currentTime = (float)ProgressManager.Instance.CurrentTime;
-        NoteJudge noteJudge = NoteJudge.Miss;
-        bool isEarly = true;
+        noteJudge = NoteJudge.Miss;
+        isEarly = true;
         if (currentTime <= thisNote.hitTime + JudgeManager.perfect &&
             currentTime >= thisNote.hitTime - JudgeManager.perfect)
         {
@@ -136,28 +172,6 @@ public class NoteController : MonoBehaviour
             noteJudge = NoteJudge.Bad;
             isEarly = false;
         }
-        Color hitJudgeEffectColor = noteJudge switch
-        {
-            NoteJudge.Perfect => ValueManager.Instance.perfectJudge,
-            NoteJudge.Good => ValueManager.Instance.goodJudge,
-            NoteJudge.Bad => ValueManager.Instance.badJudge,
-            _ => ValueManager.Instance.otherJudge,
-        };
-        switch (noteJudge)
-        {
-            case NoteJudge.Miss:
-                break;
-            default:
-
-                Vector2 noteLocalPosition = new(transform.position.x, decideLineController.lineTexture.transform.position.y);
-                if (!decideLineController.isHorizontal)
-                {
-                    noteLocalPosition = new(decideLineController.lineTexture.transform.position.x, transform.position.y);
-                }
-                HitEffectManager.Instance.PlayHitEffect(noteLocalPosition, transform.rotation, hitJudgeEffectColor);//播放打击特效
-                break;
-        }
-        ScoreManager.Instance.AddScore(thisNote.noteType, noteJudge, isEarly);
     }
     /// <summary>
     /// 判定触摸是否在音符的数轴判定范围内（非空）
@@ -186,17 +200,17 @@ public class NoteController : MonoBehaviour
 
 }
 [Serializable]
-public class SpriteRenderers//每一层渲染层
+public class RenderOrder//每一层渲染层
 {
-    public List<SpriteRenderer> spriteRenderers;//每一层渲染层下的所有需要修改的渲染组件
-    public int length_spriteRenderers = -1;//长度
+    public List<SpriteRenderer> tierCount;//每一层渲染层下的所有需要修改的渲染组件
+    public int length_tierCount = -1;//长度
     public int Length_spriteRenderers
     {
         get
         {
-            if (length_spriteRenderers < 0)//如果小于0说明没有调用过
-                length_spriteRenderers = spriteRenderers.Count;//调用一次
-            return length_spriteRenderers;//返回
+            if (length_tierCount < 0)//如果小于0说明没有调用过
+                length_tierCount = tierCount.Count;//调用一次
+            return length_tierCount;//返回
         }
     }
 }

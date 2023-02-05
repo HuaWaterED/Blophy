@@ -344,7 +344,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   renderOrder:
-  - spriteRenderers:
+  - tierCount:
     - {fileID: 5547647067597061505}
     - {fileID: 3742894975374827354}
     - {fileID: 4447274214135293785}
@@ -364,9 +364,9 @@ MonoBehaviour:
     - {fileID: 90584543144713311}
     - {fileID: 5682447873640930639}
     length_spriteRenderers: -1
-  - spriteRenderers: []
+  - tierCount: []
     length_spriteRenderers: -1
-  - spriteRenderers: []
+  - tierCount: []
     length_spriteRenderers: -1
   length_renderOrder: -1
   thisNote:

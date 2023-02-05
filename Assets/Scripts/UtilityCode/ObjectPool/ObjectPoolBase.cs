@@ -27,7 +27,7 @@ public abstract class ObjectPoolBase<T> where T : MonoBehaviour
         NoteController note = obj.GetComponent<NoteController>();
         for (int i = 0; i < note.renderOrder.Count; i++)
         {
-            foreach (var item in note.renderOrder[i].spriteRenderers)
+            foreach (var item in note.renderOrder[i].tierCount)
             {
                 item.sortingOrder = sortSeed + 1 + i;
             }

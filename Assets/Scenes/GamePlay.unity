@@ -2297,8 +2297,7 @@ MonoBehaviour:
       chartLevel: 
       description: 
     boxes:
-    - type: 0
-      boxEvents:
+    - boxEvents:
         moveX:
         - startTime: 0
           endTime: 0
@@ -2365,35 +2364,7 @@ MonoBehaviour:
         - startTime: 0
           endTime: 0
           startValue: 0
-          endValue: 1
-          curve:
-            serializedVersion: 2
-            m_Curve:
-            - serializedVersion: 3
-              time: 0
-              value: 0
-              inSlope: 1
-              outSlope: 1
-              tangentMode: 34
-              weightedMode: 0
-              inWeight: 0
-              outWeight: 0
-            - serializedVersion: 3
-              time: 1
-              value: 1
-              inSlope: 1
-              outSlope: 1
-              tangentMode: 34
-              weightedMode: 0
-              inWeight: 0
-              outWeight: 0
-            m_PreInfinity: 2
-            m_PostInfinity: 2
-            m_RotationOrder: 0
-        - startTime: 5
-          endTime: 5
-          startValue: 0
-          endValue: 5
+          endValue: 4
           curve:
             serializedVersion: 2
             m_Curve:
@@ -2422,7 +2393,7 @@ MonoBehaviour:
         - startTime: 0
           endTime: 0
           startValue: 0
-          endValue: 1
+          endValue: 4
           curve:
             serializedVersion: 2
             m_Curve:
@@ -2548,13 +2519,36 @@ MonoBehaviour:
             m_PreInfinity: 2
             m_PostInfinity: 2
             m_RotationOrder: 0
-      - onlineNotes: []
+      - onlineNotes:
+        - noteType: 1
+          hitTime: 5
+          holdTime: 5
+          boxEffect: 0
+          positionX: 0
+          isClockwise: 0
+          speed: []
+          hitFloorPosition: 0
+          ariseFloorPosition: 0
+          ariseTime: 0
+          isArise: 0
+          localDisplacement:
+            serializedVersion: 2
+            m_Curve: []
+            m_PreInfinity: 0
+            m_PostInfinity: 0
+            m_RotationOrder: 0
+          localVelocity:
+            serializedVersion: 2
+            m_Curve: []
+            m_PreInfinity: 0
+            m_PostInfinity: 0
+            m_RotationOrder: 0
         offlineNotes: []
         speed:
         - startTime: 0
-          endTime: 0
-          startValue: 0
-          endValue: 0
+          endTime: 10
+          startValue: 1
+          endValue: 1
           curve:
             serializedVersion: 2
             m_Curve:

@@ -74,23 +74,23 @@ public class DecideLineController : MonoBehaviour
     {
         onlineNotes = new()
         {
-            new ObjectPoolQueue<NoteController>(AssetManager.Instance.noteControllers[(int)NoteType.Tap],3,box.sortSeed,onlineNote),
-            new ObjectPoolQueue<NoteController>(AssetManager.Instance.noteControllers[(int)NoteType.Hold],2,box.sortSeed,onlineNote),
-            new ObjectPoolQueue<NoteController>(AssetManager.Instance.noteControllers[(int)NoteType.Drag],5,box.sortSeed,onlineNote),
+            new ObjectPoolQueue<NoteController>(AssetManager.Instance.noteControllers[(int)NoteType.Tap],0,box.sortSeed,onlineNote),
+            new ObjectPoolQueue<NoteController>(AssetManager.Instance.noteControllers[(int)NoteType.Hold],0,box.sortSeed,onlineNote),
+            new ObjectPoolQueue<NoteController>(AssetManager.Instance.noteControllers[(int)NoteType.Drag],0,box.sortSeed,onlineNote),
             new ObjectPoolQueue<NoteController>(AssetManager.Instance.noteControllers[(int)NoteType.Flick],0,box.sortSeed,  onlineNote),
-            new ObjectPoolQueue<NoteController>(AssetManager.Instance.noteControllers[(int)NoteType.Point],1,box.sortSeed,  onlineNote),
-            new ObjectPoolQueue<NoteController>(AssetManager.Instance.noteControllers[(int)NoteType.FullFlickPink],1,box.sortSeed,  onlineNote),
-            new ObjectPoolQueue<NoteController>(AssetManager.Instance.noteControllers[(int)NoteType.FullFlickBlue],1,box.sortSeed,  onlineNote)
+            new ObjectPoolQueue<NoteController>(AssetManager.Instance.noteControllers[(int)NoteType.Point],0,box.sortSeed,  onlineNote),
+            new ObjectPoolQueue<NoteController>(AssetManager.Instance.noteControllers[(int)NoteType.FullFlickPink],0,box.sortSeed,  onlineNote),
+            new ObjectPoolQueue<NoteController>(AssetManager.Instance.noteControllers[(int)NoteType.FullFlickBlue],0,box.sortSeed,  onlineNote)
         };
         offlineNotes = new()
         {
-            new ObjectPoolQueue<NoteController>(AssetManager.Instance.noteControllers[(int)NoteType.Tap],3,box.sortSeed,offlineNote),
-            new ObjectPoolQueue<NoteController>(AssetManager.Instance.noteControllers[(int)NoteType.Hold],2,box.sortSeed, offlineNote),
-            new ObjectPoolQueue<NoteController>(AssetManager.Instance.noteControllers[(int)NoteType.Drag],5,box.sortSeed, offlineNote),
+            new ObjectPoolQueue<NoteController>(AssetManager.Instance.noteControllers[(int)NoteType.Tap],0,box.sortSeed,offlineNote),
+            new ObjectPoolQueue<NoteController>(AssetManager.Instance.noteControllers[(int)NoteType.Hold],0,box.sortSeed, offlineNote),
+            new ObjectPoolQueue<NoteController>(AssetManager.Instance.noteControllers[(int)NoteType.Drag],0,box.sortSeed, offlineNote),
             new ObjectPoolQueue<NoteController>(AssetManager.Instance.noteControllers[(int)NoteType.Flick],0,box.sortSeed,  offlineNote),
-            new ObjectPoolQueue<NoteController>(AssetManager.Instance.noteControllers[(int)NoteType.Point],1,box.sortSeed, offlineNote),
-            new ObjectPoolQueue<NoteController>(AssetManager.Instance.noteControllers[(int)NoteType.FullFlickPink],1,box.sortSeed, offlineNote),
-            new ObjectPoolQueue<NoteController>(AssetManager.Instance.noteControllers[(int)NoteType.FullFlickBlue],1,box.sortSeed, offlineNote)
+            new ObjectPoolQueue<NoteController>(AssetManager.Instance.noteControllers[(int)NoteType.Point],0,box.sortSeed, offlineNote),
+            new ObjectPoolQueue<NoteController>(AssetManager.Instance.noteControllers[(int)NoteType.FullFlickPink],0,box.sortSeed, offlineNote),
+            new ObjectPoolQueue<NoteController>(AssetManager.Instance.noteControllers[(int)NoteType.FullFlickBlue],0,box.sortSeed, offlineNote)
         };
     }
     /// <summary>

@@ -247,11 +247,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   renderOrder:
-  - spriteRenderers:
+  - tierCount:
     - {fileID: 7870038656611709239}
-  - spriteRenderers:
+    length_spriteRenderers: -1
+  - tierCount:
     - {fileID: 1681120255519769037}
-  - spriteRenderers: []
+    length_spriteRenderers: -1
+  - tierCount: []
+    length_spriteRenderers: -1
+  length_renderOrder: -1
   thisNote:
     noteType: 0
     hitTime: 0
@@ -278,4 +282,7 @@ MonoBehaviour:
       m_RotationOrder: 4
   decideLineController: {fileID: 0}
   isOnlineNote: 0
+  isJudged: 0
   noteCanvas: {fileID: 0}
+  textureBoss: {fileID: 6715463052839731807}
+  isMoved: 0

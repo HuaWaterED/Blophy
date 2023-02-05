@@ -65,21 +65,16 @@ public class ScoreManager : MonoBehaviourSingleton<ScoreManager>
     public int NoteCount => tapCount + holdCount + dragCount + flickCount + fullFlickCount + pointCount;
     public float Accuracy => (Perfect + Good * ValueManager.Instance.goodJudgePercent) / NoteCount;
     public float score;
-    public float Score
-    {
-        get
-        {
-            return Accuracy * 500000f +
-                maxCombo * 150000f +
+    public float Score => Accuracy * 500000f +
+                maxCombo / NoteCount * 150000f +
                 35000f / tapCount * tapPerfect + 22750f / tapCount * tapGood +
                 15217.39130434783f / holdCount * holdPerfect + 9891.304347826087f / holdCount * holdGood +
                 70000 / dragCount * dragPerfect +
                 20588.23529411765f / flickCount * flickPerfect +
                 11666.66666666667f / fullFlickCount * fullFlickPerfect +
                 23333.33333333333f / pointCount * pointPerfect + 15166.66666666667f / pointCount * pointGood;
-        }
-        //private set => score = value;
-    }
+
+
     public void AddScore(NoteType noteType, NoteJudge noteJudge, bool isEarly)
     {
         switch (noteJudge)

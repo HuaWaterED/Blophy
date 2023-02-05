@@ -13,6 +13,9 @@ public class HoldController : NoteController
     public bool isMissed = false;//Miss掉了
     public float reJudgeTime = 0;//距离上一次打击特效播放已经过去多久了
     public float checkTime = -.1f;//手指离开了多长时间
+
+    NoteJudge noteJudge;
+    bool isEarly;
     /// <summary>
     /// 初始化
     /// </summary>
@@ -26,19 +29,16 @@ public class HoldController : NoteController
         reJudge = false;    //重置状态
         checkTime = -.1f;   //重置状态
         reJudgeTime = 0;    //重置状态
+        noteJudge = NoteJudge.Miss;
+        isEarly = true;
         base.Init();
     }
     public override void Judge(double currentTime, TouchPhase touchPhase)
     {
-        if (!isJudged && touchPhase == TouchPhase.Began)//如果没有判定过并且触摸阶段是开始触摸
-        {
-            isJudged = true;//设置状态为判定过了
-            checkTime = Time.time;//设置时间
-        }
         switch (touchPhase)//如果触摸阶段
         {
             case TouchPhase.Began://是开始阶段
-                HitEffectManager.Instance.PlayHitEffect(transform.position, transform.rotation, ValueManager.Instance.perfectJudge);//播放打击特效
+                TouchPhaseBegan();
                 break;//啥也不干，因为上边已经干了
             default://剩下的
                 checkTime = Time.time;//更新时间
@@ -51,12 +51,46 @@ public class HoldController : NoteController
                 break;
         }
     }
+
+    private void TouchPhaseBegan()
+    {
+        switch (isJudged)
+        {
+            case true:
+                HitEffectManager.Instance.PlayHitEffect(transform.position, transform.rotation, ValueManager.Instance.perfectJudge);//播放打击特效
+                break;
+            case false://如果没有判定过并且触摸阶段是开始触摸
+                isJudged = true;//设置状态为判定过了
+                checkTime = Time.time;//设置时间
+                JudgeLevel(out noteJudge, out isEarly);
+                HitEffectManager.Instance.PlayHitEffect(transform.position, transform.rotation, GetColorWithNoteJudge(noteJudge));//播放打击特效
+                break;
+        }
+    }
+
+    public override void JudgeLevel(out NoteJudge noteJudge, out bool isEarly)
+    {
+        base.JudgeLevel(out noteJudge, out isEarly);
+        noteJudge = noteJudge switch
+        {
+            NoteJudge.Bad => NoteJudge.Good,
+            _ => noteJudge
+        };
+    }
     /// <summary>
     /// Hold音符Miss掉了
     /// </summary>
     public void HoldMiss()
     {
         ChangeColor(new Color(1, 1, 1, .3f));//Miss掉了就设置透明度为30%
+    }
+    protected override void PlayHitEffectWithJudgeLevel(NoteJudge noteJudge, Color hitJudgeEffectColor)
+    {
+        base.PlayHitEffectWithJudgeLevel(noteJudge, hitJudgeEffectColor);
+    }
+    public override void ReturnPool()
+    {
+        ScoreManager.Instance.AddScore(thisNote.noteType, noteJudge, isEarly);
     }
     public override void NoteHoldArise()
     {

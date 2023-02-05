@@ -47,17 +47,9 @@ namespace Blophy.Chart
     [Serializable]
     public struct Box
     {
-        public BoxType type;
         public BoxEvents boxEvents;
         public Line[] lines;
     }
-    [Serializable]
-    public enum BoxType
-    {
-        free = 0,
-        square = 1
-    }
-
     [Serializable]
     public struct Line
     {

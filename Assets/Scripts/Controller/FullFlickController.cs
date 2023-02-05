@@ -4,22 +4,34 @@ using UnityEngine;
 
 public class FullFlickController : NoteController
 {
+    public Transform textureBoss;//就是FullFlick音符的两个渲染贴图（Texture）的爸爸（
     public bool isMoved = false;//是否已经移动了
+    int decisionEndPoint;
     public override void Init()
     {
         base.Init();
         isJudged = false;//重置isJudged
+        switch (thisNote.isClockwise)
+        {
+            case true:
+                decisionEndPoint = -1;
+                textureBoss.localRotation = Quaternion.Euler(Vector3.forward * 180);
+                break;
+            case false:
+                decisionEndPoint = 1;
+                textureBoss.localRotation = Quaternion.identity;
+                break;
+        }
     }
     public override void Judge(double currentTime, TouchPhase touchPhase)
     {
-        if (isJudged)//如果isJudged为true，说明是第二次
+        if (!isJudged && touchPhase == TouchPhase.Began)
         {
-            //判定成功
-            isMoved = true;//移动改为True
+            isJudged = true;
         }
-        if (!isJudged)//如果isJudged为False，说明是第一次
+        else if (isJudged && touchPhase == TouchPhase.Moved)
         {
-            isJudged = true;//那就设置状态
+            isMoved = true;
         }
     }
     public override void PassHitTime(double currentTime)
@@ -31,7 +43,7 @@ public class FullFlickController : NoteController
         //if (true)
         {
             float percent = ((float)currentTime - thisNote.hitTime) / thisNote.HoldTime;//计算当前时间距离开始和结束过去了百分之多少
-            currentX = (1 - thisNote.positionX) * percent + thisNote.positionX;//赋值计算得到的值，1是方框最右边，因为方框最左边是-1，左右边是1，中间是0
+            currentX = (decisionEndPoint - thisNote.positionX) * percent + thisNote.positionX;//赋值计算得到的值，1是方框最右边，因为方框最左边是-1，左右边是1，中间是0
         }
         transform.localPosition = new Vector2(currentX, -noteCanvas.localPosition.y);//维持位置到“x和-y（本地坐标轴）”
     }
@@ -39,12 +51,15 @@ public class FullFlickController : NoteController
     {
         if (isJudged && isMoved)//如果判定成功
         {
-            base.Judge(ProgressManager.Instance.CurrentTime, TouchPhase.Canceled);//播放特效然后回收对象池
+            PlayHitEffectWithJudgeLevel(NoteJudge.Perfect, ValueManager.Instance.perfectJudge);
+            ScoreManager.Instance.AddScore(thisNote.noteType, NoteJudge.Perfect, true);
+            return;
         }
+        ScoreManager.Instance.AddScore(thisNote.noteType, NoteJudge.Miss, true);
     }
     public override bool IsinRange(Vector2 currentPosition)
     {
-        float inThisLine = transform.InverseTransformPoint(currentPosition).x;//将手指的世界坐标转换为局部坐标后的x拿到
+        float inThisLine = noteCanvas.InverseTransformPoint(currentPosition).x;//将手指的世界坐标转换为局部坐标后的x拿到
 
         if (inThisLine <= ValueManager.Instance.fullFlick_noteRightJudgeRange &&//如果x介于ValueManager设定的数值之间
             inThisLine >= ValueManager.Instance.fullFlick_noteLeftJudgeRange)

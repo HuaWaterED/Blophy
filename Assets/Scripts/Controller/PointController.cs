@@ -54,7 +54,7 @@ public class PointController : NoteController
         {
             for (int j = 0; j < renderOrder[i].Length_spriteRenderers; j++)//循环每一层的所有素材
             {
-                renderOrder[i].spriteRenderers[j].color = Color.black;//改为白色
+                renderOrder[i].tierCount[j].color = Color.black;//改为白色
             }
         }
         isJudged = false;//是否判定过设为假

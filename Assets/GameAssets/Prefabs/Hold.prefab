@@ -311,11 +311,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   renderOrder:
-  - spriteRenderers:
+  - tierCount:
     - {fileID: 1055111832930579929}
-  - spriteRenderers:
+    length_spriteRenderers: -1
+  - tierCount:
     - {fileID: 6735959982253518055}
-  - spriteRenderers: []
+    length_spriteRenderers: -1
+  - tierCount: []
+    length_spriteRenderers: -1
+  length_renderOrder: -1
   thisNote:
     noteType: 0
     hitTime: 0
@@ -342,7 +346,12 @@ MonoBehaviour:
       m_RotationOrder: 4
   decideLineController: {fileID: 0}
   isOnlineNote: 0
+  isJudged: 0
   noteCanvas: {fileID: 0}
   holdBody: {fileID: 8684928917179229485}
   holdHead: {fileID: 7530131069725985595}
   remainTime: 0
+  reJudge: 0
+  isMissed: 0
+  reJudgeTime: 0
+  checkTime: -0.1
