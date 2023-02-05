@@ -34,7 +34,7 @@ public class GameUtility
     /// </summary>
     /// <param name="speeds">给我一个Speed事件列表</param>
     /// <returns>返回一个处理好的AnimationCurve</returns>
-    public static List<Keyframe> CalculatedSpeedCurve(Blophy.Chart.Event[] speeds)
+    public static List<Keyframe> CalculatedSpeedCurve(Event[] speeds)
     {
         List<Keyframe> keys = new();//声明一个Keys列表
         Vector2 keySeed_Speed = Vector2.zero;//Key种子，用来记录上一次循环结束时的Time和Value信息

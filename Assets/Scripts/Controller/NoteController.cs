@@ -23,7 +23,7 @@ public class NoteController : MonoBehaviour
     public DecideLineController decideLineController;//判定线引用
 
     public bool isOnlineNote;//是否事判定线上方的音符
-    public bool isJudged = false;
+    public bool isJudged = false;//是否已经判定过了
 
     public Transform noteCanvas;//音符画布的引用
 
@@ -34,7 +34,7 @@ public class NoteController : MonoBehaviour
     public virtual void Init()
     {
         ChangeColor(Color.white);//初始化为白色
-        isJudged = false;//是否判定过设为假
+        isJudged = false;//重置isJudged
 
     }//初始化方法
     /// <summary>
@@ -75,7 +75,7 @@ public class NoteController : MonoBehaviour
                 decideLineController.lineNoteController.endTime_ariseOfflineNotes.Remove(this);//endTime排序中移除自己
                 break;
         }
-        ReturnPool();
+        ReturnPool();//调用返回对象池才会调用的方法
         decideLineController.ReturnNote(this, thisNote.noteType, isOnlineNote);//把自己返回对象池
     }
 
@@ -106,71 +106,83 @@ public class NoteController : MonoBehaviour
     /// </summary>
     public virtual void ReturnPool()
     {
-        JudgeLevel(out NoteJudge noteJudge, out bool isEarly);
-        Color hitJudgeEffectColor = GetColorWithNoteJudge(noteJudge);
-        PlayHitEffectWithJudgeLevel(noteJudge, hitJudgeEffectColor);
-        ScoreManager.Instance.AddScore(thisNote.noteType, noteJudge, isEarly);
+        JudgeLevel(out NoteJudge noteJudge, out bool isEarly);//获得到判定等级，Perfect？Good？Bad？Miss？Early？Late？
+        Color hitJudgeEffectColor = GetColorWithNoteJudge(noteJudge);//根据判定等级获得到打击特效的颜色
+        PlayHitEffectWithJudgeLevel(noteJudge, hitJudgeEffectColor);//根据判定等级播放打击特效
+        ScoreManager.Instance.AddScore(thisNote.noteType, noteJudge, isEarly);//加分
     }
-
+    /// <summary>
+    /// 根据判定等级播放打击特效
+    /// </summary>
+    /// <param name="noteJudge">判定等级</param>
+    /// <param name="hitJudgeEffectColor">判定等级对应的颜色</param>
     protected virtual void PlayHitEffectWithJudgeLevel(NoteJudge noteJudge, Color hitJudgeEffectColor)
     {
-        switch (noteJudge)
+        switch (noteJudge)//判定等级枚举
         {
-            case NoteJudge.Miss:
+            case NoteJudge.Miss://如果是Miss则不播放打击特效
                 break;
             default:
-                Vector2 noteLocalPosition = new(transform.position.x, decideLineController.lineTexture.transform.position.y);
+                Vector2 notePosition = new(transform.position.x, decideLineController.lineTexture.transform.position.y);//水平判定线拿到自己的x和线渲染器的y（都是世界坐标）作为打击特效的生成点
                 if (!decideLineController.isHorizontal)
                 {
-                    noteLocalPosition = new(decideLineController.lineTexture.transform.position.x, transform.position.y);
+                    notePosition = new(decideLineController.lineTexture.transform.position.x, transform.position.y);//水平判定线拿到线渲染器的x和自己的y（都是世界坐标）作为打击特效的生成点
                 }
-                HitEffectManager.Instance.PlayHitEffect(noteLocalPosition, transform.rotation, hitJudgeEffectColor);//播放打击特效
+                HitEffectManager.Instance.PlayHitEffect(notePosition, transform.rotation, hitJudgeEffectColor);//播放打击特效
                 break;
         }
     }
-
+    /// <summary>
+    /// 根据音符判定等级获得到颜色
+    /// </summary>
+    /// <param name="noteJudge"></param>
+    /// <returns></returns>
     protected static Color GetColorWithNoteJudge(NoteJudge noteJudge)
     {
         return noteJudge switch
         {
-            NoteJudge.Perfect => ValueManager.Instance.perfectJudge,
-            NoteJudge.Good => ValueManager.Instance.goodJudge,
-            NoteJudge.Bad => ValueManager.Instance.badJudge,
-            _ => ValueManager.Instance.otherJudge,
+            NoteJudge.Perfect => ValueManager.Instance.perfectJudge,//如果是P、G、B就拿到对应的颜色
+            NoteJudge.Good => ValueManager.Instance.goodJudge,      //如果是P、G、B就拿到对应的颜色
+            NoteJudge.Bad => ValueManager.Instance.badJudge,        //如果是P、G、B就拿到对应的颜色
+            _ => ValueManager.Instance.otherJudge,//其他则Other，这个颜色的出现代表有bug
         };
     }
-
+    /// <summary>
+    /// 判定等级
+    /// </summary>
+    /// <param name="noteJudge">输出判定等级</param>
+    /// <param name="isEarly">输出早还是晚</param>
     public virtual void JudgeLevel(out NoteJudge noteJudge, out bool isEarly)
     {
-        float currentTime = (float)ProgressManager.Instance.CurrentTime;
-        noteJudge = NoteJudge.Miss;
-        isEarly = true;
+        float currentTime = (float)ProgressManager.Instance.CurrentTime;//获取到当前时间
+        noteJudge = NoteJudge.Miss;//默认Miss
+        isEarly = true;//默认是早的
         if (currentTime <= thisNote.hitTime + JudgeManager.perfect &&
-            currentTime >= thisNote.hitTime - JudgeManager.perfect)
+            currentTime >= thisNote.hitTime - JudgeManager.perfect)//如果在hitTime+perfect和hitTime-perfect之间
         {
-            noteJudge = NoteJudge.Perfect;
+            noteJudge = NoteJudge.Perfect;//完美判定
         }
-        else if (currentTime <= thisNote.hitTime &&
+        else if (currentTime <= thisNote.hitTime &&//如果在打击时间-good到打击时间之间
             currentTime >= thisNote.hitTime - JudgeManager.good)
         {
-            noteJudge = NoteJudge.Good;
+            noteJudge = NoteJudge.Good;//Good判定，Early默认是True，所以这里不理会isEarly
         }
         else if (currentTime <= thisNote.hitTime + JudgeManager.good &&
-            currentTime >= thisNote.hitTime)
+            currentTime >= thisNote.hitTime)//如果在打击时间+good到打击时间之间
         {
-            noteJudge = NoteJudge.Good;
-            isEarly = false;
+            noteJudge = NoteJudge.Good;//Good判定
+            isEarly = false;//LateGood设置
         }
-        else if (currentTime <= thisNote.hitTime &&
+        else if (currentTime <= thisNote.hitTime &&//如果在打击时间-bad到打击时间之间
             currentTime >= thisNote.hitTime - JudgeManager.bad)
         {
-            noteJudge = NoteJudge.Bad;
+            noteJudge = NoteJudge.Bad;//Bad判定
         }
         else if (currentTime <= thisNote.hitTime + JudgeManager.bad &&
-            currentTime >= thisNote.hitTime)
+            currentTime >= thisNote.hitTime)//如果在打击时间+bad到打击时间之间
         {
-            noteJudge = NoteJudge.Bad;
-            isEarly = false;
+            noteJudge = NoteJudge.Bad;//Bad判定
+            isEarly = false;//LateBad设置
         }
     }
     /// <summary>

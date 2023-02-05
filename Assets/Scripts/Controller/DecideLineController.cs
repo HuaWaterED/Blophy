@@ -29,7 +29,7 @@ using Quaternion = UnityEngine.Quaternion;
 public class DecideLineController : MonoBehaviour
 {
     public float lineDistance;//线的距离，根据每帧计算，生成这个范围内的所有Note
-    public bool isHorizontal;
+    public bool isHorizontal;//是否为水平判定线
 
     public AnimationCurve canvasSpeed;//这个用来表示这根线的所有速度总览
     public AnimationCurve canvasLocalOffset;//这个用来表示的是某个时间，画布的Y轴应该是多少
@@ -39,8 +39,8 @@ public class DecideLineController : MonoBehaviour
     public List<ObjectPoolQueue<NoteController>> onlineNotes;//判定线上方的音符对象池
     public List<ObjectPoolQueue<NoteController>> offlineNotes;//判定线下方的音符对象池
 
-    public SpriteRenderer lineTexture;
-    public BoxController box;
+    public SpriteRenderer lineTexture;//线渲染器
+    public BoxController box;//方框控制脚本
     public LineNoteController lineNoteController;//判定线音符管理脚本
 
     Line thisLine;//这根线的源数据
@@ -60,7 +60,7 @@ public class DecideLineController : MonoBehaviour
     void Init()
     {
         InitNotesObjectPool();//初始化对象池
-        SpeckleManager.Instance.allLineNoteControllers.Add(lineNoteController);
+        SpeckleManager.Instance.allLineNoteControllers.Add(lineNoteController);//把自己加入到判定系统的判定线管理中
         List<Keyframe> keyframes = GameUtility.CalculatedSpeedCurve(ThisLine.speed);//将获得到的Key列表全部赋值
         canvasSpeed = new() { keys = keyframes.ToArray(), preWrapMode = WrapMode.ClampForever, postWrapMode = WrapMode.ClampForever };//把上边获得到的点转换为速度图
         canvasLocalOffset = GameUtility.CalculatedOffsetCurve(canvasSpeed, keyframes);//吧速度图转换为位移图

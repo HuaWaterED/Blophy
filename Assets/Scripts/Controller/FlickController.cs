@@ -16,12 +16,12 @@ public class FlickController : NoteController
     }
     public override void ReturnPool()
     {
-        if (!isJudged)
+        if (!isJudged)//如果没有判定过
         {
-            ScoreManager.Instance.AddScore(thisNote.noteType, NoteJudge.Miss, true);
+            ScoreManager.Instance.AddScore(thisNote.noteType, NoteJudge.Miss, true);//加Miss分
             return;
         }
-        PlayHitEffectWithJudgeLevel(NoteJudge.Perfect, ValueManager.Instance.perfectJudge);
-        ScoreManager.Instance.AddScore(thisNote.noteType, NoteJudge.Perfect, true);
+        PlayHitEffectWithJudgeLevel(NoteJudge.Perfect, ValueManager.Instance.perfectJudge);//放Perfect特效
+        ScoreManager.Instance.AddScore(thisNote.noteType, NoteJudge.Perfect, true);//加Perfect分
     }
 }

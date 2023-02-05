@@ -10,28 +10,28 @@ public class FullFlickController : NoteController
     public override void Init()
     {
         base.Init();
-        isJudged = false;//重置isJudged
-        switch (thisNote.isClockwise)
+        isMoved = false;//重置isMoved
+        switch (thisNote.isClockwise)//顺时针逆时针
         {
-            case true:
-                decisionEndPoint = -1;
-                textureBoss.localRotation = Quaternion.Euler(Vector3.forward * 180);
+            case true://如果是顺时针
+                decisionEndPoint = -1;//终点在x=-1位置
+                textureBoss.localRotation = Quaternion.Euler(Vector3.forward * 180);//旋转180度
                 break;
-            case false:
-                decisionEndPoint = 1;
-                textureBoss.localRotation = Quaternion.identity;
+            case false://如果是逆时针
+                decisionEndPoint = 1;//终点在x=1位置
+                textureBoss.localRotation = Quaternion.identity;//默认旋转即可
                 break;
         }
     }
     public override void Judge(double currentTime, TouchPhase touchPhase)
     {
-        if (!isJudged && touchPhase == TouchPhase.Began)
+        if (!isJudged && touchPhase == TouchPhase.Began)//如果没有判定过并且是开始阶段
         {
-            isJudged = true;
+            isJudged = true;//是否判定过为tue
         }
-        else if (isJudged && touchPhase == TouchPhase.Moved)
+        else if (isJudged && touchPhase == TouchPhase.Moved)//如果判定过并且判定阶段为moved
         {
-            isMoved = true;
+            isMoved = true;//设置为真
         }
     }
     public override void PassHitTime(double currentTime)
@@ -51,11 +51,11 @@ public class FullFlickController : NoteController
     {
         if (isJudged && isMoved)//如果判定成功
         {
-            PlayHitEffectWithJudgeLevel(NoteJudge.Perfect, ValueManager.Instance.perfectJudge);
-            ScoreManager.Instance.AddScore(thisNote.noteType, NoteJudge.Perfect, true);
-            return;
+            PlayHitEffectWithJudgeLevel(NoteJudge.Perfect, ValueManager.Instance.perfectJudge);//播放完美判定的特效
+            ScoreManager.Instance.AddScore(thisNote.noteType, NoteJudge.Perfect, true);//按完美判定加分
+            return;//返回
         }
-        ScoreManager.Instance.AddScore(thisNote.noteType, NoteJudge.Miss, true);
+        ScoreManager.Instance.AddScore(thisNote.noteType, NoteJudge.Miss, true);//按Miss判定加分
     }
     public override bool IsinRange(Vector2 currentPosition)
     {

@@ -29,8 +29,8 @@ public class HoldController : NoteController
         reJudge = false;    //重置状态
         checkTime = -.1f;   //重置状态
         reJudgeTime = 0;    //重置状态
-        noteJudge = NoteJudge.Miss;
-        isEarly = true;
+        noteJudge = NoteJudge.Miss;//重置状态
+        isEarly = true;//重置状态
         base.Init();
     }
     public override void Judge(double currentTime, TouchPhase touchPhase)
@@ -39,7 +39,7 @@ public class HoldController : NoteController
         {
             case TouchPhase.Began://是开始阶段
                 TouchPhaseBegan();
-                break;//啥也不干，因为上边已经干了
+                break;
             default://剩下的
                 checkTime = Time.time;//更新时间
                 reJudgeTime += Time.deltaTime;//累加重新判定时间
@@ -51,29 +51,35 @@ public class HoldController : NoteController
                 break;
         }
     }
-
+    /// <summary>
+    /// 开始阶段
+    /// </summary>
     private void TouchPhaseBegan()
     {
         switch (isJudged)
         {
-            case true:
+            case true://如果isJudge为True，说明是抬起来再按回去的，直接播放打击特效
                 HitEffectManager.Instance.PlayHitEffect(transform.position, transform.rotation, ValueManager.Instance.perfectJudge);//播放打击特效
                 break;
             case false://如果没有判定过并且触摸阶段是开始触摸
                 isJudged = true;//设置状态为判定过了
                 checkTime = Time.time;//设置时间
-                JudgeLevel(out noteJudge, out isEarly);
+                JudgeLevel(out noteJudge, out isEarly);//获得到判定等级
                 HitEffectManager.Instance.PlayHitEffect(transform.position, transform.rotation, GetColorWithNoteJudge(noteJudge));//播放打击特效
                 break;
         }
     }
-
+    /// <summary>
+    /// 判定等级
+    /// </summary>
+    /// <param name="noteJudge">判定等级</param>
+    /// <param name="isEarly">是否过早</param>
     public override void JudgeLevel(out NoteJudge noteJudge, out bool isEarly)
     {
         base.JudgeLevel(out noteJudge, out isEarly);
         noteJudge = noteJudge switch
         {
-            NoteJudge.Bad => NoteJudge.Good,
+            NoteJudge.Bad => NoteJudge.Good,//过滤bad为Good判定
             _ => noteJudge
         };
     }
@@ -84,13 +90,9 @@ public class HoldController : NoteController
     {
         ChangeColor(new Color(1, 1, 1, .3f));//Miss掉了就设置透明度为30%
     }
-    protected override void PlayHitEffectWithJudgeLevel(NoteJudge noteJudge, Color hitJudgeEffectColor)
-    {
-        base.PlayHitEffectWithJudgeLevel(noteJudge, hitJudgeEffectColor);
-    }
     public override void ReturnPool()
     {
-        ScoreManager.Instance.AddScore(thisNote.noteType, noteJudge, isEarly);
+        ScoreManager.Instance.AddScore(thisNote.noteType, noteJudge, isEarly);//加分
     }
     public override void NoteHoldArise()
     {

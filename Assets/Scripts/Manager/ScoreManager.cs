@@ -74,26 +74,34 @@ public class ScoreManager : MonoBehaviourSingleton<ScoreManager>
                 11666.66666666667f / fullFlickCount * fullFlickPerfect +
                 23333.33333333333f / pointCount * pointPerfect + 15166.66666666667f / pointCount * pointGood;
 
-
+    /// <summary>
+    /// 加分
+    /// </summary>
+    /// <param name="noteType">音符类型</param>
+    /// <param name="noteJudge">判定等级</param>
+    /// <param name="isEarly">是否过早</param>
     public void AddScore(NoteType noteType, NoteJudge noteJudge, bool isEarly)
     {
         switch (noteJudge)
         {
-            case NoteJudge.Perfect:
+            case NoteJudge.Perfect://完美
                 AddScorePerfect(noteType);
                 break;
-            case NoteJudge.Good:
+            case NoteJudge.Good://好
                 AddScoreGood(noteType, isEarly);
                 break;
-            case NoteJudge.Bad:
+            case NoteJudge.Bad://坏
                 AddScoreBad(noteType, isEarly);
                 break;
-            case NoteJudge.Miss:
+            case NoteJudge.Miss://小姐
                 AddScoreMiss(noteType);
                 break;
         }
     }
-
+    /// <summary>
+    /// 加Miss分
+    /// </summary>
+    /// <param name="noteType"></param>
     private void AddScoreMiss(NoteType noteType)
     {
         switch (noteType)
@@ -134,7 +142,11 @@ public class ScoreManager : MonoBehaviourSingleton<ScoreManager>
                 break;
         }
     }
-
+    /// <summary>
+    /// 加Bad分
+    /// </summary>
+    /// <param name="noteType"></param>
+    /// <param name="isEarly"></param>
     private void AddScoreBad(NoteType noteType, bool isEarly)
     {
         switch (noteType)
@@ -160,7 +172,11 @@ public class ScoreManager : MonoBehaviourSingleton<ScoreManager>
                 break;
         }
     }
-
+    /// <summary>
+    /// 加Good分
+    /// </summary>
+    /// <param name="noteType"></param>
+    /// <param name="isEarly"></param>
     private void AddScoreGood(NoteType noteType, bool isEarly)
     {
         switch (noteType)
@@ -212,7 +228,10 @@ public class ScoreManager : MonoBehaviourSingleton<ScoreManager>
                 break;
         }
     }
-
+    /// <summary>
+    /// 加Perfect分
+    /// </summary>
+    /// <param name="noteType"></param>
     private void AddScorePerfect(NoteType noteType)
     {
         switch (noteType)
