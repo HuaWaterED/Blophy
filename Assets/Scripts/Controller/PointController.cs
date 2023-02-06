@@ -17,6 +17,11 @@ public class PointController : NoteController
         isJudged = true;//修改属性为成功判定
         base.Judge(currentTime, TouchPhase.Canceled);//执行基类的判定方法
     }
+    public override void Judge()
+    {
+        isJudged = true;
+        base.Judge();
+    }
     public override void NoteHoldArise()
     {
         transform.localPosition = Vector2.up * PointNoteCurrentOffset;//纠正自己的位置，不会因为画布移动而移动

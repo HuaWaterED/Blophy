@@ -55,7 +55,7 @@ public class LineNoteController : MonoBehaviour
     {
         double currentTime = ProgressManager.Instance.CurrentTime;//当前时间
         int index = Algorithm.BinarySearch(ariseNotes, m => m.thisNote.hitTime < currentTime + .00001, false);//寻找音符过了打击时间但是没有Miss掉的音符
-        for (int i = 0; i < index; i++)//循环遍历所有找到的音符
+        for (int i = index - 1; i >= 0; i--)//循环遍历所有找到的音符
         {
             ariseNotes[i].PassHitTime(currentTime);//吧音符单独拿出来
         }

@@ -6,6 +6,10 @@ public class FlickController : NoteController
     {
         isJudged = true;//设置状态
     }
+    public override void Judge()
+    {
+        isJudged = true;
+    }
     public override void PassHitTime(double currentTime)
     {
         base.PassHitTime(currentTime);//执行基类的方法

@@ -18,6 +18,11 @@ public class UIManager : MonoBehaviourSingleton<UIManager>
     }
     public TextMeshProUGUI combo;
     public TextMeshProUGUI score;
+    public void ChangeComboAndScoreText(int rawCombo, float rawScore)
+    {
+        combo.text = $"{rawCombo}";
+        score.text = $"{(int)rawScore:D7}";
+    }
     private void Update()
     {
         debugTextString = "";//每帧清空字符串本身

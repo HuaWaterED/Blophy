@@ -267,6 +267,12 @@ MonoBehaviour:
   hitEffectScale: 0.3
   holdLeaveScreenTime: 0.5
   holdHitEffectCDTime: 0.5
+  tapWeight: 10
+  holdWeight: 23
+  dragWeight: 5
+  flickWeight: 17
+  fullFlickWeight: 30
+  pointWeight: 15
 --- !u!1 &130468146
 GameObject:
   m_ObjectHideFlags: 0
@@ -576,7 +582,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 1000000
+  m_text: 0000000
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 63623bdff9431084089b9c2a5a9f5d8d, type: 2}
   m_sharedMaterial: {fileID: 4737349496631823484, guid: 63623bdff9431084089b9c2a5a9f5d8d, type: 2}
@@ -1075,6 +1081,7 @@ GameObject:
   m_Component:
   - component: {fileID: 505069976}
   - component: {fileID: 505069977}
+  - component: {fileID: 505069978}
   m_Layer: 0
   m_Name: SpeckleManager
   m_TagString: Untagged
@@ -1114,6 +1121,20 @@ MonoBehaviour:
   isInRangeLine: []
   waitNote: []
   lineNoteControllerCount: -1
+--- !u!114 &505069978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 505069975}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f02c0039be7a7f048b1fb376c05963aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speckleManager: {fileID: 505069977}
+  isAutoplay: 0
 --- !u!1 &518539666
 GameObject:
   m_ObjectHideFlags: 0
@@ -1488,7 +1509,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 100
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 63623bdff9431084089b9c2a5a9f5d8d, type: 2}
   m_sharedMaterial: {fileID: 4737349496631823484, guid: 63623bdff9431084089b9c2a5a9f5d8d, type: 2}
@@ -3560,6 +3581,7 @@ MonoBehaviour:
   flickCount: 0
   fullFlickCount: 0
   pointCount: 0
+  delta: -1
   score: 0
 --- !u!1 &1911001488
 GameObject:

@@ -44,6 +44,12 @@ public class ValueManager : MonoBehaviourSingleton<ValueManager>//这里存放�
     [Tooltip("Hold音符判定手指离开多长时间重新放回去是为不Miss")] public float holdLeaveScreenTime;
     [Tooltip("Hold音符的特效播放间隔多长时间")] public float holdHitEffectCDTime;//就是Hold打击特效播放完一次后CD是多少，播放完一次后多少秒内不能继续播放
 
+    [Tooltip("Tap音符权重")] public int tapWeight;
+    [Tooltip("Hold音符权重")] public int holdWeight;
+    [Tooltip("Drag音符权重")] public int dragWeight;
+    [Tooltip("Flick音符权重")] public int flickWeight;
+    [Tooltip("FullFlick音符权重")] public int fullFlickWeight;
+    [Tooltip("Point音符权重")] public int pointWeight;
     protected override void OnAwake()
     {
         Application.targetFrameRate = FPS;

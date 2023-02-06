@@ -51,6 +51,20 @@ public class HoldController : NoteController
                 break;
         }
     }
+    public override void Judge()
+    {
+        switch (isJudged)
+        {
+            case true:
+                Judge(thisNote.hitTime, TouchPhase.Moved);
+                break;
+            case false:
+                Judge(thisNote.hitTime, TouchPhase.Began);
+                break;
+        }
+
+
+    }
     /// <summary>
     /// 开始阶段
     /// </summary>

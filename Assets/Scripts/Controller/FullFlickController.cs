@@ -34,6 +34,18 @@ public class FullFlickController : NoteController
             isMoved = true;//设置为真
         }
     }
+    public override void Judge()
+    {
+        switch (isJudged)
+        {
+            case true:
+                Judge(thisNote.hitTime, TouchPhase.Moved);
+                break;
+            case false:
+                Judge(thisNote.hitTime, TouchPhase.Began);
+                break;
+        }
+    }
     public override void PassHitTime(double currentTime)
     {
         base.PassHitTime(currentTime);//执行基类的方法

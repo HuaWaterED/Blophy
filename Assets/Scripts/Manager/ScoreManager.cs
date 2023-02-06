@@ -2,6 +2,7 @@ using Blophy.Chart;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using VM = ValueManager;
 public class ScoreManager : MonoBehaviourSingleton<ScoreManager>
 {
     public int tapPerfect;
@@ -62,17 +63,49 @@ public class ScoreManager : MonoBehaviourSingleton<ScoreManager>
     public int flickCount;
     public int fullFlickCount;
     public int pointCount;
+    public int JudgedTapCount => tapPerfect + tapGood + tapBad + tapMiss;
+    public int JudgedHoldCount => holdPerfect + holdGood + holdMiss;
+    public int JudgedDragCount => dragPerfect + dragMiss;
+    public int JudgedFlickCount => flickPerfect + flickMiss;
+    public int JudgedFullFlickCount => fullFlickPerfect + fullFlickMiss;
+    public int JudgedPointCount => pointPerfect + pointGood + pointMiss;
     public int NoteCount => tapCount + holdCount + dragCount + flickCount + fullFlickCount + pointCount;
-    public float Accuracy => (Perfect + Good * ValueManager.Instance.goodJudgePercent) / NoteCount;
+    public float Accuracy => (Perfect + Good * VM.Instance.goodJudgePercent) / NoteCount;
+
+    public float delta = -1;
+    public float Delta
+    {
+        get
+        {
+            if (delta < 0)
+            {
+                delta = 350000f /
+                (VM.Instance.tapWeight * tapCount +
+                VM.Instance.holdWeight * holdCount +
+                VM.Instance.dragWeight * dragCount +
+                VM.Instance.flickWeight * flickCount +
+                VM.Instance.fullFlickWeight * fullFlickCount +
+                VM.Instance.pointWeight * pointCount);
+            }
+            return delta;
+        }
+    }
     public float score;
-    public float Score => Accuracy * 500000f +
-                maxCombo / NoteCount * 150000f +
-                35000f / tapCount * tapPerfect + 22750f / tapCount * tapGood +
-                15217.39130434783f / holdCount * holdPerfect + 9891.304347826087f / holdCount * holdGood +
-                70000 / dragCount * dragPerfect +
-                20588.23529411765f / flickCount * flickPerfect +
-                11666.66666666667f / fullFlickCount * fullFlickPerfect +
-                23333.33333333333f / pointCount * pointPerfect + 15166.66666666667f / pointCount * pointGood;
+    public float Score
+    {
+        get
+        {
+            float result = 500000f * Accuracy +
+              150000f * maxCombo / NoteCount +
+            Delta * (VM.Instance.tapWeight * tapPerfect) +
+            Delta * (VM.Instance.holdWeight * holdPerfect) +
+            Delta * (VM.Instance.dragWeight * dragPerfect) +
+            Delta * (VM.Instance.flickWeight * flickPerfect) +
+            Delta * (VM.Instance.fullFlickWeight * fullFlickPerfect) +
+            Delta * (VM.Instance.pointWeight * pointPerfect);
+            return result;
+        }
+    }
 
     /// <summary>
     /// 加分
@@ -97,6 +130,7 @@ public class ScoreManager : MonoBehaviourSingleton<ScoreManager>
                 AddScoreMiss(noteType);
                 break;
         }
+        UIManager.Instance.ChangeComboAndScoreText(Combo, Score);
     }
     /// <summary>
     /// 加Miss分

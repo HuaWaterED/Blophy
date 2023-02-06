@@ -60,6 +60,13 @@ public class NoteController : MonoBehaviour
         ReturnObjectPool();//返回对象池
     }
     /// <summary>
+    /// 这里是被子类重写的方法，用于Autoplay判定
+    /// </summary>
+    public virtual void Judge()
+    {
+        ReturnObjectPool();//返回对象池
+    }
+    /// <summary>
     /// 吧音符返回对象池
     /// </summary>
     protected void ReturnObjectPool()
@@ -85,7 +92,7 @@ public class NoteController : MonoBehaviour
     /// <param name="currentTime">当前时间</param>
     public virtual void PassHitTime(double currentTime)
     {
-        //UIManager.Instance.DebugTextString = $"我是{thisNote.noteType},我应该在第{thisNote.hitTime}被打击，我是PassHitTime触发的";
+        UIManager.Instance.DebugTextString = $"我是{thisNote.noteType},我应该在第{thisNote.hitTime}被打击，我是PassHitTime触发的";
         float currentAlpha = (float)(currentTime - thisNote.hitTime) / thisNote.HoldTime;//当前时间-打击时间/持续时间  可以拿到当前时间相对于打击时间到Miss这段时间的百分比
         for (int i = 0; i < Length_renderOrder; i++)//遍历每一层渲染层
         {
