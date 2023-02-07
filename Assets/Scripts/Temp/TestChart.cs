@@ -11,7 +11,7 @@ public class TestChart : MonoBehaviourSingleton<TestChart>
 
     private void Start()
     {
-        string chart = Resources.Load<TextAsset>("MusicPack/Chapter_I/VirtualSpace/ChartFile/Chart").text;
+        string chart = Resources.Load<TextAsset>("MusicPack/Tutorial/Base/ChartFile/Chart").text;
         chartData = JsonConvert.DeserializeObject<ChartData>(chart);
         WebManager.Instance.ChartData = chartData;
         WebManager.Instance.MusicClip = clip;

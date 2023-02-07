@@ -7,6 +7,7 @@ public class AutoplayController : MonoBehaviourSingleton<AutoplayController>
 {
     public SpeckleManager speckleManager;
     public bool isAutoplay = true;
+    public float currentH;
     private void Start()
     {
         switch (isAutoplay)
@@ -26,6 +27,9 @@ public class AutoplayController : MonoBehaviourSingleton<AutoplayController>
             FindPassHitTimeNotes(lineNoteController.ariseOnlineNotes);
             FindPassHitTimeNotes(lineNoteController.ariseOfflineNotes);
         }
+        if (currentH >= 1) currentH = 0;
+        currentH += Time.deltaTime;
+        ValueManager.Instance.perfectJudge = Color.HSVToRGB(currentH, 1, 1);
     }
     /// <summary>
     /// 音符过了打击时间但是没有Miss掉的这个期间每一帧调用
@@ -34,11 +38,7 @@ public class AutoplayController : MonoBehaviourSingleton<AutoplayController>
     void FindPassHitTimeNotes(List<NoteController> ariseNotes)
     {
         if (ariseNotes.Count <= 0) return;
-        double currentTime = ProgressManager.Instance.CurrentTime;//当前时间
-        int end_index = Algorithm.BinarySearch(ariseNotes, m => m.thisNote.hitTime < currentTime + .00001, false);//寻找音符过了打击时间但是没有Miss掉的音符
-        //int current_index = 0;
-        //NoteController targetNote = ariseNotes[end_index];
-        //Debug.Log(targetNote.Equals(ariseNotes[end_index]));
+        int end_index = Algorithm.BinarySearch(ariseNotes, m => m.thisNote.hitTime < ProgressManager.Instance.CurrentTime + .00001, false);//寻找音符过了打击时间但是没有Miss掉的音符
         for (int i = end_index - 1; i >= 0; i--)
         {
             ariseNotes[i].Judge();

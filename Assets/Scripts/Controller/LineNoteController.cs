@@ -42,6 +42,7 @@ public class LineNoteController : MonoBehaviour
     /// <param name="ariseNotes">需要调用的列表</param>
     void UpdateNotes(List<NoteController> ariseNotes)
     {
+        if (ariseNotes.Count <= 0) return;
         foreach (var item in ariseNotes)//循环调用
         {
             item.NoteHoldArise();//调用
@@ -53,11 +54,11 @@ public class LineNoteController : MonoBehaviour
     /// <param name="ariseNotes">需要调用的列表</param>
     void FindPassHitTimeNotes(List<NoteController> ariseNotes)
     {
-        double currentTime = ProgressManager.Instance.CurrentTime;//当前时间
-        int index = Algorithm.BinarySearch(ariseNotes, m => m.thisNote.hitTime < currentTime + .00001, false);//寻找音符过了打击时间但是没有Miss掉的音符
+        if (ariseNotes.Count <= 0) return;
+        int index = Algorithm.BinarySearch(ariseNotes, m => m.thisNote.hitTime < ProgressManager.Instance.CurrentTime + .00001, false);//寻找音符过了打击时间但是没有Miss掉的音符
         for (int i = index - 1; i >= 0; i--)//循环遍历所有找到的音符
         {
-            ariseNotes[i].PassHitTime(currentTime);//吧音符单独拿出来
+            ariseNotes[i].PassHitTime(ProgressManager.Instance.CurrentTime);//吧音符单独拿出来
         }
     }
     /// <summary>
@@ -69,6 +70,7 @@ public class LineNoteController : MonoBehaviour
     /// <param name="isOnlineNote">当前处理的是不是判定线上方的音符，true代表是判定线上方的音符，false代表不是判定线上方的音符</param>
     private void FindAndGetNotes(Note[] notes, ref int lastIndex, List<NoteController> arisedNotes, List<NoteController> endTime_arisedNotes, bool isOnlineNote)
     {
+        if (notes.Length <= 0) return;
         Vector3 direction = isOnlineNote switch//确定方向，如果是判定线上方，就是正值，如果是判定线下方，就是负值
         {
             true => Vector3.forward,
@@ -88,9 +90,6 @@ public class LineNoteController : MonoBehaviour
     /// <returns>返回索引</returns>
     private int FindNote(Note[] notes)
     {
-        //m.thisNote.hitTime < currentTime + m.thisNote.HoldTime + .00001
-        //return Algorithm.BinarySearch(notes, m => (float)ProgressManager.Instance.CurrentTime > m.hitTime - CurrentAriseTime, false);
-        //return Algorithm.BinarySearch(notes, m => m.hitTime < (float)ProgressManager.Instance.CurrentTime + CurrentAriseTime + .00001, false);
         return Algorithm.BinarySearch(notes, m => m.hitFloorPosition < decideLineController.offlineNote.localPosition.y + 2.00001, false);
         //寻找这个时刻需要出现的音符，出现要提前两个单位长度的时间出现
     }
@@ -142,6 +141,7 @@ public class LineNoteController : MonoBehaviour
     /// <param name="isOnlineNote">是判定线上方还是下方</param>
     void FindAndReturnNotes(List<NoteController> ariseNotes, List<NoteController> endTime_ariseNotes, bool isOnlineNote)
     {
+        if (ariseNotes.Count <= 0) return;
         int index = FindMissNote(endTime_ariseNotes);//寻找Miss的音符的索引
         for (int i = 0; i < index; i++)//循环遍历所有Miss掉的音符
         {

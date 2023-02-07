@@ -1218,7 +1218,6 @@ MonoBehaviour:
   - {fileID: 6928414127062336489}
   - {fileID: 7860544464297355684}
   box:
-    type: 0
     boxEvents:
       moveX: []
       moveY: []
@@ -1232,8 +1231,15 @@ MonoBehaviour:
     lines: []
   sortSeed: 0
   spriteMask: {fileID: 3551648482430810191}
-  currentScaleX: 0
-  currentScaleY: 0
+  currentScaleX: 1
+  currentScaleY: 1
+  currentAlpha: 1
+  currentCenterX: 0.5
+  currentCenterY: 0.5
+  currentLineAlpha: 0
+  currentMoveX: 0
+  currentMoveY: 0
+  currentRotate: 0
 --- !u!1 &8592862652095322561
 GameObject:
   m_ObjectHideFlags: 0

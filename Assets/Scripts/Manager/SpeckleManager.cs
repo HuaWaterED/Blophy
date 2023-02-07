@@ -243,10 +243,10 @@ public struct Speckle//翻译为斑点，亦为安卓系统的触摸小白点，
         Vector2 currentPosition = movePath[LoopBackIndex(index_movePath, -1, length_movePath)];//获取到当前的位置
         Vector2 lastPosition = movePath[LoopBackIndex(index_movePath, -2, length_movePath)];//获取到上一帧的位置
         float deltaLength = (currentPosition - lastPosition).sqrMagnitude;//计算这一帧和上一帧手指的拉开的距离
-        UIManager.Instance.DebugTextString = $"FingerIndex：{thisIndex}\n" +
-            $"FlickLength:{deltaLength}\n" +
-            $"TouchPhase:{phase}\n" +
-            $"CurrentTargetFPS:{ValueManager.Instance.currentTargetFPS}";
+        //UIManager.Instance.DebugTextString = $"FingerIndex：{thisIndex}\n" +
+        //    $"FlickLength:{deltaLength}\n" +
+        //    $"TouchPhase:{phase}\n" +
+        //    $"CurrentTargetFPS:{ValueManager.Instance.currentTargetFPS}";
         return deltaLength < deltaRange ? TouchPhase.Stationary : TouchPhase.Moved;//如果小于设定的值就判定为Stationary ，否侧判定为Moved
     }
     /// <summary>

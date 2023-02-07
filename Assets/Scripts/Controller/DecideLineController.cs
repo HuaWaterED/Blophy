@@ -61,9 +61,7 @@ public class DecideLineController : MonoBehaviour
     {
         InitNotesObjectPool();//初始化对象池
         SpeckleManager.Instance.allLineNoteControllers.Add(lineNoteController);//把自己加入到判定系统的判定线管理中
-        List<Keyframe> keyframes = GameUtility.CalculatedSpeedCurve(ThisLine.speed);//将获得到的Key列表全部赋值
-        canvasSpeed = new() { keys = keyframes.ToArray(), preWrapMode = WrapMode.ClampForever, postWrapMode = WrapMode.ClampForever };//把上边获得到的点转换为速度图
-        canvasLocalOffset = GameUtility.CalculatedOffsetCurve(canvasSpeed, keyframes);//吧速度图转换为位移图
+        canvasLocalOffset = thisLine.canvasLocalOffset;//吧速度图转换为位移图
         CalculatedNoteFloorPosition(ThisLine.onlineNotes);//计算判定线上方的所有音符的FloorPosition
         CalculatedNoteFloorPosition(ThisLine.offlineNotes);//计算判定线下方的所有音符的FloorPosition
     }

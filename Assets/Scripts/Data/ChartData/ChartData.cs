@@ -6,7 +6,8 @@ namespace Blophy.Chart
 {
 
     [Serializable]
-    public struct ChartData
+    //public struct ChartData
+    public class ChartData
     {
         public MetaData metaData;
         public List<Box> boxes;
@@ -26,7 +27,8 @@ namespace Blophy.Chart
         public string description = "";
     }
     [Serializable]
-    public struct GlobalData
+    //public struct GlobalData
+    public class GlobalData
     {
         public float offset;
         public float musicLength;
@@ -45,20 +47,24 @@ namespace Blophy.Chart
     #region 下面都是依赖
 
     [Serializable]
-    public struct Box
+    //public struct Box
+    public class Box
     {
         public BoxEvents boxEvents;
         public Line[] lines;
     }
     [Serializable]
-    public struct Line
+    //public struct Line
+    public class Line
     {
         public Note[] onlineNotes;
         public Note[] offlineNotes;
         public Event[] speed;
+        public AnimationCurve canvasLocalOffset;
     }
     [Serializable]
-    public struct Note
+    //public struct Note
+    public class Note
     {
         public NoteType noteType;
         public float hitTime;//打击时间
@@ -73,13 +79,7 @@ namespace Blophy.Chart
         public float positionX;
         public bool isClockwise;//是逆时针
         [JsonIgnore] public float EndTime => hitTime + HoldTime;
-        [JsonIgnore] public Event[] speed;
         [JsonIgnore] public float hitFloorPosition;//打击地板上距离
-        [JsonIgnore] public float ariseFloorPosition;//从什么地方出现
-        [JsonIgnore] public float ariseTime;//出现时间
-        [JsonIgnore] public bool isArise;
-        [JsonIgnore] public AnimationCurve localDisplacement;//这个用来表示的是某个时间，Note应该在画布的Y轴应该是多少
-        [JsonIgnore] public AnimationCurve localVelocity;//这个用来表示这个Note的所有速度总览
     }
     [Serializable]
     public enum NoteType
@@ -102,7 +102,8 @@ namespace Blophy.Chart
         FullBox = 8
     }
     [Serializable]
-    public struct BoxEvents
+    //public struct BoxEvents
+    public class BoxEvents
     {
         public Event[] moveX;
         public Event[] moveY;
@@ -115,7 +116,8 @@ namespace Blophy.Chart
         public Event[] lineAlpha;
     }
     [Serializable]
-    public struct Event
+    //public struct Event
+    public class Event
     {
         public float startTime;
         public float endTime;

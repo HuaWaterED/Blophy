@@ -2,6 +2,8 @@ using Blophy.Chart;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using static Algorithm;
+using Event = Blophy.Chart.Event;
 
 public class Algorithm
 {
@@ -22,6 +24,30 @@ public class Algorithm
         {
             middle = (left + right) / 2;//将数据除2
             if (match(list[middle]))
+            {
+                left = middle;//更新右边界
+            }
+            else//否则
+            {
+                right = middle;//更新左边界
+            }
+        }
+        return isLeft switch
+        {
+            true => left,
+            false => right
+        };//返回最终结果
+    }
+    public delegate bool Pre(Event obj, ref float currentTime);
+    public static int BinarySearch(Event[] list, Pre match, bool isLeft, ref float currentTime)
+    {
+        int left = -1;//左初始化为-1
+        int right = list.Length;//右初始化为数量
+        int middle;//m无默认值
+        while (left + 1 != right)//如果l和r的下标没有挨在一起
+        {
+            middle = (left + right) / 2;//将数据除2
+            if (match(list[middle], ref currentTime))
             {
                 left = middle;//更新右边界
             }

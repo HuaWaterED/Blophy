@@ -1,6 +1,7 @@
 using UnityEngine;
 using Blophy.Chart;
 using static UnityEngine.Camera;
+using Event = Blophy.Chart.Event;
 
 public class BoxController : MonoBehaviour
 {
@@ -14,8 +15,15 @@ public class BoxController : MonoBehaviour
     public int sortSeed = 0;//层级顺序种子
     public SpriteMask spriteMask;//遮罩
 
-    public float currentScaleX;//当前的X缩放，因为有别的组件要用这个数值，所以放在这里
-    public float currentScaleY;//当前的Y缩放，因为有别的组件要用这个数值，所以放在这里
+    public float currentScaleX;
+    public float currentScaleY;
+    public float currentAlpha;        //默认值
+    public float currentCenterX;    //默认值
+    public float currentCenterY;    //默认值
+    public float currentLineAlpha;    //默认值
+    public float currentMoveX;        //默认值
+    public float currentMoveY;        //默认值
+    public float currentRotate;       //默认值
     /// <summary>
     /// 设置遮罩种子
     /// </summary>
@@ -56,16 +64,22 @@ public class BoxController : MonoBehaviour
     /// </summary>
     void UpdateCurrentEvents()
     {
+        float currentTime = (float)ProgressManager.Instance.CurrentTime;
         //更新所有事件，拿到当前这一刻的数据
-        CalculateAllEventCurrentValue(out float currentPositionX,
-            out float currentPositionY, out float currentAngle,
-            out float currentAlpha, out float currentLineAlpha,
-            out float currentCenterX, out float currentCenterY,
-            out currentScaleX, out currentScaleY,
-            (float)ProgressManager.Instance.CurrentTime);
+        CalculateAllEventCurrentValue(
+            out currentMoveX,
+            out currentMoveY,
+               out currentRotate,
+               out currentAlpha,
+            out currentLineAlpha,
+             out currentCenterX,
+             out currentCenterY,
+            out currentScaleX,
+            out currentScaleY,
+            ref currentTime);
         //将当前这一刻的数据全部赋值给方框
-        GiveEventData2Box(currentPositionX, currentPositionY,
-            currentAngle, currentAlpha, currentLineAlpha,
+        GiveEventData2Box(currentMoveX, currentMoveY,
+            currentRotate, currentAlpha, currentLineAlpha,
             currentCenterX, currentCenterY,
             currentScaleX,
             currentScaleY);
@@ -73,9 +87,9 @@ public class BoxController : MonoBehaviour
     /// <summary>
     /// 根据谱面数据更新当前所有事件
     /// </summary>
-    /// <param name="currentPositionX">当前基于Center的LocalPositionX</param>
-    /// <param name="currentPositionY">当前基于Center的LocalPositionY</param>
-    /// <param name="currentAngle">当前角度</param>
+    /// <param name="currentMoveX">当前基于Center的LocalPositionX</param>
+    /// <param name="currentMoveY">当前基于Center的LocalPositionY</param>
+    /// <param name="currentRotate">当前角度</param>
     /// <param name="currentAlpha">当前方框的Alpha</param>
     /// <param name="currentLineAlpha">当前方框中间那根线的Alpha</param>
     /// <param name="currentCenterX">基于屏幕的X</param>
@@ -83,20 +97,20 @@ public class BoxController : MonoBehaviour
     /// <param name="currentScaleX">当前的X缩放</param>
     /// <param name="currentScaleY">当前的Y缩放</param>
     /// <param name="currentTime">当前时间</param>
-    void CalculateAllEventCurrentValue(out float currentPositionX,
-         out float currentPositionY, out float currentAngle, out float currentAlpha,
+    void CalculateAllEventCurrentValue(out float currentMoveX,
+         out float currentMoveY, out float currentRotate, out float currentAlpha,
          out float currentLineAlpha, out float currentCenterX, out float currentCenterY,
-        out float currentScaleX, out float currentScaleY, float currentTime)
+        out float currentScaleX, out float currentScaleY, ref float currentTime)
     {
-        currentPositionX = CalculateCurrentValue(box.boxEvents.moveX, currentTime);
-        currentPositionY = CalculateCurrentValue(box.boxEvents.moveY, currentTime);
-        currentCenterX = CalculateCurrentValue(box.boxEvents.centerX, currentTime);
-        currentCenterY = CalculateCurrentValue(box.boxEvents.centerY, currentTime);
-        currentAngle = CalculateCurrentValue(box.boxEvents.rotate, currentTime);
-        currentAlpha = CalculateCurrentValue(box.boxEvents.alpha, currentTime);
-        currentLineAlpha = CalculateCurrentValue(box.boxEvents.lineAlpha, currentTime);
-        currentScaleX = CalculateCurrentValue(box.boxEvents.scaleX, currentTime);
-        currentScaleY = CalculateCurrentValue(box.boxEvents.scaleY, currentTime);
+        currentMoveX = CalculateCurrentValue(box.boxEvents.moveX, ref currentTime, ref this.currentMoveX);
+        currentMoveY = CalculateCurrentValue(box.boxEvents.moveY, ref currentTime, ref this.currentMoveY);
+        currentCenterX = CalculateCurrentValue(box.boxEvents.centerX, ref currentTime, ref this.currentCenterX);
+        currentCenterY = CalculateCurrentValue(box.boxEvents.centerY, ref currentTime, ref this.currentCenterY);
+        currentRotate = CalculateCurrentValue(box.boxEvents.rotate, ref currentTime, ref this.currentRotate);
+        currentAlpha = CalculateCurrentValue(box.boxEvents.alpha, ref currentTime, ref this.currentAlpha);
+        currentLineAlpha = CalculateCurrentValue(box.boxEvents.lineAlpha, ref currentTime, ref this.currentLineAlpha);
+        currentScaleX = CalculateCurrentValue(box.boxEvents.scaleX, ref currentTime, ref this.currentScaleX);
+        currentScaleY = CalculateCurrentValue(box.boxEvents.scaleY, ref currentTime, ref this.currentScaleY);
     }
     /// <summary>
     /// 把所有的方框数据都给Box
@@ -147,10 +161,13 @@ public class BoxController : MonoBehaviour
     /// </summary>
     /// <param name="events"></param>
     /// <returns></returns>
-    public float CalculateCurrentValue(Blophy.Chart.Event[] events, float currentTime)
+    public float CalculateCurrentValue(Event[] events, ref float currentTime, ref float defaultValue)
     {
-        int eventIndex = /*Algorithm.BinarySearch(events, currentTime);*/
-            Algorithm.BinarySearch(events, m => currentTime >= m.startTime, true);//找到当前时间下，应该是哪个事件
+        if (events.Length <= 0 || currentTime < events[0].startTime) return defaultValue;
+        int eventIndex = Algorithm.BinarySearch(events, IsCurrentEvent, true, ref currentTime);//找到当前时间下，应该是哪个事件
+        if (currentTime > events[eventIndex].endTime) return events[eventIndex].endValue;
         return GameUtility.GetValueWithEvent(events[eventIndex], currentTime);//拿到事件后根据时间Get到当前值
     }
+    public bool IsCurrentEvent(Event m, ref float currentTime) => currentTime >= m.startTime;
+
 }
