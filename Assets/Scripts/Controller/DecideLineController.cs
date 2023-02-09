@@ -61,7 +61,8 @@ public class DecideLineController : MonoBehaviour
     {
         InitNotesObjectPool();//初始化对象池
         SpeckleManager.Instance.allLineNoteControllers.Add(lineNoteController);//把自己加入到判定系统的判定线管理中
-        canvasLocalOffset = thisLine.canvasLocalOffset;//吧速度图转换为位移图
+        canvasLocalOffset = thisLine.far;
+        canvasSpeed = thisLine.career;
         CalculatedNoteFloorPosition(ThisLine.onlineNotes);//计算判定线上方的所有音符的FloorPosition
         CalculatedNoteFloorPosition(ThisLine.offlineNotes);//计算判定线下方的所有音符的FloorPosition
     }

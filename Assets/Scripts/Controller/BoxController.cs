@@ -58,7 +58,7 @@ public class BoxController : MonoBehaviour
         ripples = new(AssetManager.Instance.ripple, 0, squarePosition);
         return this;//返回自身
     }
-    public void PlaiRipple() => StartCoroutine(Play());
+    public void PlayRipple() => StartCoroutine(Play());
     public IEnumerator Play()
     {
         RippleController ripple = ripples.PrepareObject().Init(currentScaleX, currentScaleY);
@@ -175,7 +175,7 @@ public class BoxController : MonoBehaviour
     {
         if (events.Length <= 0 || currentTime < events[0].startTime) return defaultValue;
         int eventIndex = Algorithm.BinarySearch(events, IsCurrentEvent, true, ref currentTime);//找到当前时间下，应该是哪个事件
-        if (currentTime > events[eventIndex].endTime) return events[eventIndex].endValue;
+        if (currentTime > events[eventIndex].endTime && events[eventIndex].endValue != 0) return events[eventIndex].endValue;
         return GameUtility.GetValueWithEvent(events[eventIndex], currentTime);//拿到事件后根据时间Get到当前值
     }
     public bool IsCurrentEvent(Event m, ref float currentTime) => currentTime >= m.startTime;

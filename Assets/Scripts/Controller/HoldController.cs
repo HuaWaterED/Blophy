@@ -23,8 +23,7 @@ public class HoldController : NoteController
     {
         AnimationCurve localOffset = decideLineController.canvasLocalOffset;//拿到位移图的索引
         holdBody.transform.localScale = //设置缩放
-                                        //new Vector2(1, localOffset.Evaluate(thisNote.EndTime) - localOffset.Evaluate(thisNote.hitTime));//x轴默认为1，y轴为位移图上的距离
-            Vector2.up * (localOffset.Evaluate(thisNote.EndTime) - localOffset.Evaluate(thisNote.hitTime)) + Vector2.right;
+        Vector2.up * (localOffset.Evaluate(thisNote.EndTime) - localOffset.Evaluate(thisNote.hitTime)) + Vector2.right;
         isMissed = false;   //重置状态
         reJudge = false;    //重置状态
         checkTime = -.1f;   //重置状态
@@ -73,13 +72,13 @@ public class HoldController : NoteController
         switch (isJudged)
         {
             case true://如果isJudge为True，说明是抬起来再按回去的，直接播放打击特效
-                HitEffectManager.Instance.PlayHitEffect(transform.position, transform.rotation, ValueManager.Instance.perfectJudge);//播放打击特效
+                PlayEffectWithoutAddScore(NoteJudge.Perfect, ValueManager.Instance.perfectJudge, true);
                 break;
             case false://如果没有判定过并且触摸阶段是开始触摸
                 isJudged = true;//设置状态为判定过了
                 checkTime = Time.time;//设置时间
                 JudgeLevel(out noteJudge, out isEarly);//获得到判定等级
-                HitEffectManager.Instance.PlayHitEffect(transform.position, transform.rotation, GetColorWithNoteJudge(noteJudge));//播放打击特效
+                PlayEffectWithoutAddScore(noteJudge, GetColorWithNoteJudge(noteJudge), isEarly);
                 break;
         }
     }
@@ -106,7 +105,7 @@ public class HoldController : NoteController
     }
     public override void ReturnPool()
     {
-        ScoreManager.Instance.AddScore(thisNote.noteType, noteJudge, isEarly);//加分
+        PlayEffect(noteJudge, GetColorWithNoteJudge(noteJudge), isEarly);
     }
     public override void NoteHoldArise()
     {
@@ -125,8 +124,7 @@ public class HoldController : NoteController
                 //checkTime = Time.time;
                 //没有Miss
                 //打击特效
-                PlayRipple();
-                HitEffectManager.Instance.PlayHitEffect(transform.position, transform.rotation, ValueManager.Instance.perfectJudge);//播放打击特效
+                PlayEffectWithoutAddScore(NoteJudge.Perfect, ValueManager.Instance.perfectJudge, true);
                 reJudge = false;//重判一次完成后就设置状态
             }
         }

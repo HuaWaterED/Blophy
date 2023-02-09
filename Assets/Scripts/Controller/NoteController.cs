@@ -113,33 +113,44 @@ public class NoteController : MonoBehaviour
     /// </summary>
     public virtual void ReturnPool()
     {
-        PlayRipple();
         JudgeLevel(out NoteJudge noteJudge, out bool isEarly);//获得到判定等级，Perfect？Good？Bad？Miss？Early？Late？
         Color hitJudgeEffectColor = GetColorWithNoteJudge(noteJudge);//根据判定等级获得到打击特效的颜色
-        PlayHitEffectWithJudgeLevel(noteJudge, hitJudgeEffectColor);//根据判定等级播放打击特效
+
+        PlayEffect(noteJudge, hitJudgeEffectColor, isEarly);
+    }
+    public virtual void PlayRipple() => decideLineController.box.PlayRipple();
+    public virtual void PlayEffect(NoteJudge noteJudge, Color hitJudgeEffectColor, bool isEarly)
+    {
+        PlayEffectWithoutAddScore(noteJudge, hitJudgeEffectColor, isEarly);
         ScoreManager.Instance.AddScore(thisNote.noteType, noteJudge, isEarly);//加分
     }
-    public virtual void PlayRipple() => decideLineController.box.PlaiRipple();
-    /// <summary>
-    /// 根据判定等级播放打击特效
-    /// </summary>
-    /// <param name="noteJudge">判定等级</param>
-    /// <param name="hitJudgeEffectColor">判定等级对应的颜色</param>
-    protected virtual void PlayHitEffectWithJudgeLevel(NoteJudge noteJudge, Color hitJudgeEffectColor)
+    public virtual void PlayEffectWithoutAddScore(NoteJudge noteJudge, Color hitJudgeEffectColor, bool isEarly)
     {
         switch (noteJudge)//判定等级枚举
         {
             case NoteJudge.Miss://如果是Miss则不播放打击特效
                 break;
             default:
-                Vector2 notePosition = new(transform.position.x, decideLineController.lineTexture.transform.position.y);//水平判定线拿到自己的x和线渲染器的y（都是世界坐标）作为打击特效的生成点
-                if (!decideLineController.isHorizontal)
-                {
-                    notePosition = new(decideLineController.lineTexture.transform.position.x, transform.position.y);//水平判定线拿到线渲染器的x和自己的y（都是世界坐标）作为打击特效的生成点
-                }
-                HitEffectManager.Instance.PlayHitEffect(notePosition, transform.rotation, hitJudgeEffectColor);//播放打击特效
+                PlayRipple();
+                PlayHitEffectWithJudgeLevel(hitJudgeEffectColor);//根据判定等级播放打击特效
                 break;
         }
+    }
+    /// <summary>
+    /// 根据判定等级播放打击特效
+    /// </summary>
+    /// <param name="noteJudge">判定等级</param>
+    /// <param name="hitJudgeEffectColor">判定等级对应的颜色</param>
+    protected virtual void PlayHitEffectWithJudgeLevel(Color hitJudgeEffectColor)
+    {
+        Vector2 notePosition = new(transform.position.x, decideLineController.lineTexture.transform.position.y);//水平判定线拿到自己的x和线渲染器的y（都是世界坐标）作为打击特效的生成点
+        if (!decideLineController.isHorizontal)
+        {
+            notePosition = new(decideLineController.lineTexture.transform.position.x, transform.position.y);//水平判定线拿到线渲染器的x和自己的y（都是世界坐标）作为打击特效的生成点
+        }
+        HitEffectManager.Instance.PlayHitEffect(notePosition, transform.rotation, hitJudgeEffectColor);//播放打击特效
+
+
     }
     /// <summary>
     /// 根据音符判定等级获得到颜色

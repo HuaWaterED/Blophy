@@ -60,7 +60,8 @@ namespace Blophy.Chart
         public Note[] onlineNotes;
         public Note[] offlineNotes;
         public Event[] speed;
-        public AnimationCurve canvasLocalOffset;
+        public AnimationCurve far;//画布偏移绝对位置，距离
+        public AnimationCurve career;//速度
     }
     [Serializable]
     //public struct Note
@@ -78,6 +79,7 @@ namespace Blophy.Chart
         public BoxEffect boxEffect;
         public float positionX;
         public bool isClockwise;//是逆时针
+        public bool hasOther;//还有别的Note和他在统一时间被打击，简称多押标识（（
         [JsonIgnore] public float EndTime => hitTime + HoldTime;
         [JsonIgnore] public float hitFloorPosition;//打击地板上距离
     }

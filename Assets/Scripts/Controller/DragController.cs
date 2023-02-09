@@ -5,12 +5,10 @@ public class DragController : NoteController
     public override void Judge(double currentTime, TouchPhase touchPhase)
     {
         isJudged = true;//设置状态
-        PlayRipple();
     }
     public override void Judge()
     {
         isJudged = true;
-        PlayRipple();
     }
     public override void PassHitTime(double currentTime)
     {
@@ -27,7 +25,6 @@ public class DragController : NoteController
             ScoreManager.Instance.AddScore(thisNote.noteType, NoteJudge.Miss, true);//加Miss分
             return;
         }
-        PlayHitEffectWithJudgeLevel(NoteJudge.Perfect, ValueManager.Instance.perfectJudge);//放Perfect特效
-        ScoreManager.Instance.AddScore(thisNote.noteType, NoteJudge.Perfect, true);//加Perfect分
+        PlayEffect(NoteJudge.Perfect, ValueManager.Instance.perfectJudge, true);
     }
 }
