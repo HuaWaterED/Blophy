@@ -21,6 +21,9 @@ public class NoteController : MonoBehaviour
     }
     public Note thisNote;//负责储存这个音符的一些数据
     public DecideLineController decideLineController;//判定线引用
+    public SpriteRenderer texture;
+    public Sprite commonTexture;
+    public Sprite multiTexture;
 
     public bool isOnlineNote;//是否事判定线上方的音符
     public bool isJudged = false;//是否已经判定过了
@@ -33,10 +36,17 @@ public class NoteController : MonoBehaviour
     /// </summary>
     public virtual void Init()
     {
+        MultiOrCommon();
         ChangeColor(Color.white);//初始化为白色
         isJudged = false;//重置isJudged
 
     }//初始化方法
+    public virtual void MultiOrCommon() =>
+        texture.sprite = thisNote.hasOther switch
+        {
+            true => multiTexture,
+            false => commonTexture
+        };
     /// <summary>
     /// 更改颜色
     /// </summary>
@@ -131,11 +141,24 @@ public class NoteController : MonoBehaviour
             case NoteJudge.Miss://如果是Miss则不播放打击特效
                 break;
             default:
-                PlayRipple();
-                PlayHitEffectWithJudgeLevel(hitJudgeEffectColor);//根据判定等级播放打击特效
+                PlayEffectWithoutMiss(hitJudgeEffectColor);
                 break;
         }
     }
+
+    private void PlayEffectWithoutMiss(Color hitJudgeEffectColor)
+    {
+        if (thisNote.effect.HasFlag(NoteEffect.Ripple))
+        {
+            PlayRipple();
+        }
+        if (thisNote.effect.HasFlag(NoteEffect.CommonEffect))
+        {
+            PlayHitEffectWithJudgeLevel(hitJudgeEffectColor);//根据判定等级播放打击特效
+        }
+
+    }
+
     /// <summary>
     /// 根据判定等级播放打击特效
     /// </summary>

@@ -43,7 +43,7 @@ public class DecideLineController : MonoBehaviour
     public BoxController box;//方框控制脚本
     public LineNoteController lineNoteController;//判定线音符管理脚本
 
-    Line thisLine;//这根线的源数据
+    public Line thisLine;//这根线的源数据
     public Line ThisLine
     {
         get => thisLine;

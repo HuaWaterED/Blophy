@@ -76,7 +76,7 @@ namespace Blophy.Chart
             get => holdTime == 0 ? JudgeManager.bad : holdTime;
             set => holdTime = value;
         }
-        public BoxEffect boxEffect;
+        public NoteEffect effect;
         public float positionX;
         public bool isClockwise;//是逆时针
         public bool hasOther;//还有别的Note和他在统一时间被打击，简称多押标识（（
@@ -96,12 +96,11 @@ namespace Blophy.Chart
     }
     [Flags]
     [Serializable]
-    public enum BoxEffect
+    public enum NoteEffect
     {
-        None = 1,
-        Ripple = 2,
-        FullLine = 4,
-        FullBox = 8
+        Ripple = 1,
+        FullLine = 2,
+        CommonEffect = 4
     }
     [Serializable]
     //public struct BoxEvents

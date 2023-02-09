@@ -9,7 +9,8 @@ public class FullFlickController : NoteController
     int decisionEndPoint;
     public override void Init()
     {
-        base.Init();
+        ChangeColor(Color.white);//初始化为白色
+        isJudged = false;//重置isJudged
         isMoved = false;//重置isMoved
         switch (thisNote.isClockwise)//顺时针逆时针
         {

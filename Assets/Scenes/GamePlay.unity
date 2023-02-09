@@ -2667,7 +2667,7 @@ MonoBehaviour:
       flickCount: 0
       fullFlickCount: 0
       pointCount: 0
-  clip: {fileID: 8300000, guid: a35fa0734a049274183b9b0c44323840, type: 3}
+  clip: {fileID: 8300000, guid: 5130c4f8ffcdf874b870118734ef47a7, type: 3}
 --- !u!1 &1165070292
 GameObject:
   m_ObjectHideFlags: 0
