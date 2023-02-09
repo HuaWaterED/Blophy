@@ -125,6 +125,7 @@ public class HoldController : NoteController
                 //checkTime = Time.time;
                 //没有Miss
                 //打击特效
+                PlayRipple();
                 HitEffectManager.Instance.PlayHitEffect(transform.position, transform.rotation, ValueManager.Instance.perfectJudge);//播放打击特效
                 reJudge = false;//重判一次完成后就设置状态
             }

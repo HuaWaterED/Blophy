@@ -19,4 +19,7 @@ public class AssetManager : MonoBehaviourSingleton<AssetManager>
 
     [Header("打击特效的预制件")]
     public HitEffectController hitEffect;
+
+    [Header("方框波纹特效预制件")]
+    public RippleController ripple;
 }

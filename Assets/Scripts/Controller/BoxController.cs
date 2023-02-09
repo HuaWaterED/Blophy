@@ -2,6 +2,7 @@ using UnityEngine;
 using Blophy.Chart;
 using static UnityEngine.Camera;
 using Event = Blophy.Chart.Event;
+using System.Collections;
 
 public class BoxController : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class BoxController : MonoBehaviour
 
     public DecideLineController[] decideLineControllers;//所有的判定线控制器
     public SpriteRenderer[] spriteRenderers;//所有的渲染组件
+    public ObjectPoolQueue<RippleController> ripples;
 
     public Box box;//谱面，单独这个box的谱面
 
@@ -53,7 +55,15 @@ public class BoxController : MonoBehaviour
         {
             decideLineControllers[i].ThisLine = box.lines[i];//将line的源数据赋值过去
         }
+        ripples = new(AssetManager.Instance.ripple, 0, squarePosition);
         return this;//返回自身
+    }
+    public void PlaiRipple() => StartCoroutine(Play());
+    public IEnumerator Play()
+    {
+        RippleController ripple = ripples.PrepareObject().Init(currentScaleX, currentScaleY);
+        yield return new WaitForSeconds(1.1f);//打击特效时长是0.5秒，0.6秒是为了兼容误差
+        ripples.ReturnObject(ripple);
     }
     private void Update()
     {

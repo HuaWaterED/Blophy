@@ -2712,6 +2712,7 @@ MonoBehaviour:
   - {fileID: 852783850352410451, guid: b165f8e0b53cc3345a7fd872c2fee4fb, type: 3}
   - {fileID: 221127150915810207, guid: bb0bc53564cefb543b992b2e4e8abcda, type: 3}
   hitEffect: {fileID: 7562400954563801936, guid: bfc8589b933ff2e41a1ea0cdf3b34b95, type: 3}
+  ripple: {fileID: 8259591433578680565, guid: 567cc5b5e4f7c6045aa0f99df8c7e493, type: 3}
 --- !u!1 &1265520383
 GameObject:
   m_ObjectHideFlags: 0

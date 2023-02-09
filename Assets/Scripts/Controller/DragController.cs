@@ -5,10 +5,12 @@ public class DragController : NoteController
     public override void Judge(double currentTime, TouchPhase touchPhase)
     {
         isJudged = true;//设置状态
+        PlayRipple();
     }
     public override void Judge()
     {
         isJudged = true;
+        PlayRipple();
     }
     public override void PassHitTime(double currentTime)
     {

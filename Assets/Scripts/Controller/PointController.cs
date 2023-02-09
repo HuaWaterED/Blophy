@@ -31,7 +31,6 @@ public class PointController : NoteController
         {
             return;//返回
         }
-        Debug.Log($"Point的Update调用一次，计算出来的百分比是：{percent}");
         for (int i = 0; i < journeyLength; i++)//循环--遍历所有角，计算位置
         {
             //move_edgeCorner[i].localPosition = (destinations[i] - origins[i]) * (1 - percent) + origins[i];//这是从中间向周围扩散

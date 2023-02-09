@@ -113,11 +113,13 @@ public class NoteController : MonoBehaviour
     /// </summary>
     public virtual void ReturnPool()
     {
+        PlayRipple();
         JudgeLevel(out NoteJudge noteJudge, out bool isEarly);//获得到判定等级，Perfect？Good？Bad？Miss？Early？Late？
         Color hitJudgeEffectColor = GetColorWithNoteJudge(noteJudge);//根据判定等级获得到打击特效的颜色
         PlayHitEffectWithJudgeLevel(noteJudge, hitJudgeEffectColor);//根据判定等级播放打击特效
         ScoreManager.Instance.AddScore(thisNote.noteType, noteJudge, isEarly);//加分
     }
+    public virtual void PlayRipple() => decideLineController.box.PlaiRipple();
     /// <summary>
     /// 根据判定等级播放打击特效
     /// </summary>

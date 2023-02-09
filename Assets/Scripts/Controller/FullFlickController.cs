@@ -63,6 +63,7 @@ public class FullFlickController : NoteController
     {
         if (isJudged && isMoved)//如果判定成功
         {
+            PlayRipple();
             PlayHitEffectWithJudgeLevel(NoteJudge.Perfect, ValueManager.Instance.perfectJudge);//播放完美判定的特效
             ScoreManager.Instance.AddScore(thisNote.noteType, NoteJudge.Perfect, true);//按完美判定加分
             return;//返回
