@@ -137,6 +137,22 @@ MonoBehaviour:
   lineTexture: {fileID: 7860544464297355684}
   box: {fileID: 2812981860159532905}
   lineNoteController: {fileID: 5122208234408603399}
+  thisLine:
+    onlineNotes: []
+    offlineNotes: []
+    speed: []
+    far:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    career:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
 --- !u!114 &5122208234408603399
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -228,6 +244,22 @@ MonoBehaviour:
   lineTexture: {fileID: 8691635155744236437}
   box: {fileID: 2812981860159532905}
   lineNoteController: {fileID: 323890600802986010}
+  thisLine:
+    onlineNotes: []
+    offlineNotes: []
+    speed: []
+    far:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    career:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
 --- !u!114 &323890600802986010
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -319,6 +351,22 @@ MonoBehaviour:
   lineTexture: {fileID: 6458697084622260732}
   box: {fileID: 2812981860159532905}
   lineNoteController: {fileID: 555974982157619623}
+  thisLine:
+    onlineNotes: []
+    offlineNotes: []
+    speed: []
+    far:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    career:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
 --- !u!114 &555974982157619623
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -640,6 +688,22 @@ MonoBehaviour:
   lineTexture: {fileID: 3746573344842827060}
   box: {fileID: 2812981860159532905}
   lineNoteController: {fileID: 3474532405289055257}
+  thisLine:
+    onlineNotes: []
+    offlineNotes: []
+    speed: []
+    far:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    career:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
 --- !u!114 &3474532405289055257
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1022,6 +1086,22 @@ MonoBehaviour:
   lineTexture: {fileID: 6928414127062336489}
   box: {fileID: 2812981860159532905}
   lineNoteController: {fileID: 2332721750854021627}
+  thisLine:
+    onlineNotes: []
+    offlineNotes: []
+    speed: []
+    far:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    career:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
 --- !u!114 &2332721750854021627
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1231,8 +1311,8 @@ MonoBehaviour:
     lines: []
   sortSeed: 0
   spriteMask: {fileID: 3551648482430810191}
-  currentScaleX: 1
-  currentScaleY: 1
+  currentScaleX: 2.25
+  currentScaleY: 2.25
   currentAlpha: 1
   currentCenterX: 0.5
   currentCenterY: 0.5

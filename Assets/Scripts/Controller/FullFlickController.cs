@@ -7,11 +7,13 @@ public class FullFlickController : NoteController
     public Transform textureBoss;//就是FullFlick音符的两个渲染贴图（Texture）的爸爸（
     public bool isMoved = false;//是否已经移动了
     int decisionEndPoint;
+    public bool isJudgedComplete = false;//判定是否已经完成
     public override void Init()
     {
         ChangeColor(Color.white);//初始化为白色
         isJudged = false;//重置isJudged
         isMoved = false;//重置isMoved
+        isJudgedComplete = false;
         switch (thisNote.isClockwise)//顺时针逆时针
         {
             case true://如果是顺时针
@@ -26,13 +28,15 @@ public class FullFlickController : NoteController
     }
     public override void Judge(double currentTime, TouchPhase touchPhase)
     {
-        if (!isJudged && touchPhase == TouchPhase.Began)//如果没有判定过并且是开始阶段
+        if (!isJudged && !isJudgedComplete && touchPhase == TouchPhase.Began)//如果没有判定过并且是开始阶段
         {
             isJudged = true;//是否判定过为tue
         }
-        else if (isJudged && touchPhase == TouchPhase.Moved)//如果判定过并且判定阶段为moved
+        else if (isJudged && !isJudgedComplete && touchPhase == TouchPhase.Moved)//如果判定过并且判定阶段为moved
         {
             isMoved = true;//设置为真
+            isJudgedComplete = true;
+            CompletedJudge();
         }
     }
     public override void Judge()

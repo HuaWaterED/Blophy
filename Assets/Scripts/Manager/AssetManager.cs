@@ -22,4 +22,7 @@ public class AssetManager : MonoBehaviourSingleton<AssetManager>
 
     [Header("方框波纹特效预制件")]
     public RippleController ripple;
+
+    [Header("打击音效预制件")]
+    public HitSoundController hitSoundController;
 }

@@ -15,11 +15,13 @@ public class PointController : NoteController
     public override void Judge(double currentTime, TouchPhase touchPhase)
     {
         isJudged = true;//修改属性为成功判定
+        CompletedJudge();
         base.Judge(currentTime, TouchPhase.Canceled);//执行基类的判定方法
     }
     public override void Judge()
     {
         isJudged = true;
+        CompletedJudge();
         base.Judge();
     }
     public override void NoteHoldArise()

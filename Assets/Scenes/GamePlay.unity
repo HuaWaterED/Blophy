@@ -1059,7 +1059,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speckleManager: {fileID: 505069977}
-  isAutoplay: 1
+  isAutoplay: 0
   currentH: 0
 --- !u!1 &518539666
 GameObject:
@@ -1952,7 +1952,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &945565751
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2482,7 +2482,7 @@ MonoBehaviour:
         - noteType: 1
           hitTime: 5
           holdTime: 5
-          boxEffect: 0
+          effect: 0
           positionX: 0
           isClockwise: 0
           hasOther: 0
@@ -2667,7 +2667,7 @@ MonoBehaviour:
       flickCount: 0
       fullFlickCount: 0
       pointCount: 0
-  clip: {fileID: 8300000, guid: 5130c4f8ffcdf874b870118734ef47a7, type: 3}
+  clip: {fileID: 8300000, guid: ad2328508f1ea22479a3444a18643ca9, type: 3}
 --- !u!1 &1165070292
 GameObject:
   m_ObjectHideFlags: 0
@@ -2744,6 +2744,7 @@ MonoBehaviour:
   - {fileID: 221127150915810207, guid: bb0bc53564cefb543b992b2e4e8abcda, type: 3}
   hitEffect: {fileID: 7562400954563801936, guid: bfc8589b933ff2e41a1ea0cdf3b34b95, type: 3}
   ripple: {fileID: 8259591433578680565, guid: 567cc5b5e4f7c6045aa0f99df8c7e493, type: 3}
+  hitSoundController: {fileID: 6141943866723921915, guid: 43642713fc8126249a2a463ecb05e81b, type: 3}
 --- !u!1 &1265520383
 GameObject:
   m_ObjectHideFlags: 0
@@ -3563,6 +3564,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1911001489}
+  - component: {fileID: 1911001490}
   m_Layer: 0
   m_Name: HitSoundManager
   m_TagString: Untagged
@@ -3585,6 +3587,26 @@ Transform:
   m_Father: {fileID: 1692888102}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1911001490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1911001488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba2542474376ee5478aa9bb565b5727d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - {fileID: 8300000, guid: c5617782018f51a439093aa1b2b3e001, type: 3}
+  - {fileID: 8300000, guid: c5617782018f51a439093aa1b2b3e001, type: 3}
+  - {fileID: 8300000, guid: 96c15278f1aab1a46bb289fc5fcf1e34, type: 3}
+  - {fileID: 8300000, guid: 9531dc210bc0e2043a404c1ae557ab81, type: 3}
+  - {fileID: 8300000, guid: 9531dc210bc0e2043a404c1ae557ab81, type: 3}
+  - {fileID: 8300000, guid: 56977c0b2376233438ece6b6abd9821e, type: 3}
+  - {fileID: 8300000, guid: 56977c0b2376233438ece6b6abd9821e, type: 3}
 --- !u!1 &1926056510
 GameObject:
   m_ObjectHideFlags: 0
@@ -4056,7 +4078,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

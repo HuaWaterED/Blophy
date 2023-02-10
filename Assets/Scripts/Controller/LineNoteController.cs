@@ -90,7 +90,7 @@ public class LineNoteController : MonoBehaviour
     /// <returns>返回索引</returns>
     private int FindNote(Note[] notes)
     {
-        return Algorithm.BinarySearch(notes, m => m.hitFloorPosition < decideLineController.offlineNote.localPosition.y + 2.00001, false);
+        return Algorithm.BinarySearch(notes, m => m.hitFloorPosition < decideLineController.offlineNote.localPosition.y + 2.00001f, false);
         //寻找这个时刻需要出现的音符，出现要提前两个单位长度的时间出现
     }
     /// <summary>

@@ -128,6 +128,13 @@ public class NoteController : MonoBehaviour
 
         PlayEffect(noteJudge, hitJudgeEffectColor, isEarly);
     }
+    /// <summary>
+    /// 完成判定调用的方法
+    /// </summary>
+    public void CompletedJudge()
+    {
+        HitSoundManager.Instance.PlayHitSound(thisNote.noteType);
+    }
     public virtual void PlayRipple() => decideLineController.box.PlayRipple();
     public virtual void PlayEffect(NoteJudge noteJudge, Color hitJudgeEffectColor, bool isEarly)
     {

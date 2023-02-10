@@ -25,6 +25,7 @@ public class DragController : NoteController
             ScoreManager.Instance.AddScore(thisNote.noteType, NoteJudge.Miss, true);//加Miss分
             return;
         }
+        CompletedJudge();
         PlayEffect(NoteJudge.Perfect, ValueManager.Instance.perfectJudge, true);
     }
 }
