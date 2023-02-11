@@ -50,6 +50,11 @@ public class DecideLineController : MonoBehaviour
         set
         {
             thisLine = value;//获取到源数据
+            if (thisLine.OnlineNotesLength <= 0 && thisLine.OfflineNotesLength <= 0)
+            {
+                lineNoteController.enabled = this.enabled = false;
+                return;
+            }
             Init();//初始化
         }
     }//这跟线的谱面元数据
@@ -144,8 +149,11 @@ public class DecideLineController : MonoBehaviour
     /// </summary>
     private void UpdateCanvas()
     {
+
         float currentValue = canvasLocalOffset.Evaluate((float)ProgressManager.Instance.CurrentTime);//获取到当前的画布距离
-        onlineNote.localPosition = Vector3.down * currentValue;//赋值
-        offlineNote.localPosition = Vector3.up * currentValue;//赋值
+        if (thisLine.OnlineNotesLength > 0)
+            onlineNote.localPosition = Vector3.down * currentValue;//赋值
+        if (thisLine.OfflineNotesLength > 0)
+            offlineNote.localPosition = Vector3.up * currentValue;//赋值
     }
 }

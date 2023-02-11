@@ -12,13 +12,13 @@ public class RippleController : MonoBehaviour
             return textureLength;
         }
     }
-    public Color currentColor;
+    public Color currentColor = Color.black * .5f;
     public RippleController Init(float currentScaleX, float currentScaleY)
     {
         transform.localPosition = Vector3.zero;
         transform.localRotation = Quaternion.identity;
         transform.localScale = Vector3.one;
-        currentColor = Color.black * .5f;
+        currentColor.a = .5f;
         texture[0].transform.localScale =//第12根线都是水平的
             texture[1].transform.localScale =
             new Vector2(2 - (ValueManager.Instance.boxFineness / currentScaleX), ValueManager.Instance.boxFineness / currentScaleY);

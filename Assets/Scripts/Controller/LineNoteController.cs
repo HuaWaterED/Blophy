@@ -26,13 +26,8 @@ public class LineNoteController : MonoBehaviour
     public int movedOnlineNotesCount = 0;
     public int movedOfflineNotesCount = 0;
 
-    public float CurrentValue => decideLineController.canvasLocalOffset.Evaluate((float)ProgressManager.Instance.CurrentTime);
     private void Update()
     {
-        //FindAndGetNotes(decideLineController.ThisLine.onlineNotes, ref lastOnlineIndex, ariseOnlineNotes, endTime_ariseOnlineNotes, true);//寻找这一时刻，在判定线上方需要生成的音符
-        //UpdateNotes(ariseOnlineNotes);//音符出现后每一帧调用
-        //FindPassHitTimeNotes(ariseOnlineNotes);//音符过了打击时间但是没有Miss掉的这个期间每一帧调用
-        //FindAndReturnNotes(ariseOnlineNotes, endTime_ariseOnlineNotes, true);//寻找这一时刻，在判定线上方需要回收的Miss掉的音符
         if (decideLineController.ThisLine.OnlineNotesLength > 0)
             Find_Get_Update_PassHit_Return(decideLineController.ThisLine.onlineNotes, ref lastOnlineIndex, ariseOnlineNotes, endTime_ariseOnlineNotes, true);
         if (decideLineController.ThisLine.OfflineNotesLength > 0)
@@ -100,7 +95,7 @@ public class LineNoteController : MonoBehaviour
     /// <returns>返回索引</returns>
     private int FindNote(Note[] notes)
     {
-        return Algorithm.BinarySearch(notes, m => m.hitFloorPosition < decideLineController.offlineNote.localPosition.y + 2.00001f, false);
+        return Algorithm.BinarySearch(notes, m => m.hitFloorPosition < -decideLineController.onlineNote.localPosition.y + 2.00001f, false);
         //寻找这个时刻需要出现的音符，出现要提前两个单位长度的时间出现
     }
     /// <summary>
