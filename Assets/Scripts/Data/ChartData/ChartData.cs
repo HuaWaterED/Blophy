@@ -58,7 +58,25 @@ namespace Blophy.Chart
     public class Line
     {
         public Note[] onlineNotes;
+        public int onlineNotesLength = -1;
+        public int OnlineNotesLength
+        {
+            get
+            {
+                if (onlineNotesLength < 0) onlineNotesLength = onlineNotes.Length;
+                return onlineNotesLength;
+            }
+        }
         public Note[] offlineNotes;
+        public int offlineNotesLength = -1;
+        public int OfflineNotesLength
+        {
+            get
+            {
+                if (offlineNotesLength < 0) offlineNotesLength = offlineNotes.Length;
+                return offlineNotesLength;
+            }
+        }
         public Event[] speed;
         public AnimationCurve far;//画布偏移绝对位置，距离
         public AnimationCurve career;//速度
