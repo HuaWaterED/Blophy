@@ -3,7 +3,6 @@ using Blophy.Chart;
 using static UnityEngine.Camera;
 using Event = Blophy.Chart.Event;
 using System.Collections;
-using static UnityEditor.PlayerSettings;
 using static UnityEngine.Mathf;
 using System;
 
@@ -87,9 +86,10 @@ public class BoxController : MonoBehaviour
     void UpdateEvents()
     {
         float currentTime = (float)ProgressManager.Instance.CurrentTime;
-        UpdateCenterAndRotation(ref currentCenterX, ref currentCenterY, ref currentRotate, ref currentTime);
         if (box.boxEvents.Length_alpha > 0)
             UpdateAlpha(ref currentAlpha, ref currentTime);
+        if (currentAlpha == 0) return;
+        UpdateCenterAndRotation(ref currentCenterX, ref currentCenterY, ref currentRotate, ref currentTime);
         if (box.boxEvents.Length_lineAlpha > 0)
             UpdateLineAlpha(ref currentLineAlpha, ref currentTime);
         UpdateMove(ref currentMoveX, ref currentMoveY, ref currentTime);

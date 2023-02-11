@@ -1059,7 +1059,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speckleManager: {fileID: 505069977}
-  isAutoplay: 1
+  isAutoplay: 0
   currentH: 0
 --- !u!1 &518539666
 GameObject:
