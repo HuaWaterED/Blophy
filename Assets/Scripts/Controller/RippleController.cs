@@ -3,16 +3,8 @@ using UnityEngine;
 
 public class RippleController : MonoBehaviour
 {
-    public float currentScaleX = 1;
-    public float currentScaleY = 1;
     public SpriteRenderer[] texture;
     public RippleController Init(float currentScaleX, float currentScaleY)
-    {
-        this.currentScaleX = currentScaleX;
-        this.currentScaleY = currentScaleY;
-        return this;
-    }
-    private void OnEnable()
     {
         transform.localPosition = Vector3.zero;
         transform.localRotation = Quaternion.identity;
@@ -28,6 +20,7 @@ public class RippleController : MonoBehaviour
         texture[2].transform.localScale =//第34都是垂直的
             texture[3].transform.localScale =
             new Vector2(2 + (ValueManager.Instance.boxFineness / currentScaleY), ValueManager.Instance.boxFineness / currentScaleX);
+        return this;
     }
     private void Update()
     {

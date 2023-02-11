@@ -1059,7 +1059,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speckleManager: {fileID: 505069977}
-  isAutoplay: 0
+  isAutoplay: 1
   currentH: 0
 --- !u!1 &518539666
 GameObject:
@@ -2667,7 +2667,7 @@ MonoBehaviour:
       flickCount: 0
       fullFlickCount: 0
       pointCount: 0
-  clip: {fileID: 8300000, guid: ad2328508f1ea22479a3444a18643ca9, type: 3}
+  clip: {fileID: 8300000, guid: a35fa0734a049274183b9b0c44323840, type: 3}
 --- !u!1 &1165070292
 GameObject:
   m_ObjectHideFlags: 0
