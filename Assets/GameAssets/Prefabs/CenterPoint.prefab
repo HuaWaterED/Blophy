@@ -139,7 +139,9 @@ MonoBehaviour:
   lineNoteController: {fileID: 5122208234408603399}
   thisLine:
     onlineNotes: []
+    onlineNotesLength: -1
     offlineNotes: []
+    offlineNotesLength: -1
     speed: []
     far:
       serializedVersion: 2
@@ -246,7 +248,9 @@ MonoBehaviour:
   lineNoteController: {fileID: 323890600802986010}
   thisLine:
     onlineNotes: []
+    onlineNotesLength: -1
     offlineNotes: []
+    offlineNotesLength: -1
     speed: []
     far:
       serializedVersion: 2
@@ -353,7 +357,9 @@ MonoBehaviour:
   lineNoteController: {fileID: 555974982157619623}
   thisLine:
     onlineNotes: []
+    onlineNotesLength: -1
     offlineNotes: []
+    offlineNotesLength: -1
     speed: []
     far:
       serializedVersion: 2
@@ -690,7 +696,9 @@ MonoBehaviour:
   lineNoteController: {fileID: 3474532405289055257}
   thisLine:
     onlineNotes: []
+    onlineNotesLength: -1
     offlineNotes: []
+    offlineNotesLength: -1
     speed: []
     far:
       serializedVersion: 2
@@ -1088,7 +1096,9 @@ MonoBehaviour:
   lineNoteController: {fileID: 2332721750854021627}
   thisLine:
     onlineNotes: []
+    onlineNotesLength: -1
     offlineNotes: []
+    offlineNotesLength: -1
     speed: []
     far:
       serializedVersion: 2
@@ -1300,14 +1310,23 @@ MonoBehaviour:
   box:
     boxEvents:
       moveX: []
+      length_moveX: -1
       moveY: []
+      length_moveY: -1
       rotate: []
+      length_rotate: -1
       alpha: []
+      length_alpha: -1
       scaleX: []
+      length_scaleX: -1
       scaleY: []
+      length_scaleY: -1
       centerX: []
+      length_centerX: -1
       centerY: []
+      length_centerY: -1
       lineAlpha: []
+      length_lineAlpha: -1
     lines: []
   sortSeed: 0
   spriteMask: {fileID: 3551648482430810191}
@@ -1320,6 +1339,16 @@ MonoBehaviour:
   currentMoveX: 0
   currentMoveY: 0
   currentRotate: 0
+  boxFineness: 0
+  raw_center: {x: 0.5, y: 0.5}
+  center: {x: 0.5, y: 0.5}
+  alpha: {r: 0, g: 0, b: 0, a: 1}
+  lineAlpha: {r: 0, g: 0, b: 0, a: 0}
+  move: {x: 0, y: 0}
+  scale: {x: 2.25, y: 2.25}
+  rotation: {x: 0, y: 0, z: 0, w: 0}
+  horizontalFineness: {x: 0, y: 0}
+  verticalFineness: {x: 0, y: 0}
 --- !u!1 &8592862652095322561
 GameObject:
   m_ObjectHideFlags: 0
@@ -1425,7 +1454,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

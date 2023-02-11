@@ -10,7 +10,7 @@ namespace Blophy.Chart
     public class ChartData
     {
         public MetaData metaData;
-        public List<Box> boxes;
+        public Box[] boxes;
         public GlobalData globalData;
         public Text text;
     }
@@ -125,14 +125,95 @@ namespace Blophy.Chart
     public class BoxEvents
     {
         public Event[] moveX;
+        public int length_moveX = -1;
+        public int Length_moveX
+        {
+            get
+            {
+                if (length_moveX < 0) length_moveX = moveX.Length;
+                return length_moveX;
+            }
+        }
         public Event[] moveY;
+        public int length_moveY = -1;
+        public int Length_moveY
+        {
+            get
+            {
+                if (length_moveY < 0) length_moveY = moveY.Length;
+                return length_moveY;
+            }
+        }
         public Event[] rotate;
+        public int length_rotate = -1;
+        public int Length_rotate
+        {
+            get
+            {
+                if (length_rotate < 0) length_rotate = rotate.Length;
+                return length_rotate;
+            }
+        }
         public Event[] alpha;
+        public int length_alpha = -1;
+        public int Length_alpha
+        {
+            get
+            {
+                if (length_alpha < 0) length_alpha = alpha.Length;
+                return length_alpha;
+            }
+        }
         public Event[] scaleX;
+        public int length_scaleX = -1;
+        public int Length_scaleX
+        {
+            get
+            {
+                if (length_scaleX < 0) length_scaleX = scaleX.Length;
+                return length_scaleX;
+            }
+        }
         public Event[] scaleY;
+        public int length_scaleY = -1;
+        public int Length_scaleY
+        {
+            get
+            {
+                if (length_scaleY < 0) length_scaleY = scaleY.Length;
+                return length_scaleY;
+            }
+        }
         public Event[] centerX;
+        public int length_centerX = -1;
+        public int Length_centerX
+        {
+            get
+            {
+                if (length_centerX < 0) length_centerX = centerX.Length;
+                return length_centerX;
+            }
+        }
         public Event[] centerY;
+        public int length_centerY = -1;
+        public int Length_centerY
+        {
+            get
+            {
+                if (length_centerY < 0) length_centerY = centerY.Length;
+                return length_centerY;
+            }
+        }
         public Event[] lineAlpha;
+        public int length_lineAlpha = -1;
+        public int Length_lineAlpha
+        {
+            get
+            {
+                if (length_lineAlpha < 0) length_lineAlpha = lineAlpha.Length;
+                return length_lineAlpha;
+            }
+        }
     }
     [Serializable]
     //public struct Event

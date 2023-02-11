@@ -3,6 +3,9 @@ using Blophy.Chart;
 using static UnityEngine.Camera;
 using Event = Blophy.Chart.Event;
 using System.Collections;
+using static UnityEditor.PlayerSettings;
+using static UnityEngine.Mathf;
+using System;
 
 public class BoxController : MonoBehaviour
 {
@@ -26,6 +29,17 @@ public class BoxController : MonoBehaviour
     public float currentMoveX;        //默认值
     public float currentMoveY;        //默认值
     public float currentRotate;       //默认值
+    public float boxFineness;
+
+    public Vector2 raw_center;
+    public Vector2 center;
+    public Color alpha;
+    public Color lineAlpha;
+    public Vector2 move;
+    public Vector2 scale;
+    public Quaternion rotation;
+    public Vector2 horizontalFineness;
+    public Vector2 verticalFineness;
     /// <summary>
     /// 设置遮罩种子
     /// </summary>
@@ -36,9 +50,9 @@ public class BoxController : MonoBehaviour
         this.sortSeed = sortSeed;//设置我自己的遮罩到我自己
         spriteMask.frontSortingOrder = sortSeed + ValueManager.Instance.noteRendererOrder - 1;//遮罩种子+一共多少层-1（这个1是我自己占用了，所以减去）
         spriteMask.backSortingOrder = sortSeed - 1;//遮罩的优先级是前包容后不包容，所以后的遮罩层级向下探一个
-        foreach (var item in spriteRenderers)//赋值渲染层级到组成渲染的各个组件们
+        for (int i = 0; i < spriteRenderers.Length; i++)//赋值渲染层级到组成渲染的各个组件们
         {
-            item.sortingOrder = sortSeed;//赋值
+            spriteRenderers[i].sortingOrder = sortSeed;//赋值
         }
         return this;//返回自己
     }
@@ -55,6 +69,7 @@ public class BoxController : MonoBehaviour
         {
             decideLineControllers[i].ThisLine = box.lines[i];//将line的源数据赋值过去
         }
+        boxFineness = ValueManager.Instance.boxFineness;
         ripples = new(AssetManager.Instance.ripple, 0, squarePosition);
         return this;//返回自身
     }
@@ -67,104 +82,105 @@ public class BoxController : MonoBehaviour
     }
     private void Update()
     {
-        UpdateCurrentEvents();//更新所有事件
+        UpdateEvents();
     }
-    /// <summary>
-    /// 这里更新所有事件
-    /// </summary>
-    void UpdateCurrentEvents()
+    void UpdateEvents()
     {
         float currentTime = (float)ProgressManager.Instance.CurrentTime;
-        //更新所有事件，拿到当前这一刻的数据
-        CalculateAllEventCurrentValue(
-            out currentMoveX,
-            out currentMoveY,
-               out currentRotate,
-               out currentAlpha,
-            out currentLineAlpha,
-             out currentCenterX,
-             out currentCenterY,
-            out currentScaleX,
-            out currentScaleY,
-            ref currentTime);
-        //将当前这一刻的数据全部赋值给方框
-        GiveEventData2Box(currentMoveX, currentMoveY,
-            currentRotate, currentAlpha, currentLineAlpha,
-            currentCenterX, currentCenterY,
-            currentScaleX,
-            currentScaleY);
+        UpdateCenterAndRotation(ref currentCenterX, ref currentCenterY, ref currentRotate, ref currentTime);
+        if (box.boxEvents.Length_alpha > 0)
+            UpdateAlpha(ref currentAlpha, ref currentTime);
+        if (box.boxEvents.Length_lineAlpha > 0)
+            UpdateLineAlpha(ref currentLineAlpha, ref currentTime);
+        UpdateMove(ref currentMoveX, ref currentMoveY, ref currentTime);
+        UpdateScale(ref currentScaleX, ref currentScaleY, ref currentTime);
+        UpdateFineness();
     }
-    /// <summary>
-    /// 根据谱面数据更新当前所有事件
-    /// </summary>
-    /// <param name="currentMoveX">当前基于Center的LocalPositionX</param>
-    /// <param name="currentMoveY">当前基于Center的LocalPositionY</param>
-    /// <param name="currentRotate">当前角度</param>
-    /// <param name="currentAlpha">当前方框的Alpha</param>
-    /// <param name="currentLineAlpha">当前方框中间那根线的Alpha</param>
-    /// <param name="currentCenterX">基于屏幕的X</param>
-    /// <param name="currentCenterY">基于屏幕的Y</param>
-    /// <param name="currentScaleX">当前的X缩放</param>
-    /// <param name="currentScaleY">当前的Y缩放</param>
-    /// <param name="currentTime">当前时间</param>
-    void CalculateAllEventCurrentValue(out float currentMoveX,
-         out float currentMoveY, out float currentRotate, out float currentAlpha,
-         out float currentLineAlpha, out float currentCenterX, out float currentCenterY,
-        out float currentScaleX, out float currentScaleY, ref float currentTime)
+
+    void UpdateCenterAndRotation(ref float currentCenterX, ref float currentCenterY, ref float currentRotate, ref float currentTime)
     {
-        currentMoveX = CalculateCurrentValue(box.boxEvents.moveX, ref currentTime, ref this.currentMoveX);
-        currentMoveY = CalculateCurrentValue(box.boxEvents.moveY, ref currentTime, ref this.currentMoveY);
-        currentCenterX = CalculateCurrentValue(box.boxEvents.centerX, ref currentTime, ref this.currentCenterX);
-        currentCenterY = CalculateCurrentValue(box.boxEvents.centerY, ref currentTime, ref this.currentCenterY);
-        currentRotate = CalculateCurrentValue(box.boxEvents.rotate, ref currentTime, ref this.currentRotate);
+        if (box.boxEvents.Length_centerX > 0)
+        {
+            currentCenterX = CalculateCurrentValue(box.boxEvents.centerX, ref currentTime, ref this.currentCenterX);
+            raw_center.x = currentCenterX;
+        }
+
+        if (box.boxEvents.Length_centerY > 0)
+        {
+            currentCenterY = CalculateCurrentValue(box.boxEvents.centerY, ref currentTime, ref this.currentCenterY);
+            raw_center.y = currentCenterY;
+        }
+        center = main.ViewportToWorldPoint(raw_center);
+
+        if (box.boxEvents.Length_rotate > 0)
+        {
+            currentRotate = CalculateCurrentValue(box.boxEvents.rotate, ref currentTime, ref this.currentRotate);
+            rotation = Quaternion.Euler(Vector3.forward * currentRotate);
+        }
+        transform.SetPositionAndRotation(center, rotation);
+    }
+
+    void UpdateAlpha(ref float currentAlpha, ref float currentTime)
+    {
         currentAlpha = CalculateCurrentValue(box.boxEvents.alpha, ref currentTime, ref this.currentAlpha);
-        currentLineAlpha = CalculateCurrentValue(box.boxEvents.lineAlpha, ref currentTime, ref this.currentLineAlpha);
-        currentScaleX = CalculateCurrentValue(box.boxEvents.scaleX, ref currentTime, ref this.currentScaleX);
-        currentScaleY = CalculateCurrentValue(box.boxEvents.scaleY, ref currentTime, ref this.currentScaleY);
+        alpha.a = currentAlpha;
+        spriteRenderers[0].color =
+        spriteRenderers[1].color =
+        spriteRenderers[2].color =
+        spriteRenderers[3].color = alpha;//1234根线赋值，这里的0，0，0就是黑色的线
     }
-    /// <summary>
-    /// 把所有的方框数据都给Box
-    /// </summary>
-    /// <param name="currentPositionX">当前基于Center的LocalPositionX</param>
-    /// <param name="currentPositionY">当前基于Center的LocalPositionY</param>
-    /// <param name="currentAngle">当前角度</param>
-    /// <param name="currentAlpha">当前方框的Alpha</param>
-    /// <param name="currentLineAlpha">当前方框中间那根线的Alpha</param>
-    /// <param name="currentCenterX">基于屏幕的X</param>
-    /// <param name="currentCenterY">基于屏幕的Y</param>
-    /// <param name="currentScaleX">当前的X缩放</param>
-    /// <param name="currentScaleY">当前的Y缩放</param>
-    void GiveEventData2Box(float currentPositionX, float currentPositionY,
-           float currentAngle, float currentAlpha, float currentLineAlpha,
-           float currentCenterX, float currentCenterY, float currentScaleX,
-           float currentScaleY)
+
+    void UpdateLineAlpha(ref float currentLineAlpha, ref float currentTime)
     {
-        //设置位置和旋转
-        transform.SetPositionAndRotation((Vector2)main.ViewportToWorldPoint(new(currentCenterX, currentCenterY)), Quaternion.Euler(Vector3.forward * currentAngle));
+        currentLineAlpha = CalculateCurrentValue(box.boxEvents.lineAlpha, ref currentTime, ref this.currentLineAlpha);
+        lineAlpha.a = currentLineAlpha;
+        spriteRenderers[4].color = lineAlpha;
+    }
 
-        //透明度
-        for (int i = 0; i < spriteRenderers.Length - 1; i++)
-            spriteRenderers[i].color = new Color(0, 0, 0, currentAlpha);//1234根线赋值，这里的0，0，0就是黑色的线
-        spriteRenderers[4].color = new Color(0, 0, 0, currentLineAlpha);//最后那条线单独赋值，这里的0，0，0就是黑色的线
+    void UpdateMove(ref float currentMoveX, ref float currentMoveY, ref float currentTime)
+    {
+        if (box.boxEvents.Length_moveX > 0)
+        {
+            currentMoveX = CalculateCurrentValue(box.boxEvents.moveX, ref currentTime, ref this.currentMoveX);
+            move.x = currentMoveX;
+        }
+        if (box.boxEvents.Length_moveY > 0)
+        {
+            currentMoveY = CalculateCurrentValue(box.boxEvents.moveY, ref currentTime, ref this.currentMoveY);
+            move.y = currentMoveY;
+        }
+        squarePosition.localPosition = move;
+    }
 
-        //方框的位置
-        squarePosition.localPosition = new Vector2(currentPositionX, currentPositionY);
+    void UpdateScale(ref float currentScaleX, ref float currentScaleY, ref float currentTime)
+    {
+        if (box.boxEvents.Length_scaleX > 0)
+        {
+            currentScaleX = CalculateCurrentValue(box.boxEvents.scaleX, ref currentTime, ref this.currentScaleX);
+            scale.x = currentScaleX;
+        }
+        if (box.boxEvents.Length_scaleY > 0)
+        {
+            currentScaleY = CalculateCurrentValue(box.boxEvents.scaleY, ref currentTime, ref this.currentScaleY);
+            scale.y = currentScaleY;
+        }
+        squarePosition.localScale = scale;
+    }
 
-        //设置scale
-
-        squarePosition.localScale = new Vector2(currentScaleX, currentScaleY);
-
+    void UpdateFineness()
+    {
+        horizontalFineness.x = 2 - (boxFineness / currentScaleX);
+        horizontalFineness.y = boxFineness / currentScaleY;
+        verticalFineness.x = 2 + (boxFineness / currentScaleY);
+        verticalFineness.y = boxFineness / currentScaleX;
         //缩放图片，保持视觉上相等
         spriteRenderers[0].transform.localScale =//第125根线都是水平的
             spriteRenderers[1].transform.localScale =
-            spriteRenderers[4].transform.localScale =
-            new Vector2(2 - (ValueManager.Instance.boxFineness / currentScaleX), ValueManager.Instance.boxFineness / currentScaleY);
+            spriteRenderers[4].transform.localScale = horizontalFineness;
 
         spriteRenderers[2].transform.localScale =//第34都是垂直的
-            spriteRenderers[3].transform.localScale =
-            new Vector2(2 + (ValueManager.Instance.boxFineness / currentScaleY), ValueManager.Instance.boxFineness / currentScaleX);
+            spriteRenderers[3].transform.localScale = verticalFineness;
         //这里的2是初始大小*2得到的结果，初始大小就是Prefabs里的
-        //结束设置scale
     }
     /// <summary>
     /// 计算当前数值
@@ -173,7 +189,7 @@ public class BoxController : MonoBehaviour
     /// <returns></returns>
     public float CalculateCurrentValue(Event[] events, ref float currentTime, ref float defaultValue)
     {
-        if (events.Length <= 0 || currentTime < events[0].startTime) return defaultValue;
+        if (currentTime < events[0].startTime) return defaultValue;
         int eventIndex = Algorithm.BinarySearch(events, IsCurrentEvent, true, ref currentTime);//找到当前时间下，应该是哪个事件
         if (currentTime > events[eventIndex].endTime && events[eventIndex].endValue != 0) return events[eventIndex].endValue;
         return GameUtility.GetValueWithEvent(events[eventIndex], currentTime);//拿到事件后根据时间Get到当前值

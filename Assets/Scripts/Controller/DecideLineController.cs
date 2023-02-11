@@ -52,7 +52,7 @@ public class DecideLineController : MonoBehaviour
             thisLine = value;//获取到源数据
             if (thisLine.OnlineNotesLength <= 0 && thisLine.OfflineNotesLength <= 0)
             {
-                lineNoteController.enabled = this.enabled = false;
+                lineNoteController.enabled = enabled = false;
                 return;
             }
             Init();//初始化
