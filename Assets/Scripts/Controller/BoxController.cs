@@ -88,12 +88,12 @@ public class BoxController : MonoBehaviour
         float currentTime = (float)ProgressManager.Instance.CurrentTime;
         if (box.boxEvents.Length_alpha > 0)
             UpdateAlpha(ref currentAlpha, ref currentTime);
-        if (currentAlpha == 0) return;
         UpdateCenterAndRotation(ref currentCenterX, ref currentCenterY, ref currentRotate, ref currentTime);
         if (box.boxEvents.Length_lineAlpha > 0)
             UpdateLineAlpha(ref currentLineAlpha, ref currentTime);
         UpdateMove(ref currentMoveX, ref currentMoveY, ref currentTime);
         UpdateScale(ref currentScaleX, ref currentScaleY, ref currentTime);
+        if (currentAlpha <= .01f) return;
         UpdateFineness();
     }
 
