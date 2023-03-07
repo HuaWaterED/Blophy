@@ -1202,6 +1202,26 @@ MonoBehaviour:
   currentMusic: 
   currentMusicIndex: 0
   currentHard: 
+  chartData:
+    metaData:
+      musicName: 
+      musicWriter: 
+      musicBPMText: 
+      artWriter: 
+      chartWriter: 
+      chartLevel: 
+      description: 
+    boxes: []
+    globalData:
+      offset: 0
+      musicLength: 0
+      tapCount: 0
+      holdCount: 0
+      dragCount: 0
+      flickCount: 0
+      fullFlickCount: 0
+      pointCount: 0
+  clip: {fileID: 0}
 --- !u!1 &1354066591
 GameObject:
   m_ObjectHideFlags: 0
