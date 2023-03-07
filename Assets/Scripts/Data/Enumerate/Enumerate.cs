@@ -5,3 +5,9 @@ public enum NoteJudge
     Bad,
     Miss
 }
+public enum Hard
+{
+    Green,
+    Yellow,
+    Red
+}

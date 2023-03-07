@@ -13,8 +13,6 @@ public class TestChart : MonoBehaviourSingleton<TestChart>
     {
         string chart = Resources.Load<TextAsset>("MusicPack/Tutorial/Base/ChartFile/Chart").text;
         chartData = JsonConvert.DeserializeObject<ChartData>(chart);
-        WebManager.Instance.ChartData = chartData;
-        WebManager.Instance.MusicClip = clip;
     }
     private void Update()
     {
