@@ -71,7 +71,7 @@ public class FullFlickController : NoteController
             PlayEffect(NoteJudge.Perfect, ValueManager.Instance.perfectJudge, true);
             return;//返回
         }
-        ScoreManager.Instance.AddScore(thisNote.noteType, NoteJudge.Miss, true);//按Miss判定加分
+        GlobalData.Instance.score.AddScore(thisNote.noteType, NoteJudge.Miss, true);//按Miss判定加分
     }
     public override bool IsinRange(Vector2 currentPosition)
     {

@@ -139,7 +139,7 @@ public class NoteController : MonoBehaviour
     public virtual void PlayEffect(NoteJudge noteJudge, Color hitJudgeEffectColor, bool isEarly)
     {
         PlayEffectWithoutAddScore(noteJudge, hitJudgeEffectColor, isEarly);
-        ScoreManager.Instance.AddScore(thisNote.noteType, noteJudge, isEarly);//加分
+        GlobalData.Instance.score.AddScore(thisNote.noteType, noteJudge, isEarly);//加分
     }
     public virtual void PlayEffectWithoutAddScore(NoteJudge noteJudge, Color hitJudgeEffectColor, bool isEarly)
     {

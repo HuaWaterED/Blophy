@@ -4,21 +4,37 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SelectMusic_ControlSpace : Public_ControlSpace
 {
     public static SelectMusic_ControlSpace Instance;
     private void Awake() => Instance = this;
     public string[] musics;
+    public Image musicPrefab;
     public override void Send()
     {
         GlobalData.Instance.currentMusicIndex = currentElementIndex;
         GlobalData.Instance.currentMusic = musics[currentElementIndex];
+        GlobalData.Instance.currentCP = Resources.Load<Sprite>($"MusicPack/{GlobalData.Instance.currentChapter}/{GlobalData.Instance.currentMusic}/Background/CP");
+        GlobalData.Instance.currentCPH = Resources.Load<Sprite>($"MusicPack/{GlobalData.Instance.currentChapter}/{GlobalData.Instance.currentMusic}/Background/CPH");
         GlobalData.Instance.clip = Resources.Load<AudioClip>($"MusicPack/{GlobalData.Instance.currentChapter}/{GlobalData.Instance.currentMusic}/Music/Music");
-        string chart = Resources.Load<TextAsset>($"MusicPack/{GlobalData.Instance.currentChapter}/{GlobalData.Instance.currentMusic}/ChartFile/{GlobalData.Instance.currentHard}/Chart").text;
+        string rawChart = Resources.Load<TextAsset>($"MusicPack/{GlobalData.Instance.currentChapter}/{GlobalData.Instance.currentMusic}/ChartFile/{GlobalData.Instance.currentHard}/Chart").text;
         //GlobalData.Instance. = JsonConvert.DeserializeObject<ChartData>(chart);
-        GlobalData.Instance.chartData = JsonConvert.DeserializeObject<ChartData>(chart);
+        ChartData chart = JsonConvert.DeserializeObject<ChartData>(rawChart);
+        GlobalData.Instance.chartData = chart;
+        SelectMusic_UIManager.Instance.SelectMusic(chart.metaData.musicName, chart.metaData.musicWriter, chart.metaData.chartWriter, chart.metaData.artWriter);
     }
+    protected override void OnStart()
+    {
+        int currentChapterMusicCount = GlobalData.Instance.chapters[GlobalData.Instance.currentChapterIndex].musicPath.Length;
+        elementCount = currentChapterMusicCount;
+        for (int i = 0; i < currentChapterMusicCount; i++)
+        {
+            Instantiate(musicPrefab, transform).sprite = Resources.Load<Sprite>($"MusicPack/{GlobalData.Instance.currentChapter}/{GlobalData.Instance.chapters[GlobalData.Instance.currentChapterIndex].musicPath[i]}/Background/CPH");
+        }
+    }
+
     Vector2 startPoint;
     Vector2 endPoint;
     protected override void LargeImageUpdate()

@@ -18,6 +18,7 @@ public class Public_ControlSpace : MonoBehaviour
     // Update is called once per frame
     private void Start()
     {
+        OnStart();
         allElementDistance = new float[elementCount];//所有元素标准的距离（0-1之间的数据）
         for (int i = 0; i < elementCount; i++)
         {
@@ -25,6 +26,7 @@ public class Public_ControlSpace : MonoBehaviour
         }
         Send();
     }
+    protected virtual void OnStart() { }
     void Update()
     {
         ListUpdate();

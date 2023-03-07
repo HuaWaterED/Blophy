@@ -22,7 +22,7 @@ public class FlickController : NoteController
     {
         if (!isJudged)//如果没有判定过
         {
-            ScoreManager.Instance.AddScore(thisNote.noteType, NoteJudge.Miss, true);//加Miss分
+            GlobalData.Instance.score.AddScore(thisNote.noteType, NoteJudge.Miss, true);//加Miss分
             return;
         }
         CompletedJudge();

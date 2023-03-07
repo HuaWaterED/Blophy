@@ -1,6 +1,7 @@
 using UnityEngine;
 using Blophy.Chart;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class AssetManager : MonoBehaviourSingleton<AssetManager>
 {
@@ -25,4 +26,7 @@ public class AssetManager : MonoBehaviourSingleton<AssetManager>
 
     [Header("打击音效预制件")]
     public HitSoundController hitSoundController;
+
+    [Header("背景")]
+    public Image background;
 }

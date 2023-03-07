@@ -14,6 +14,7 @@ public class SelectMusic_Start : MonoBehaviour
         {
             WebManager.Instance.ChartData = GlobalData.Instance.chartData;
             WebManager.Instance.MusicClip = GlobalData.Instance.clip;
+            WebManager.Instance.Background.sprite = GlobalData.Instance.currentCP;
         });
     }
 }
