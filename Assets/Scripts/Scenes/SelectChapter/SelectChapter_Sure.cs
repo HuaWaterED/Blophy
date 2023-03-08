@@ -11,8 +11,7 @@ public class SelectChapter_Sure : MonoBehaviour
     {
         sure_button.onClick.AddListener(() =>
         {
-            SceneManager.LoadSceneAsync("SelectMusic", LoadSceneMode.Single).completed +=
-            (AsyncOperation obj) => SelectMusic_ControlSpace.Instance.musics = GlobalData.Instance.chapters[GlobalData.Instance.currentChapterIndex].musicPath;
+            SceneManager.LoadSceneAsync("SelectMusic", LoadSceneMode.Single);
         });
     }
 }

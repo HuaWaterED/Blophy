@@ -10,11 +10,6 @@ public class SelectMusic_Start : MonoBehaviour
     public Button start_button;
     private void Start()
     {
-        start_button.onClick.AddListener(() => SceneManager.LoadSceneAsync("GamePlay", LoadSceneMode.Single).completed += (AsyncOperation obj) =>
-        {
-            WebManager.Instance.ChartData = GlobalData.Instance.chartData;
-            WebManager.Instance.MusicClip = GlobalData.Instance.clip;
-            WebManager.Instance.Background.sprite = GlobalData.Instance.currentCP;
-        });
+        start_button.onClick.AddListener(() => SceneManager.LoadSceneAsync("GamePlay", LoadSceneMode.Single));
     }
 }

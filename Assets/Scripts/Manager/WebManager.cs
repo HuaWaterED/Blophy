@@ -35,4 +35,10 @@ public class WebManager : MonoBehaviourSingleton<WebManager>
         get => AssetManager.Instance.background;
         set => AssetManager.Instance.background = value;
     }
+    private void Start()
+    {
+        ChartData = GlobalData.Instance.chartData;
+        MusicClip = GlobalData.Instance.clip;
+        Background.sprite = GlobalData.Instance.currentCP;
+    }
 }

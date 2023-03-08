@@ -27,6 +27,7 @@ public class SelectMusic_ControlSpace : Public_ControlSpace
     }
     protected override void OnStart()
     {
+        musics = GlobalData.Instance.chapters[GlobalData.Instance.currentChapterIndex].musicPath;
         int currentChapterMusicCount = GlobalData.Instance.chapters[GlobalData.Instance.currentChapterIndex].musicPath.Length;
         elementCount = currentChapterMusicCount;
         currentElement = 1;

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviourSingleton<UIManager>
 {
@@ -25,6 +26,9 @@ public class UIManager : MonoBehaviourSingleton<UIManager>
         combo.text = $"{rawCombo}";
         score.text = $"{(int)rawScore:D7}";
     }
+    [Header("暂停画布")]
+    public Canvas pauseCanvas;
+    public Image background;
     private void Update()
     {
         debugTextString = "";//每帧清空字符串本身
