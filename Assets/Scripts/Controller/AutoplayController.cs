@@ -6,12 +6,10 @@ using UnityEngine;
 public class AutoplayController : MonoBehaviourSingleton<AutoplayController>
 {
     public SpeckleManager speckleManager;
-    public bool isAutoplay = false;
     public float currentH;
     private void Start()
     {
-        if (Application.isEditor) isAutoplay = true;
-        switch (isAutoplay)
+        switch (GlobalData.Instance.isAutoplay)
         {
             case true:
                 speckleManager.enabled = false;

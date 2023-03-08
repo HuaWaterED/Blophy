@@ -36,7 +36,7 @@ public class End_UIManager : MonoBehaviourSingleton<End_UIManager>
         {
             APFC.text = "";
         }
-        score.text = $"{GlobalData.Instance.score.Score}";
+        score.text = $"{(int)GlobalData.Instance.score.Score:D7}";
         perfect.text = $"{GlobalData.Instance.score.Perfect}";
         good.text = $"{GlobalData.Instance.score.Good}";
         bad.text = $"{GlobalData.Instance.score.Bad}";

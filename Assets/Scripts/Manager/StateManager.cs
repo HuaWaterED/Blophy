@@ -14,7 +14,7 @@ public class StateManager : MonoBehaviourSingleton<StateManager>
         {
             if (_isStart) return;//如果已经开始了就直接返回
             _isStart = value;//设置状态为开始
-            AssetManager.Instance.musicPlayer.PlayScheduled(AssetManager.Instance.chartData.globalData.offset);//播放音乐，带上延迟
+            AssetManager.Instance.musicPlayer.PlayScheduled(AssetManager.Instance.chartData.globalData.offset + GlobalData.Instance.offset);//播放音乐，带上延迟
             ProgressManager.Instance.StartPlay(default);//谱面开始播放
             AssetManager.Instance.box.gameObject.SetActive(true);//激活所有方框
 

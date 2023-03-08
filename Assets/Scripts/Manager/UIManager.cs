@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class UIManager : MonoBehaviourSingleton<UIManager>
 {
+    public TextMeshProUGUI musicName;
+    public TextMeshProUGUI level;
     public TextMeshProUGUI debugText;//用于显示debugText的UI
     string debugTextString = "";//需要显示的字符
     public string DebugTextString//通过这个来增加DebugText文本

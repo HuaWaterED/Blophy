@@ -29,6 +29,7 @@ public class SelectMusic_ControlSpace : Public_ControlSpace
     {
         int currentChapterMusicCount = GlobalData.Instance.chapters[GlobalData.Instance.currentChapterIndex].musicPath.Length;
         elementCount = currentChapterMusicCount;
+        currentElement = 1;
         for (int i = 0; i < currentChapterMusicCount; i++)
         {
             Instantiate(musicPrefab, transform).sprite = Resources.Load<Sprite>($"MusicPack/{GlobalData.Instance.currentChapter}/{GlobalData.Instance.chapters[GlobalData.Instance.currentChapterIndex].musicPath[i]}/Background/CPH");

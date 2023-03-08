@@ -20,6 +20,8 @@ public class WebManager : MonoBehaviourSingleton<WebManager>
             GlobalData.Instance.score.flickCount = value.globalData.flickCount;
             GlobalData.Instance.score.fullFlickCount = value.globalData.fullFlickCount;
             GlobalData.Instance.score.pointCount = value.globalData.pointCount;
+            UIManager.Instance.musicName.text = value.metaData.musicName;
+            UIManager.Instance.level.text = value.metaData.chartLevel;
         }
 
     }
