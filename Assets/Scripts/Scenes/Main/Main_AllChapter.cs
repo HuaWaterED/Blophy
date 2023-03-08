@@ -8,6 +8,7 @@ public class Main_AllChapter : Public_Button
 {
     private void Start()
     {
-        thisButton.onClick.AddListener(() => SceneManager.LoadSceneAsync("SelectChapter", LoadSceneMode.Single));
+
+        thisButton.onClick.AddListener(() => Loading_Controller.Instance.SetLoadSceneByName("SelectChapter").StartLoad());
     }
 }

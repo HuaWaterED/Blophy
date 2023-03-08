@@ -5,11 +5,10 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class SelectMusic_Start : MonoBehaviour
+public class SelectMusic_Start : Public_Button
 {
-    public Button start_button;
     private void Start()
     {
-        start_button.onClick.AddListener(() => SceneManager.LoadSceneAsync("GamePlay", LoadSceneMode.Single));
+        thisButton.onClick.AddListener(() => Loading_Controller.Instance.SetLoadSceneByName("Gameplay").StartLoad());
     }
 }

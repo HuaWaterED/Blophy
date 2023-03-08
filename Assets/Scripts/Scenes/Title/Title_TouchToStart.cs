@@ -8,9 +8,9 @@ public class Title_TouchToStart : Public_Button
 {
     private void Start()
     {
-        thisButton.onClick.AddListener(() =>
-        {
-            SceneManager.LoadSceneAsync("Main", LoadSceneMode.Single);
-        });
+        SceneManager.LoadSceneAsync("Loading", LoadSceneMode.Additive).completed += (AsyncOperation a) =>
+        Loading_Controller.Instance.SetLoadSceneByName("Main");
+
+        thisButton.onClick.AddListener(() => Loading_Controller.Instance.StartLoad());
     }
 }
