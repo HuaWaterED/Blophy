@@ -9,7 +9,7 @@ public class Title_TouchToStart : Public_Button
     private void Start()
     {
         SceneManager.LoadSceneAsync("Loading", LoadSceneMode.Additive).completed += (AsyncOperation a) =>
-        Loading_Controller.Instance.SetLoadSceneByName("Main");
+        Loading_Controller.Instance.SetLoadSceneByName("SelectChapter");
 
         thisButton.onClick.AddListener(() => Loading_Controller.Instance.StartLoad());
     }

@@ -8,7 +8,6 @@ public class Settings_Return : Public_Button
     // Start is called before the first frame update
     void Start()
     {
-        Loading_Controller.Instance.SetLoadSceneByName("Main");
-        thisButton.onClick.AddListener(() => Loading_Controller.Instance.StartLoad());
+        thisButton.onClick.AddListener(() => Loading_Controller.Instance.SetLoadSceneByName("SelectChapter").StartLoad());
     }
 }

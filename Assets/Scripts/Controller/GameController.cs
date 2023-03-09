@@ -15,7 +15,7 @@ public class GameController : MonoBehaviourSingleton<GameController>
         }
         yield return new WaitForSeconds(3);//等8秒
         StateManager.Instance.IsStart = true;//设置状态IsStart为True
-        yield return new WaitForSeconds(AssetManager.Instance.musicPlayer.clip.length + 3 + GlobalData.Instance.chartData.globalData.offset + GlobalData.Instance.offset);
+        yield return new WaitForSeconds(AssetManager.Instance.chartData.globalData.musicLength + 3f + GlobalData.Instance.chartData.globalData.offset + GlobalData.Instance.offset);
         Loading_Controller.Instance.SetLoadSceneByName("End").StartLoad();
     }
 }

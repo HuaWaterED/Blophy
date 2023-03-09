@@ -16,9 +16,6 @@ public class SelectMusic_ControlSpace : Public_ControlSpace
     public Image musicPrefab;
     public new IEnumerator Send()
     {
-        GlobalData.Instance.currentMusicIndex = currentElementIndex;
-        GlobalData.Instance.currentMusic = musics[currentElementIndex];
-
         ResourceRequest rawChart = Resources.LoadAsync<TextAsset>($"MusicPack/{GlobalData.Instance.currentChapter}/{GlobalData.Instance.currentMusic}/ChartFile/{GlobalData.Instance.currentHard}/Chart");
         yield return rawChart;
         TextAsset rawChartTex = rawChart.asset as TextAsset;
@@ -38,6 +35,18 @@ public class SelectMusic_ControlSpace : Public_ControlSpace
         ResourceRequest clip = Resources.LoadAsync<AudioClip>($"MusicPack/{GlobalData.Instance.currentChapter}/{GlobalData.Instance.currentMusic}/Music/Music");
         yield return clip;
         GlobalData.Instance.clip = clip.asset as AudioClip;
+
+        verticalBar.value = allElementDistance[elementCount - 1 - currentElementIndex];
+    }
+    void UploadSyncMusicIndex()
+    {
+        GlobalData.Instance.currentMusicIndex = currentElementIndex;
+        GlobalData.Instance.currentMusic = musics[currentElementIndex];
+    }
+    void DownloadSyncMusicIndex()
+    {
+        currentElementIndex = GlobalData.Instance.currentMusicIndex;
+        GlobalData.Instance.currentMusic = musics[currentElementIndex];
     }
     protected override void OnStart()
     {
@@ -45,10 +54,13 @@ public class SelectMusic_ControlSpace : Public_ControlSpace
         int currentChapterMusicCount = GlobalData.Instance.chapters[GlobalData.Instance.currentChapterIndex].musicPath.Length;
         elementCount = currentChapterMusicCount;
         currentElement = 1;
+        InitAllElementDistance();
         for (int i = 0; i < currentChapterMusicCount; i++)
         {
             Instantiate(musicPrefab, transform).sprite = Resources.Load<Sprite>($"MusicPack/{GlobalData.Instance.currentChapter}/{GlobalData.Instance.chapters[GlobalData.Instance.currentChapterIndex].musicPath[i]}/Background/CPH");
         }
+        DownloadSyncMusicIndex();
+        StartCoroutine(Send());
     }
 
     Vector2 startPoint;
@@ -74,6 +86,7 @@ public class SelectMusic_ControlSpace : Public_ControlSpace
                 {
                     currentElement = allElementDistance[elementCount - 1 - --currentElementIndex];
                 }
+                UploadSyncMusicIndex();
                 StartCoroutine(Send());
                 StartCoroutine(Lerp());
             }
