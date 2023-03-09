@@ -24,7 +24,11 @@ public class End_UIManager : MonoBehaviourSingleton<End_UIManager>
         art.sprite = GlobalData.Instance.currentCPH;
         Texture2D cphTexture = GlobalData.Instance.currentCPH.texture;
         art.sprite = Sprite.Create(cphTexture, new Rect((cphTexture.width - cphTexture.height) / 2, 0, cphTexture.height, cphTexture.height), new Vector2(0.5f, 0.5f));
-        if (GlobalData.Instance.score.Bad == 0 && GlobalData.Instance.score.Miss == 0 && GlobalData.Instance.score.Good == 0)
+        if (GlobalData.Instance.isAutoplay)
+        {
+            APFC.text = "Autoplay";
+        }
+        else if (GlobalData.Instance.score.Bad == 0 && GlobalData.Instance.score.Miss == 0 && GlobalData.Instance.score.Good == 0)
         {
             APFC.text = "AllPerfect";
         }

@@ -5,8 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviourSingleton<GameController>
 {
+    public bool isLoading = false;
     private IEnumerator Start()
     {
+        isLoading = false;
         for (int i = 0; i < AssetManager.Instance.chartData.boxes.Length; i++)
         {
             Instantiate(AssetManager.Instance.boxController, AssetManager.Instance.box)
@@ -15,7 +17,15 @@ public class GameController : MonoBehaviourSingleton<GameController>
         }
         yield return new WaitForSeconds(3);//等8秒
         StateManager.Instance.IsStart = true;//设置状态IsStart为True
-        yield return new WaitForSeconds(AssetManager.Instance.chartData.globalData.musicLength + 3f + GlobalData.Instance.chartData.globalData.offset + GlobalData.Instance.offset);
-        Loading_Controller.Instance.SetLoadSceneByName("End").StartLoad();
+
+    }
+    private void Update()
+    {
+        if (GlobalData.Instance.chartData.globalData.musicLength - ProgressManager.Instance.CurrentTime <= .1f && !isLoading)
+        {
+            isLoading = true;
+            Loading_Controller.Instance.SetLoadSceneByName("End").StartLoad();
+        }
+
     }
 }
