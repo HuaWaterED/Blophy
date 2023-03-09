@@ -12,7 +12,7 @@ namespace Blophy.Chart
         public MetaData metaData;
         public Box[] boxes;
         public GlobalData globalData;
-        public Text text;
+        public Text[] texts;
     }
 
     [Serializable]
@@ -42,10 +42,14 @@ namespace Blophy.Chart
     [Serializable]
     public class Text
     {
-        //未来要补文字演示的json
+        public float startTime;
+        public float endTime;
+        public float size;
+        public string text;
+        public Event moveX;
+        public Event moveY;
     }
     #region 下面都是依赖
-
     [Serializable]
     //public struct Box
     public class Box

@@ -1,6 +1,5 @@
 using UnityEngine;
 using Blophy.Chart;
-using static UnityEngine.Camera;
 using Event = Blophy.Chart.Event;
 using System.Collections;
 using static UnityEngine.Mathf;
@@ -9,6 +8,7 @@ using System;
 public class BoxController : MonoBehaviour
 {
     public Transform squarePosition;//方框的位置
+    public Camera mainCamera;
 
     public DecideLineController[] decideLineControllers;//所有的判定线控制器
     public SpriteRenderer[] spriteRenderers;//所有的渲染组件
@@ -84,6 +84,7 @@ public class BoxController : MonoBehaviour
     public BoxController Init(Box thisBox)
     {
         box = thisBox;//赋值thisBox到box
+        mainCamera = Camera.main;
         int length_decideLineControllers = decideLineControllers.Length;//获得到当前判定线的数量
         for (int i = 0; i < length_decideLineControllers; i++)//遍历
         {
@@ -162,7 +163,7 @@ public class BoxController : MonoBehaviour
         if (last_currentCenterX == currentCenterX && last_currentCenterY == currentCenterY && last_currentRotate == currentRotate) return;
         raw_center.x = currentCenterX;
         raw_center.y = currentCenterY;
-        center = main.ViewportToWorldPoint(raw_center);
+        center = mainCamera.ViewportToWorldPoint(raw_center);
         rotation = Quaternion.Euler(Vector3.forward * currentRotate);
         transform.SetPositionAndRotation(center, rotation);
     }

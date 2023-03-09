@@ -15,6 +15,9 @@ public class AssetManager : MonoBehaviourSingleton<AssetManager>
     public Transform box;
     public BoxController boxController;
 
+    [Header("文字的预制件")]
+    public TextController text;
+
     [Header("音符萌~")]
     public NoteController[] noteControllers;
 
