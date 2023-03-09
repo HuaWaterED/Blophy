@@ -207,29 +207,28 @@ public class NoteController : MonoBehaviour
         float currentTime = (float)ProgressManager.Instance.CurrentTime;//获取到当前时间
         noteJudge = NoteJudge.Miss;//默认Miss
         isEarly = true;//默认是早的
-        if (currentTime <= thisNote.hitTime + JudgeManager.perfect &&
-            currentTime >= thisNote.hitTime - JudgeManager.perfect)//如果在hitTime+perfect和hitTime-perfect之间
+        if (currentTime < thisNote.hitTime + JudgeManager.perfect &&
+            currentTime > thisNote.hitTime - JudgeManager.perfect)//如果在hitTime+perfect和hitTime-perfect之间
         {
             noteJudge = NoteJudge.Perfect;//完美判定
         }
-        else if (currentTime <= thisNote.hitTime &&//如果在打击时间-good到打击时间之间
-            currentTime >= thisNote.hitTime - JudgeManager.good)
+        else if (currentTime < thisNote.hitTime &&//如果在打击时间-good到打击时间之间
+            currentTime > thisNote.hitTime - JudgeManager.good)
         {
             noteJudge = NoteJudge.Good;//Good判定，Early默认是True，所以这里不理会isEarly
         }
-        else if (currentTime <= thisNote.hitTime + JudgeManager.good &&
-            currentTime >= thisNote.hitTime)//如果在打击时间+good到打击时间之间
+        else if (currentTime < thisNote.hitTime + JudgeManager.good &&
+            currentTime > thisNote.hitTime)//如果在打击时间+good到打击时间之间
         {
             noteJudge = NoteJudge.Good;//Good判定
             isEarly = false;//LateGood设置
         }
-        else if (currentTime <= thisNote.hitTime &&//如果在打击时间-bad到打击时间之间
-            currentTime >= thisNote.hitTime - JudgeManager.bad)
+        else if (currentTime < thisNote.hitTime &&//如果在打击时间-bad到打击时间之间
+            currentTime > thisNote.hitTime - JudgeManager.bad)
         {
             noteJudge = NoteJudge.Bad;//Bad判定
         }
-        else if (currentTime <= thisNote.hitTime + JudgeManager.bad &&
-            currentTime >= thisNote.hitTime)//如果在打击时间+bad到打击时间之间
+        else if (isJudged)//如果是坏判定，晚
         {
             noteJudge = NoteJudge.Bad;//Bad判定
             isEarly = false;//LateBad设置

@@ -36,7 +36,7 @@ public class SelectMusic_ControlSpace : Public_ControlSpace
         yield return clip;
         GlobalData.Instance.clip = clip.asset as AudioClip;
 
-        verticalBar.value = allElementDistance[elementCount - 1 - currentElementIndex];
+
     }
     void UploadSyncMusicIndex()
     {
@@ -46,6 +46,7 @@ public class SelectMusic_ControlSpace : Public_ControlSpace
     void DownloadSyncMusicIndex()
     {
         currentElementIndex = GlobalData.Instance.currentMusicIndex;
+        currentElement = allElementDistance[elementCount - 1 - currentElementIndex];
         GlobalData.Instance.currentMusic = musics[currentElementIndex];
     }
     protected override void OnStart()
@@ -61,6 +62,13 @@ public class SelectMusic_ControlSpace : Public_ControlSpace
         }
         DownloadSyncMusicIndex();
         StartCoroutine(Send());
+        StartCoroutine(ReturnLastTimeCancelMusic());
+
+    }
+    IEnumerator ReturnLastTimeCancelMusic()
+    {
+        yield return new WaitForEndOfFrame();
+        verticalBar.value = allElementDistance[elementCount - 1 - currentElementIndex];
     }
 
     Vector2 startPoint;

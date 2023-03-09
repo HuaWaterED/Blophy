@@ -8,14 +8,18 @@ public class Gameplay_Continue : Public_Button
 {
     public Image[] allTexture;
     public TextMeshProUGUI pauseText;
+    public TextMeshProUGUI bigPauseText;
     public bool isRunning = false;
+    public float textAlpha;
+    public float bigTextAlpha;
     private void OnEnable()
     {
         for (int i = 0; i < allTexture.Length; i++)
         {
             allTexture[i].color = Color.white;
         }
-        pauseText.alpha = 1;
+        pauseText.alpha = textAlpha;
+        bigPauseText.alpha = bigTextAlpha;
     }
     // Start is called before the first frame update
     void Start()
@@ -37,7 +41,8 @@ public class Gameplay_Continue : Public_Button
             {
                 allTexture[i].color = color;
             }
-            pauseText.alpha = color.a;
+            pauseText.alpha -= Time.deltaTime * textAlpha;
+            bigPauseText.alpha -= Time.deltaTime * bigTextAlpha;
             yield return new WaitForEndOfFrame();
         }
         yield return new WaitForSeconds(1.5f);

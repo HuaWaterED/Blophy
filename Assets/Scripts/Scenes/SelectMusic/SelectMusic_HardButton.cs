@@ -59,6 +59,7 @@ public class SelectMusic_HardButton : MonoBehaviour
         IsSelected = isSelected;
         thisButton.onClick.AddListener(() =>
         {
+            if (isSelected) return;
             IsSelected = !IsSelected;
         });
     }
