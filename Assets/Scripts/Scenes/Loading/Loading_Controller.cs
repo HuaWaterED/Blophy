@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics.PerformanceData;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -46,8 +45,12 @@ public class Loading_Controller : MonoBehaviourSingleton<Loading_Controller>
     {
         action = () =>
         {
-            SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene()).completed += (AsyncOperation a) => SceneManager.LoadSceneAsync(targetSceneName, LoadSceneMode.Additive).completed += (AsyncOperation a) => SceneManager.SetActiveScene(SceneManager.GetSceneByName(targetSceneName));
-            CompleteLoad();
+            SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene()).completed += (AsyncOperation a) => 
+            SceneManager.LoadSceneAsync(targetSceneName, LoadSceneMode.Additive).completed += (AsyncOperation a) =>
+            {
+                SceneManager.SetActiveScene(SceneManager.GetSceneByName(targetSceneName));
+                CompleteLoad();
+            };
         };
         return this;
     }

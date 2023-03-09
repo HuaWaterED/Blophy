@@ -1,8 +1,10 @@
 using Blophy.Chart;
 using Newtonsoft.Json;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,18 +14,30 @@ public class SelectMusic_ControlSpace : Public_ControlSpace
     private void Awake() => Instance = this;
     public string[] musics;
     public Image musicPrefab;
-    public override void Send()
+    public new IEnumerator Send()
     {
         GlobalData.Instance.currentMusicIndex = currentElementIndex;
         GlobalData.Instance.currentMusic = musics[currentElementIndex];
-        GlobalData.Instance.currentCP = Resources.Load<Sprite>($"MusicPack/{GlobalData.Instance.currentChapter}/{GlobalData.Instance.currentMusic}/Background/CP");
-        GlobalData.Instance.currentCPH = Resources.Load<Sprite>($"MusicPack/{GlobalData.Instance.currentChapter}/{GlobalData.Instance.currentMusic}/Background/CPH");
-        GlobalData.Instance.clip = Resources.Load<AudioClip>($"MusicPack/{GlobalData.Instance.currentChapter}/{GlobalData.Instance.currentMusic}/Music/Music");
-        string rawChart = Resources.Load<TextAsset>($"MusicPack/{GlobalData.Instance.currentChapter}/{GlobalData.Instance.currentMusic}/ChartFile/{GlobalData.Instance.currentHard}/Chart").text;
+
+        ResourceRequest rawChart = Resources.LoadAsync<TextAsset>($"MusicPack/{GlobalData.Instance.currentChapter}/{GlobalData.Instance.currentMusic}/ChartFile/{GlobalData.Instance.currentHard}/Chart");
+        yield return rawChart;
+        TextAsset rawChartTex = rawChart.asset as TextAsset;
         //GlobalData.Instance. = JsonConvert.DeserializeObject<ChartData>(chart);
-        ChartData chart = JsonConvert.DeserializeObject<ChartData>(rawChart);
+        ChartData chart = JsonConvert.DeserializeObject<ChartData>(rawChartTex.text);
         GlobalData.Instance.chartData = chart;
         SelectMusic_UIManager.Instance.SelectMusic(chart.metaData.musicName, chart.metaData.musicWriter, chart.metaData.chartWriter, chart.metaData.artWriter);
+
+        ResourceRequest currentCP = Resources.LoadAsync<Sprite>($"MusicPack/{GlobalData.Instance.currentChapter}/{GlobalData.Instance.currentMusic}/Background/CP");
+        yield return currentCP;
+        GlobalData.Instance.currentCP = currentCP.asset as Sprite;
+
+        ResourceRequest currentCPH = Resources.LoadAsync<Sprite>($"MusicPack/{GlobalData.Instance.currentChapter}/{GlobalData.Instance.currentMusic}/Background/CPH");
+        yield return currentCPH;
+        GlobalData.Instance.currentCPH = currentCPH.asset as Sprite;
+
+        ResourceRequest clip = Resources.LoadAsync<AudioClip>($"MusicPack/{GlobalData.Instance.currentChapter}/{GlobalData.Instance.currentMusic}/Music/Music");
+        yield return clip;
+        GlobalData.Instance.clip = clip.asset as AudioClip;
     }
     protected override void OnStart()
     {
@@ -60,7 +74,7 @@ public class SelectMusic_ControlSpace : Public_ControlSpace
                 {
                     currentElement = allElementDistance[elementCount - 1 - --currentElementIndex];
                 }
-                Send();
+                StartCoroutine(Send());
                 StartCoroutine(Lerp());
             }
         }
