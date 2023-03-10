@@ -12,7 +12,6 @@ public class WebManager : MonoBehaviourSingleton<WebManager>
         set
         {
             AssetManager.Instance.chartData = value;
-            //ScoreManager.Instance.NoteCount
             GlobalData.Instance.score.Reset();
             GlobalData.Instance.score.tapCount = value.globalData.tapCount;
             GlobalData.Instance.score.holdCount = value.globalData.holdCount;
@@ -22,6 +21,7 @@ public class WebManager : MonoBehaviourSingleton<WebManager>
             GlobalData.Instance.score.pointCount = value.globalData.pointCount;
             UIManager.Instance.musicName.text = value.metaData.musicName;
             UIManager.Instance.level.text = value.metaData.chartLevel;
+            TextManager.Instance.Init(value.texts);
         }
 
     }

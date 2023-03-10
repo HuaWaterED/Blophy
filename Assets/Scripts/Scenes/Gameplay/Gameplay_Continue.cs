@@ -47,6 +47,7 @@ public class Gameplay_Continue : Public_Button
         }
         yield return new WaitForSeconds(1.5f);
         ProgressManager.Instance.ContinuePlay();
+        if(!GlobalData.Instance.isAutoplay)
         SpeckleManager.Instance.enabled = true;
         isRunning = false;
         UIManager.Instance.pauseCanvas.gameObject.SetActive(false);

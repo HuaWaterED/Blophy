@@ -8,8 +8,9 @@ public class TextManager : MonoBehaviourSingleton<TextManager>
     public Text[] texts;
     public int lastIndex = 0;//上次召唤到Note[]列表的什么位置了，从上次的位置继续
     public ObjectPoolQueue<TextController> textObjectPool;
-    private void Start()
+    public void Init(Text[] texts)
     {
+        this.texts = texts;
         textObjectPool = new(AssetManager.Instance.text, 0, textCanvas);
         if (texts == null || texts.Length == 0)
         {
