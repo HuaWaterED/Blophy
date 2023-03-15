@@ -29,7 +29,6 @@ using Quaternion = UnityEngine.Quaternion;
 public class DecideLineController : MonoBehaviour
 {
     public float lineDistance;//线的距离，根据每帧计算，生成这个范围内的所有Note
-    public bool isHorizontal;//是否为水平判定线
 
     public AnimationCurve canvasSpeed;//这个用来表示这根线的所有速度总览
     public AnimationCurve canvasLocalOffset;//这个用来表示的是某个时间，画布的Y轴应该是多少

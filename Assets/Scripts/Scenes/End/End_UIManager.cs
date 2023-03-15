@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-
+using AD = ArchiveData;
+using GD = GlobalData;
 public class End_UIManager : MonoBehaviourSingleton<End_UIManager>
 {
     public Image background;
@@ -20,19 +21,19 @@ public class End_UIManager : MonoBehaviourSingleton<End_UIManager>
     public TextMeshProUGUI level;
     private void Start()
     {
-        background.sprite = GlobalData.Instance.currentCP;
-        art.sprite = GlobalData.Instance.currentCPH;
-        Texture2D cphTexture = GlobalData.Instance.currentCPH.texture;
+        background.sprite = GD.Instance.currentCP;
+        art.sprite = GD.Instance.currentCPH;
+        Texture2D cphTexture = GD.Instance.currentCPH.texture;
         art.sprite = Sprite.Create(cphTexture, new Rect((cphTexture.width - cphTexture.height) / 2, 0, cphTexture.height, cphTexture.height), new Vector2(0.5f, 0.5f));
-        if (GlobalData.Instance.isAutoplay)
+        if (GD.Instance.isAutoplay)
         {
             APFC.text = "Autoplay";
         }
-        else if (GlobalData.Instance.score.Bad == 0 && GlobalData.Instance.score.Miss == 0 && GlobalData.Instance.score.Good == 0)
+        else if (GD.Instance.score.Bad == 0 && GD.Instance.score.Miss == 0 && GD.Instance.score.Good == 0)
         {
             APFC.text = "AllPerfect";
         }
-        else if (GlobalData.Instance.score.Bad == 0 && GlobalData.Instance.score.Miss == 0)
+        else if (GD.Instance.score.Bad == 0 && GD.Instance.score.Miss == 0)
         {
             APFC.text = "FullCombo";
         }
@@ -40,14 +41,21 @@ public class End_UIManager : MonoBehaviourSingleton<End_UIManager>
         {
             APFC.text = "";
         }
-        score.text = $"{(int)GlobalData.Instance.score.Score:D7}";
-        perfect.text = $"{GlobalData.Instance.score.Perfect}";
-        good.text = $"{GlobalData.Instance.score.Good}";
-        bad.text = $"{GlobalData.Instance.score.Bad}";
-        miss.text = $"{GlobalData.Instance.score.Miss}";
-        maxCombo.text = $"Max Combo: {GlobalData.Instance.score.maxCombo}";
-        accuracy.text = $"Accuracy: {GlobalData.Instance.score.Accuracy * 100f:F2}%";
-        musicName.text = $"{GlobalData.Instance.chartData.metaData.musicName}";
-        level.text = $"{GlobalData.Instance.chartData.metaData.chartLevel}";
+        score.text = $"{(int)GD.Instance.score.Score:D7}";
+        perfect.text = $"{GD.Instance.score.Perfect}";
+        good.text = $"{GD.Instance.score.Good}";
+        bad.text = $"{GD.Instance.score.Bad}";
+        miss.text = $"{GD.Instance.score.Miss}";
+        maxCombo.text = $"Max Combo: {GD.Instance.score.maxCombo}";
+        accuracy.text = $"Accuracy: {GD.Instance.score.Accuracy * 100f:F2}%";
+        musicName.text = $"{GD.Instance.chartData.metaData.musicName}";
+        level.text = $"{GD.Instance.chartData.metaData.chartLevel}";
+        if (!GD.Instance.isAutoplay)
+        {
+            int currentArchiveMusicHardScore = AD.Instance.archive.chapterArchives[GD.Instance.currentChapterIndex].musicArchive[GD.Instance.currentMusicIndex][GD.Instance.currentHard];
+            int newMusicHardScore = (int)GD.Instance.score.Score;
+            AD.Instance.archive.chapterArchives[GD.Instance.currentChapterIndex].musicArchive[GD.Instance.currentMusicIndex][GD.Instance.currentHard] = newMusicHardScore > currentArchiveMusicHardScore ? newMusicHardScore : currentArchiveMusicHardScore;
+            AD.Instance.SaveArchive();
+        }
     }
 }

@@ -6,7 +6,6 @@ namespace Blophy.Chart
 {
 
     [Serializable]
-    //public struct ChartData
     public class ChartData
     {
         public MetaData metaData;
@@ -27,7 +26,6 @@ namespace Blophy.Chart
         public string description = "";
     }
     [Serializable]
-    //public struct GlobalData
     public class GlobalData
     {
         public float offset;
@@ -48,17 +46,27 @@ namespace Blophy.Chart
         public string text;
         public Event moveX;
         public Event moveY;
+
+        //先放这里，画个大饼
+        public EventString[] thisEvent;
+        public Event[] positionX;
+        public Event[] positionY;
+        public Event[] spaceBetween;
+        public Event[] textSize;
+        public Event[] r;
+        public Event[] g;
+        public Event[] b;
+        public Event[] rotate;
+        public Event[] alpha;
     }
     #region 下面都是依赖
     [Serializable]
-    //public struct Box
     public class Box
     {
         public BoxEvents boxEvents;
         public Line[] lines;
     }
     [Serializable]
-    //public struct Line
     public class Line
     {
         public Note[] onlineNotes;
@@ -86,7 +94,6 @@ namespace Blophy.Chart
         public AnimationCurve career;//速度
     }
     [Serializable]
-    //public struct Note
     public class Note
     {
         public NoteType noteType;
@@ -125,11 +132,10 @@ namespace Blophy.Chart
         CommonEffect = 4
     }
     [Serializable]
-    //public struct BoxEvents
     public class BoxEvents
     {
         public Event[] moveX;
-        public int length_moveX = -1;
+        int length_moveX = -1;
         public int Length_moveX
         {
             get
@@ -139,7 +145,7 @@ namespace Blophy.Chart
             }
         }
         public Event[] moveY;
-        public int length_moveY = -1;
+        int length_moveY = -1;
         public int Length_moveY
         {
             get
@@ -149,7 +155,7 @@ namespace Blophy.Chart
             }
         }
         public Event[] rotate;
-        public int length_rotate = -1;
+        int length_rotate = -1;
         public int Length_rotate
         {
             get
@@ -159,7 +165,7 @@ namespace Blophy.Chart
             }
         }
         public Event[] alpha;
-        public int length_alpha = -1;
+        int length_alpha = -1;
         public int Length_alpha
         {
             get
@@ -169,7 +175,7 @@ namespace Blophy.Chart
             }
         }
         public Event[] scaleX;
-        public int length_scaleX = -1;
+        int length_scaleX = -1;
         public int Length_scaleX
         {
             get
@@ -179,7 +185,7 @@ namespace Blophy.Chart
             }
         }
         public Event[] scaleY;
-        public int length_scaleY = -1;
+        int length_scaleY = -1;
         public int Length_scaleY
         {
             get
@@ -189,7 +195,7 @@ namespace Blophy.Chart
             }
         }
         public Event[] centerX;
-        public int length_centerX = -1;
+        int length_centerX = -1;
         public int Length_centerX
         {
             get
@@ -199,7 +205,7 @@ namespace Blophy.Chart
             }
         }
         public Event[] centerY;
-        public int length_centerY = -1;
+        int length_centerY = -1;
         public int Length_centerY
         {
             get
@@ -209,7 +215,7 @@ namespace Blophy.Chart
             }
         }
         public Event[] lineAlpha;
-        public int length_lineAlpha = -1;
+        int length_lineAlpha = -1;
         public int Length_lineAlpha
         {
             get
@@ -220,7 +226,6 @@ namespace Blophy.Chart
         }
     }
     [Serializable]
-    //public struct Event
     public class Event
     {
         public float startTime;
@@ -228,6 +233,14 @@ namespace Blophy.Chart
         public float startValue;
         public float endValue;
         public AnimationCurve curve;
+    }
+    [Serializable]
+    public class EventString
+    {
+        public float startTime;
+        public float endTime;
+        public string startValue;
+        public string endValue;
     }
     #endregion
 }

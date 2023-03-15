@@ -343,6 +343,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1235058640}
+  - component: {fileID: 1235058643}
+  - component: {fileID: 1235058642}
   - component: {fileID: 1235058641}
   m_Layer: 0
   m_Name: GlobalData
@@ -409,6 +411,7 @@ MonoBehaviour:
       flickCount: 0
       fullFlickCount: 0
       pointCount: 0
+    texts: []
   clip: {fileID: 0}
   currentCP: {fileID: 0}
   currentCPH: {fileID: 0}
@@ -452,6 +455,36 @@ MonoBehaviour:
     score: 0
   isAutoplay: 0
   offset: 0
+--- !u!114 &1235058642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1235058639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ce947d6c0ed6174d9fa3eb5d239c02b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  archive:
+    chapterArchives: []
+--- !u!114 &1235058643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1235058639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8d89bda625e8794ba8ec4037c4125e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentPlatformArchiveDataPath: 
+  editorArchiveDataPath: 
+  androidArchiveDataPath: 
+  iPhoneArchiveDataPath: 
 --- !u!1 &1354066591
 GameObject:
   m_ObjectHideFlags: 0

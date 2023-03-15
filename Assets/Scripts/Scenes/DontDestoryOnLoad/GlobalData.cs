@@ -1,3 +1,4 @@
+using Beebyte.Obfuscator;
 using Blophy.Chart;
 using Newtonsoft.Json;
 using System;
@@ -7,6 +8,7 @@ using System.IO;
 using UnityEngine;
 using static UnityEngine.Camera;
 using VM = ValueManager;
+
 public class GlobalData : MonoBehaviourSingleton<GlobalData>
 {
     public Chapter[] chapters;
@@ -26,21 +28,11 @@ public class GlobalData : MonoBehaviourSingleton<GlobalData>
     public int ScreenHeight => main.pixelHeight;
     protected override void OnAwake()
     {
-        DontDestroyOnLoad(this);
+        DontDestroyOnLoad(gameObject);
     }
     private void Start()
     {
         Application.targetFrameRate = 9999;
-    }
-    public bool isisisis = false;
-    private void Update()
-    {
-        if (isisisis)
-        {
-            isisisis = false;
-            File.WriteAllText(".\\Assets\\Resources\\MusicPack\\Chapter_I\\Base\\ChartFile\\Green\\sdadsadasdasdasdasdsad.json", JsonConvert.SerializeObject(chartData));
-            Debug.Log("OK");
-        }
     }
 }
 [Serializable]
