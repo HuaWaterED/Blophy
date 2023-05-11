@@ -169,11 +169,13 @@ public class NoteController : MonoBehaviour
     /// <summary>
     /// 根据判定等级播放打击特效
     /// </summary>
-    /// <param name="noteJudge">判定等级</param>
     /// <param name="hitJudgeEffectColor">判定等级对应的颜色</param>
     protected virtual void PlayHitEffectWithJudgeLevel(Color hitJudgeEffectColor)
     {
-        HitEffectManager.Instance.PlayHitEffect(transform.TransformPoint(Vector3.down * (decideLineController.onlineNote.transform.localPosition.y + transform.localPosition.y)), transform.rotation, hitJudgeEffectColor); ;//播放打击特效
+        if (isOnlineNote)
+            HitEffectManager.Instance.PlayHitEffect(transform.TransformPoint(Vector3.down * (decideLineController.onlineNote.transform.localPosition.y + transform.localPosition.y)), transform.rotation, hitJudgeEffectColor); //播放打击特效
+        else
+            HitEffectManager.Instance.PlayHitEffect(transform.TransformPoint(Vector3.down * (decideLineController.onlineNote.transform.localPosition.y - transform.localPosition.y)), transform.rotation, hitJudgeEffectColor); //播放打击特效
     }
     /// <summary>
     /// 根据音符判定等级获得到颜色
